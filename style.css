@@ -14,7 +14,7 @@ Design System: The Artisan - Refined Single Theme
     --color-text-muted: #78716C;
     --color-primary: #57534E;
     --color-accent: #6B6562;
-    --color-pop: #0891B2;
+    --color-pop: #B45309; /* Changed from teal to burnt orange - matches craftsman/forge theme */
     --color-border: #E7E5E4;
 }
 
@@ -184,11 +184,17 @@ main {
 }
 
 .journeyman-panel .profile { 
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.journeyman-panel .profile-top {
     display: grid; 
     grid-template-columns: 160px 1fr; 
     align-items: start; 
-    gap: 32px; 
-    margin-bottom: 24px;
+    gap: 32px;
 }
 
 .journeyman-panel .headshot { 
@@ -209,7 +215,7 @@ main {
     font-size: 1.1rem; 
     color: var(--color-text); 
     flex-grow: 1; 
-    margin-bottom: 24px;
+    margin-bottom: 0;
 }
 
 .profile-actions {
@@ -217,11 +223,13 @@ main {
     justify-content: space-between;
     align-items: center;
     gap: 16px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 .journeyman-panel .connect-links {
     display: flex;
     gap: 16px;
+    flex-wrap: wrap; /* Allow links to wrap if needed */
 }
 
 .journeyman-panel .connect-links a { 
@@ -331,6 +339,8 @@ main {
     border-radius: 50px;
     transition: all 0.2s ease;
     flex-shrink: 0;
+    white-space: nowrap; /* Prevent text wrapping */
+    min-width: 0; /* Allow button to shrink */
 }
 
 .cta-button:hover { 
@@ -479,19 +489,43 @@ main {
         text-align: center; 
     }
     
-    .journeyman-panel .profile { 
-        grid-template-columns: 120px 1fr; 
+    .journeyman-panel .profile-top { 
+        grid-template-columns: 1fr; 
         gap: 20px; 
+        text-align: center;
     }
     
     .journeyman-panel .headshot { 
         width: 120px; 
         height: 120px; 
+        justify-self: center;
     }
     
     .profile-actions {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         gap: 12px;
+        text-align: center;
+    }
+}
+
+/* --- Medium screen fixes for button overflow --- */
+@media (max-width: 1100px) and (min-width: 901px) {
+    .profile-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    
+    .cta-button {
+        align-self: stretch;
+        text-align: center;
+    }
+}
+
+@media (max-width: 780px) {
+    .cta-button {
+        font-size: 0.9rem;
+        padding: 14px 24px;
     }
 }
