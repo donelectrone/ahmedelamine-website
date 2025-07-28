@@ -1,5 +1,5 @@
 /* ---
-Design System: The Artisan - Refined Single Theme
+Design System: The Artisan - Deep Royal Parchment Theme
 --- */
 
 :root {
@@ -8,13 +8,13 @@ Design System: The Artisan - Refined Single Theme
     --color-podcast: #872EC4;
     --font-heading: 'Lora', serif;
     --font-body: 'Inter', sans-serif;
-    --color-bg: #F9F7F4;
-    --color-panel: #FFFFFF;
-    --color-text: #3C3633;
+    --color-bg: #FBF8F3;
+    --color-panel: #FFFEF7;
+    --color-text: #1C1917;
     --color-text-muted: #78716C;
     --color-primary: #57534E;
     --color-accent: #6B6562;
-    --color-pop: #B45309; /* Changed from teal to burnt orange - matches craftsman/forge theme */
+    --color-pop: #1E40AF; /* Classic royal blue - timeless authority */
     --color-border: #E7E5E4;
 }
 
@@ -159,7 +159,7 @@ main {
 
 .panel { 
     background-color: var(--color-panel); 
-    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 25px rgba(30, 64, 175, 0.1);
     padding: 32px; 
     border-radius: 16px; 
     height: 100%; 
@@ -308,7 +308,7 @@ main {
 
 .featured-project {
     background-color: var(--color-panel);
-    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 25px rgba(30, 64, 175, 0.1);
     padding: 48px;
     border-radius: 16px;
     margin-bottom: 24px;
@@ -331,7 +331,7 @@ main {
 .cta-button {
     display: inline-block;
     background-color: var(--color-pop);
-    color: var(--color-bg);
+    color: var(--color-panel);
     font-family: var(--font-heading);
     font-weight: 600;
     font-size: 1rem;
@@ -346,7 +346,7 @@ main {
 .cta-button:hover { 
     opacity: 0.85; 
     transform: translateY(-2px); 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+    box-shadow: 0 8px 20px rgba(30, 64, 175, 0.2); 
 }
 
 .work-tiles { 
@@ -355,7 +355,7 @@ main {
 
 .work-tile {
     background-color: var(--color-panel);
-    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 25px rgba(30, 64, 175, 0.1);
     padding: 24px;
     border-radius: 12px;
     transition: all 0.2s ease;
@@ -363,7 +363,7 @@ main {
 
 .work-tile:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(30, 64, 175, 0.15);
 }
 
 .work-tile h3 { 
