@@ -6,14 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentSort = 'date';
   let currentFilter = 'all';
   
-  // --- REFACTORED: The SUBCATEGORY_DESCRIPTIONS object has been removed. ---
-  // All descriptions are now stored in the HTML's data-description attributes.
-
   // --- DOM SELECTORS ---
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => document.querySelectorAll(selector);
 
   const elements = {
+    app: $('#app'), // Used for theme handling
     totalMonthlySpend: $('#totalMonthlySpend'),
     totalAnnualSpend: $('#totalAnnualSpend'),
     potentialSavings: $('#potentialSavings'),
@@ -100,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>`;
     }).join('');
 
-    // --- REFACTORED: Attach delete listeners directly after rendering ---
     elements.subscriptionList.querySelectorAll('.trash').forEach(button => {
         button.addEventListener('click', () => {
             const id = parseInt(button.dataset.id, 10);
@@ -130,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderSubscriptionList();
   };
   
-  // --- REFACTORED: Reads data directly from the clicked element ---
   const openModal = (chipElement) => {
     elements.subscriptionForm.reset();
     $$('#decision-group .choice-button').forEach(btn => btn.classList.remove('selected'));
@@ -176,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
     closeModal();
   };
 
-  // --- REFACTORED: Simpler delete handler, receives ID directly ---
   const handleDeleteClick = (id) => {
     const subToDelete = subscriptions.find(s => s.id === id);
     if (subToDelete && confirm(`Are you sure you want to remove "${subToDelete.name}"?`)) {
@@ -186,25 +181,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
   
-  // --- REFACTORED: Theme logic now uses a data attribute on the <html> tag ---
+  // --- THEME SWITCHER LOGIC (CORRECTED) ---
   const applyTheme = (theme) => {
-      const isDark = theme === 'dark';
       document.documentElement.setAttribute('data-theme', theme);
-      elements.themeIcon.textContent = isDark ? '☀️' : '🌙';
+      elements.themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
       localStorage.setItem('saas_theme', theme);
   };
   
   const toggleTheme = () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-    applyTheme(currentTheme === 'light' ? 'dark' : 'light');
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    applyTheme(newTheme);
   };
 
   // --- INITIALIZATION ---
   const init = () => {
-    // Load saved theme or detect user preference
+    // Correctly set initial theme
     const savedTheme = localStorage.getItem('saas_theme');
-    const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-    applyTheme(savedTheme || (prefersDark ? 'dark' : 'light'));
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    } else {
+        const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDark ? 'dark' : 'light');
+    }
 
     // Load subscriptions from local storage
     subscriptions = loadFromLocalStorage();
@@ -237,7 +236,6 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.cancelModalBtn.addEventListener('click', closeModal);
     elements.modal.addEventListener('click', (e) => { if (e.target === elements.modal) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-    // Note: The listener for .trash buttons is now attached within renderSubscriptionList()
     elements.themeToggle.addEventListener('click', toggleTheme);
   };
 
