@@ -1,34 +1,37 @@
 /* --- THEME & GLOBAL STYLES --- */
 :root {
+  /* Default Light Theme */
   --bg: #f8fafc;
   --card: #ffffff;
   --text: #1e293b;
   --muted: #64748b;
   --accent: #0ea5e9;
   --danger: #ef4444;
-  --warning: #f59e0b; /* For Review badge */
-  --success: #10b981; /* For Keep badge */
+  --warning: #f59e0b;
+  --success: #10b981;
   --border: rgba(0, 0, 0, 0.08);
   --glass: rgba(0, 0, 0, 0.03);
   --glass-2: rgba(0, 0, 0, 0.02);
   --gap: 20px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f1724;
-    --card: #0b1220;
-    --text: #e6eef6;
-    --muted: #9aa4b2;
-    --accent: #7dd3fc;
-    --danger: #fb7185;
-    --warning: #facc15;
-    --success: #34d399;
-    --border: rgba(255, 255, 255, 0.08);
-    --glass: rgba(255, 255, 255, 0.03);
-    --glass-2: rgba(255, 255, 255, 0.02);
-  }
+[data-theme="dark"] {
+  /* Dark Theme Overrides */
+  --bg: #0f1724;
+  --card: #0b1220;
+  --text: #e6eef6;
+  --muted: #9aa4b2;
+  --accent: #7dd3fc;
+  --danger: #fb7185;
+  --warning: #facc15;
+  --success: #34d399;
+  --border: rgba(255, 255, 255, 0.08);
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-2: rgba(255, 255, 255, 0.02);
 }
+
+
+/* --- THE REST OF YOUR CSS REMAINS THE SAME --- */
 
 html,
 body {
@@ -64,7 +67,6 @@ body {
 
 /* --- AUDITOR & KPIs --- */
 .auditor-title {
-  /* MODIFIED: Increased size and adjusted spacing */
   font-size: 32px; 
   font-weight: 700;
   letter-spacing: -0.8px;
@@ -76,6 +78,7 @@ body {
   font-size: 14px;
   color: var(--muted);
   margin: 0 0 18px 0;
+  line-height: 1.5; /* Added for better readability if it wraps */
 }
 
 .kpi-summary {
@@ -288,7 +291,7 @@ input[type=number] { -moz-appearance: textfield; }
 footer {
   text-align: center;
   margin-top: 32px;
-  padding-bottom: 20px; /* Add some space at the very bottom of the page */
+  padding-bottom: 20px;
   font-size: 13px;
   color: var(--muted);
 }
