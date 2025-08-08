@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>StackCheck: The Free SaaS Subscription Auditor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="wrap" id="app">
+    <!-- Top Section: Auditor & KPIs -->
+    <section class="panel auditor" aria-labelledby="auditor-heading">
+      <h2 id="auditor-heading" class="auditor-title">StackCheck</h2>
+      <p class="muted-small">A free tool to audit your SaaS subscriptions, find savings, and manage your stack.</p>
+      
+      <div class="kpi-summary">
+        <div class="metric">
+          <small>Total Monthly Spend</small>
+          <div class="value" id="totalMonthlySpend">$0.00</div>
+        </div>
+        <div class="metric">
+          <small>Total Annual Spend</small>
+          <div class="value" id="totalAnnualSpend">$0.00</div>
+        </div>
+        <div class="metric">
+          <small>Potential Annual Savings</small>
+          <div class="value" id="potentialSavings">$0.00</div>
+        </div>
+      </div>
+
+      <!-- Controls for Sorting and Filtering -->
+      <div class="list-controls">
+        <button class="btn-control" id="sortBtn">Sort by Cost</button>
+        <button class="btn-control" id="filterBtn">Filter 'Cut' Only</button>
+      </div>
+
+      <div class="list" id="subscriptionList" aria-live="polite">
+        <div id="emptyState" class="empty">
+          <p>Click a subcategory from the Memory Jogger to add your first subscription.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Section: Memory Jogger -->
+    <aside class="panel jogger" aria-label="Memory Jogger">
+      <h2>Memory Jogger</h2>
+      <p>Click a subcategory to log a subscription.</p>
+
+      <div class="category">
+        <h3>Productivity & Office</h3>
+        <div class="subs">
+          <button class="chip" data-category="Productivity & Office" data-subcategory="Docs & Notes" data-description="Tools for creating documents, wikis, and notes (e.g., Notion, Confluence).">Docs & Notes</button>
+          <button class="chip" data-category="Productivity & Office" data-subcategory="Cloud Storage" data-description="Services for file storage and synchronization (e.g., Dropbox, Google Drive).">Cloud Storage</button>
+          <button class="chip" data-category="Productivity & Office" data-subcategory="Project Management" data-description="Platforms for organizing tasks, timelines, and team collaboration (e.g., Asana, Jira).">Project Management</button>
+          <button class="chip" data-category="Productivity & Office" data-subcategory="Internal Tool Builders" data-description="Low-code platforms for creating admin panels and internal apps (e.g., Retool, Appsmith).">Internal Tool Builders</button>
+          <button class="chip" data-category="Productivity & Office" data-subcategory="Whiteboarding" data-description="Digital canvases for brainstorming and visual collaboration (e.g., Miro, FigJam).">Whiteboarding</button>
+          <button class="chip" data-category="Productivity & Office" data-subcategory="Mind Mapping" data-description="Tools for organizing thoughts and ideas visually (e.g., MindMeister, XMind).">Mind Mapping</button>
+          <button class="chip" data-category="Productivity & Office" data-subcategory="Other" data-description="Any service that doesn't fit into the predefined categories.">Other</button>
+        </div>
+      </div>
+
+      <div class="category">
+        <h3>Communication</h3>
+        <div class="subs">
+          <button class="chip" data-category="Communication" data-subcategory="Email Hosting" data-description="Professional email services for your domain (e.g., Google Workspace, Fastmail).">Email Hosting</button>
+          <button class="chip" data-category="Communication" data-subcategory="Team Chat" data-description="Real-time messaging platforms for teams (e.g., Slack, Microsoft Teams).">Team Chat</button>
+          <button class="chip" data-category="Communication" data-subcategory="Video Calls" data-description="Software for virtual meetings and video conferencing (e.g., Zoom, Google Meet).">Video Calls</button>
+          <button class="chip" data-category="Communication" data-subcategory="Webinar Tools" data-description="Platforms for hosting online presentations and webinars (e.g., Livestorm, Demio).">Webinar Tools</button>
+          <button class="chip" data-category="Communication" data-subcategory="Contact Center" data-description="Cloud-based phone systems and call center software (e.g., Aircall, Dialpad).">Contact Center</button>
+          <button class="chip" data-category="Communication" data-subcategory="Other" data-description="Any service that doesn't fit into the predefined categories.">Other</button>
+        </div>
+      </div>
+
+      <div class="category">
+        <h3>Development & IT</h3>
+        <div class="subs">
+          <button class="chip" data-category="Development & IT" data-subcategory="Cloud Hosting" data-description="Infrastructure for deploying and running applications (e.g., Vercel, AWS, DigitalOcean).">Cloud Hosting</button>
+          <button class="chip" data-category="Development & IT" data-subcategory="Code Hosting" data-description="Services for storing and managing source code repositories (e.g., GitHub, GitLab).">Code Hosting</button>
+          <button class="chip" data-category="Development & IT" data-subcategory="Databases" data-description="Managed database services (e.g., MongoDB Atlas, PlanetScale, Supabase).">Databases</button>
+          <button class="chip" data-category="Development & IT" data-subcategory="Monitoring & Logging" data-description="Tools for observing application performance and errors (e.g., Datadog, Sentry).">Monitoring & Logging</button>
+          <button class="chip" data-category="Development & IT" data-subcategory="CI/CD" data-description="Services for automating software builds, tests, and deployments (e.g., GitHub Actions, CircleCI).">CI/CD</button>
+          <button class="chip" data-category="Development & IT" data-subcategory="Feature Flags" data-description="Platforms for controlling feature rollouts and A/B testing (e.g., LaunchDarkly).">Feature Flags</button>
+          <button class="chip" data-category="Development & IT" data-subcategory="API Gateway" data-description="Tools for managing, securing, and routing API traffic (e.g., Kong, Apigee).">API Gateway</button>
+          <button class="chip" data-category="Development & IT" data-subcategory="Password Manager" data-description="Secure vaults for storing and sharing team credentials (e.g., 1Password, LastPass).">Password Manager</button>
+          <button class="chip" data-category="Development & IT" data-subcategory="VPN" data-description="Virtual Private Network services for secure internet access (e.g., NordVPN, Mullvad).">VPN</button>
+          <button class="chip" data-category="Development & IT" data-subcategory="Other" data-description="Any service that doesn't fit into the predefined categories.">Other</button>
+        </div>
+      </div>
+      
+      <div class="category">
+        <h3>AI & Machine Learning</h3>
+        <div class="subs">
+          <button class="chip" data-category="AI & Machine Learning" data-subcategory="AI Model APIs" data-description="Pay-per-use access to large language or diffusion models (e.g., OpenAI, Anthropic).">AI Model APIs</button>
+          <button class="chip" data-category="AI & Machine Learning" data-subcategory="Vector Databases" data-description="Specialized databases for AI applications and semantic search (e.g., Pinecone, Weaviate).">Vector Databases</button>
+          <button class="chip" data-category="AI & Machine Learning" data-subcategory="AI-Specific Tooling" data-description="Observability, prompt management, or fine-tuning platforms (e.g., LangSmith, Weights & Biases).">AI-Specific Tooling</button>
+          <button class="chip" data-category="AI & Machine Learning" data-subcategory="Generative Services" data-description="Specialized services for generating images, voice, or video (e.g., Midjourney, ElevenLabs).">Generative Services</button>
+          <button class="chip" data-category="AI & Machine Learning" data-subcategory="Other" data-description="Any service that doesn't fit into the predefined categories.">Other</button>
+        </div>
+      </div>
+
+      <div class="category">
+        <h3>Data & Analytics</h3>
+        <div class="subs">
+          <button class="chip" data-category="Data & Analytics" data-subcategory="Business Intelligence (BI)" data-description="Tools for creating dashboards and analyzing business data (e.g., Tableau, Looker, Metabase).">Business Intelligence (BI)</button>
+          <button class="chip" data-category="Data & Analytics" data-subcategory="Data Warehousing" data-description="Central repositories for storing and querying large datasets (e.g., Snowflake, BigQuery).">Data Warehousing</button>
+          <button class="chip" data-category="Data & Analytics" data-subcategory="ETL & Reverse ETL" data-description="Services for moving data between apps and your warehouse (e.g., Fivetran, Hightouch).">ETL & Reverse ETL</button>
+          <button class="chip" data-category="Data & Analytics" data-subcategory="Product Analytics" data-description="Platforms for tracking and understanding user behavior in your app (e.g., Mixpanel, Amplitude).">Product Analytics</button>
+          <button class="chip" data-category="Data & Analytics" data-subcategory="Other" data-description="Any service that doesn't fit into the predefined categories.">Other</button>
+        </div>
+      </div>
+
+      <div class="category">
+        <h3>Security & Compliance</h3>
+        <div class="subs">
+          <button class="chip" data-category="Security & Compliance" data-subcategory="Compliance Automation" data-description="Platforms to automate and monitor security compliance (e.g., Vanta, Drata).">Compliance Automation</button>
+          <button class="chip" data-category="Security & Compliance" data-subcategory="Application Security" data-description="Tools for scanning code and dependencies for vulnerabilities (e.g., Snyk).">Application Security</button>
+          <button class="chip" data-category="Security & Compliance" data-subcategory="Endpoint Security" data-description="Software to protect employee computers from threats (e.g., CrowdStrike).">Endpoint Security</button>
+          <button class="chip" data-category="Security & Compliance" data-subcategory="Identity & Access (SSO)" data-description="Services for managing user login and permissions (e.g., Okta, Auth0).">Identity & Access (SSO)</button>
+          <button class="chip" data-category="Security & Compliance" data-subcategory="Other" data-description="Any service that doesn't fit into the predefined categories.">Other</button>
+        </div>
+      </div>
+
+      <div class="category">
+        <h3>Sales & Marketing</h3>
+        <div class="subs">
+          <button class="chip" data-category="Sales & Marketing" data-subcategory="CRM" data-description="Customer Relationship Management software to track leads and deals (e.g., HubSpot, Salesforce).">CRM</button>
+          <button class="chip" data-category="Sales & Marketing" data-subcategory="Email Marketing" data-description="Tools for sending newsletters and marketing campaigns (e.g., Mailchimp, ConvertKit).">Email Marketing</button>
+          <button class="chip" data-category="Sales & Marketing" data-subcategory="Social Media Management" data-description="Platforms for scheduling and monitoring social media posts (e.g., Buffer, Hootsuite).">Social Media Mgmt</button>
+          <button class="chip" data-category="Sales & Marketing" data-subcategory="SEO Tools" data-description="Software for keyword research and tracking search engine rankings (e.g., Ahrefs, Semrush).">SEO Tools</button>
+          <button class="chip" data-category="Sales & Marketing" data-subcategory="Surveys" data-description="Tools for creating and distributing surveys to users or customers (e.g., Typeform, SurveyMonkey).">Surveys</button>
+          <button class="chip" data-category="Sales & Marketing" data-subcategory="Other" data-description="Any service that doesn't fit into the predefined categories.">Other</button>
+        </div>
+      </div>
+      
+      <div class="category">
+        <h3>Design & Content</h3>
+        <div class="subs">
+          <button class="chip" data-category="Design & Content" data-subcategory="Design & Prototyping" data-description="Collaborative tools for UI/UX design and prototyping (e.g., Figma, Sketch).">Design & Prototyping</button>
+          <button class="chip" data-category="Design & Content" data-subcategory="Stock Media" data-description="Subscriptions for royalty-free photos, videos, and illustrations (e.g., Shutterstock, Getty).">Stock Media</button>
+          <button class="chip" data-category="Design & Content" data-subcategory="Video Editing" data-description="Cloud-based or desktop software for editing videos (e.g., Descript, Adobe Premiere Pro).">Video Editing</button>
+          <button class="chip" data-category="Design & Content" data-subcategory="Font Services" data-description="Subscriptions for accessing a library of licensed web and desktop fonts (e.g., Adobe Fonts).">Font Services</button>
+          <button class="chip" data-category="Design & Content" data-subcategory="Other" data-description="Any service that doesn't fit into the predefined categories.">Other</button>
+        </div>
+      </div>
+      
+      <div class="category">
+        <h3>Finance & HR</h3>
+        <div class="subs">
+          <button class="chip" data-category="Finance & HR" data-subcategory="Payment Processing" data-description="Services that handle credit card payments and transactions (e.g., Stripe, Braintree).">Payment Processing</button>
+          <button class="chip" data-category="Finance & HR" data-subcategory="Accounting" data-description="Software for bookkeeping, financial reporting, and invoicing (e.g., QuickBooks, Xero).">Accounting</button>
+          <button class="chip" data-category="Finance & HR" data-subcategory="Payroll & Benefits" data-description="Platforms for managing employee payroll, taxes, and benefits (e.g., Gusto, Rippling).">Payroll & Benefits</button>
+          <button class="chip" data-category="Finance & HR" data-subcategory="Recruiting / ATS" data-description="Applicant Tracking Systems for managing the hiring process (e.g., Lever, Greenhouse).">Recruiting / ATS</button>
+          <button class="chip" data-category="Finance & HR" data-subcategory="Legal Services" data-description="Subscriptions for legal documents, e-signatures, or cap table management (e.g., Clerky, Carta).">Legal Services</button>
+          <button class="chip" data-category="Finance & HR" data-subcategory="Other" data-description="Any service that doesn't fit into the predefined categories.">Other</button>
+        </div>
+      </div>
+
+      <div class="category">
+        <h3>Customer Support</h3>
+        <div class="subs">
+          <button class="chip" data-category="Customer Support" data-subcategory="Help Desk" data-description="Centralized platforms for managing customer support tickets (e.g., Intercom, Zendesk).">Help Desk</button>
+          <button class="chip" data-category="Customer Support" data-subcategory="Live Chat" data-description="Software for providing real-time support on your website or app.">Live Chat</button>
+          <button class="chip" data-category="Customer Support" data-subcategory="Knowledge Base" data-description="Tools for creating and hosting self-service help documentation for customers.">Knowledge Base</button>
+          <button class="chip" data-category="Customer Support" data-subcategory="Status Page" data-description="Services for communicating system uptime and incidents to users (e.g., Statuspage.io).">Status Page</button>
+          <button class="chip" data-category="Customer Support" data-subcategory="Other" data-description="Any service that doesn't fit into the predefined categories.">Other</button>
+        </div>
+      </div>
+    </aside>
+
+    <footer>
+      <p>A free utility from <a href="https://AhmedElAmine.com" target="_blank" rel="noopener noreferrer">AhmedElAmine.com</a>. Building clarity through well-designed tools.</p>
+    </footer>
+
+  </main>
+
+  <!-- Add/Edit Subscription Modal -->
+  <div class="modal-backdrop" id="addSubscriptionModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" style="display: none;">
+    <div class="modal">
+      <form id="subscriptionForm" onsubmit="return false;">
+        <h3 id="modalTitle">Add Subscription</h3>
+        <p class="modal-description" id="modalSubcategoryDescription"></p>
+
+        <div class="field">
+          <label for="subscriptionName">Subscription Name</label>
+          <input id="subscriptionName" type="text" required maxlength="80" />
+        </div>
+
+        <div class="field">
+          <label for="subscriptionCost">Cost</label>
+          <div class="cost-input-group">
+            <span class="currency-symbol">$</span>
+            <input id="subscriptionCost" type="number" min="0" step="0.01" required placeholder="0.00" />
+            <button type="button" id="costPeriodToggle" class="period-toggle" data-period="month">/month</button>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label>Keep or Cut?</label>
+          <div class="button-group-container" id="decision-group">
+            <button type="button" class="choice-button keep selected" data-value="Keep">Keep</button>
+            <button type="button" class="choice-button review" data-value="Review">Review</button>
+            <button type="button" class="choice-button cut" data-value="Cut">Cut</button>
+          </div>
+        </div>
+        
+        <input type="hidden" id="formCategory" />
+        <input type="hidden" id="formSubcategory" />
+
+        <div class="form-actions">
+          <button type="button" class="btn ghost" id="cancelModalBtn">Cancel</button>
+          <button type="submit" class="btn" id="saveSubBtn">Save Subscription</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Theme toggle button -->
+  <div class="theme-toggle" id="themeToggle" title="Toggle Theme">
+    <span id="themeIcon">🌙</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
