@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en"> <!-- The data-theme attribute will be added here by JS -->
 
 <head>
   <meta charset="utf-8" />
@@ -13,7 +13,9 @@
     <!-- Top Section: Auditor & KPIs -->
     <section class="panel auditor" aria-labelledby="auditor-heading">
       <h2 id="auditor-heading" class="auditor-title">StackCheck</h2>
-      <p class="muted-small">A free tool to audit your SaaS subscriptions, find savings, and manage your stack.</p>
+      
+      <!-- UPDATED: This subtitle is now action-oriented -->
+      <p class="muted-small">Find hidden subscription costs. <strong>Click a category below to start your audit.</strong></p>
       
       <div class="kpi-summary">
         <div class="metric">
@@ -30,6 +32,8 @@
         </div>
       </div>
 
+      <!-- ... The rest of your index.html file remains the same ... -->
+      <!-- ... (from list-controls down to the script tag) ... -->
       <!-- Controls for Sorting and Filtering -->
       <div class="list-controls">
         <button class="btn-control" id="sortBtn">Sort by Cost</button>
@@ -162,7 +166,7 @@
         <div class="subs">
           <button class="chip" data-category="Customer Support" data-subcategory="Help Desk" data-description="Centralized platforms for managing customer support tickets (e.g., Intercom, Zendesk).">Help Desk</button>
           <button class="chip" data-category="Customer Support" data-subcategory="Live Chat" data-description="Software for providing real-time support on your website or app.">Live Chat</button>
-          <button class="chip" data-category="Customer Support" data-subcategory="Knowledge Base" data-description="Tools for creating and hosting self-service help documentation for customers.">Knowledge Base</button>
+          <button class="chip" data-category="Customer Support" a-description="Tools for creating and hosting self-service help documentation for customers.">Knowledge Base</button>
           <button class="chip" data-category="Customer Support" data-subcategory="Status Page" data-description="Services for communicating system uptime and incidents to users (e.g., Statuspage.io).">Status Page</button>
           <button class="chip" data-category="Customer Support" data-subcategory="Other" data-description="Any service that doesn't fit into the predefined categories.">Other</button>
         </div>
