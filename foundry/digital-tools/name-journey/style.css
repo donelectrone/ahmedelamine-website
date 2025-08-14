@@ -517,7 +517,7 @@ input[type="text"]:focus {
 }
 
 .setup-header h1 {
-    font-size: 2.2rem;
+    font-size: 3rem;
     font-weight: 700;
     color: #2c3e50; /* A strong, dark color for the title */
 }
@@ -550,5 +550,35 @@ input[type="text"]:focus {
     .setup-header p {
         font-size: 0.9rem;
     }
-
 }
+
+.creator-credit {
+    text-align: center;
+    padding: 20px 30px;
+    margin: 20px auto 0 auto;
+    max-width: 500px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    line-height: 1.8;
+}
+
+.creator-credit p {
+    color: #6c757d;
+    margin: 0;
+}
+
+.creator-credit strong {
+    color: #343a40;
+}
+
+.creator-credit a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.creator-credit a:hover {
+    text-decoration: underline;
+}
+
+
