@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="معجم الأسماء العربية - طريقة ممتعة وتفاعلية لاختيار اسم المولود المثالي">
+    <title>رحلة اسم | من معجم الأسماء العربية الشامل</title>
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Link to the external JavaScript file, 'defer' ensures it runs after the HTML is parsed -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <!-- =========== SETUP SCREEN =========== -->
+        <div id="setup-screen">
+			<div class="header setup-header">
+				<div class="header-content">
+					<img src="images/baby1.png" alt="صورة طفل رضيع" class="header-baby-photo">
+					
+					<div class="header-text">
+						<h1>رحلة اسم </h1>
+						<p>أمتع طريقة لتجدوا الإسم المثالي لمولودكم</p>
+					</div>
+					
+					<img src="images/baby2.png" alt="صورة طفل رضيع آخر" class="header-baby-photo">
+				</div>
+			</div>
+            <div class="view-content">
+                <h2>من سيختار؟</h2>
+                <div class="player-selection">
+                    <button id="one-player-btn" class="player-btn active">شخص واحد</button>
+                    <button id="two-player-btn" class="player-btn">شخصان</button>
+                </div>
+                <div class="player-inputs">
+                    <input type="text" id="parent1-name" value="الأم" aria-label="اسم اللاعب الأول">
+                    <input type="text" id="parent2-name" value="الأب" style="display: none;" aria-label="اسم اللاعب الثاني">
+                </div>
+
+                <h2>فلترة الأسماء</h2>
+                <div class="filter-group">
+                    <label for="game-gender-filter">نوع الاسم:</label>
+                    <select id="game-gender-filter">
+						<option value="all">الكل</option>
+						<option value="male-mixed">أسماء الذكور (مع المشترك)</option> <!-- NEW -->
+						<option value="female-mixed">أسماء الإناث (مع المشترك)</option> <!-- NEW -->
+						<option value="m">ذكر فقط</option>
+						<option value="f">أنثى فقط</option>
+						<option value="x">مشترك فقط</option>
+					</select>
+                </div>
+                <div class="filter-group">
+                    <label for="game-letter-filter">يبدأ بحرف:</label>
+					    <div class="letter-filter-controls">
+							<button id="select-all-letters-btn" class="filter-btn">اختر الكل</button>
+							<button id="deselect-all-letters-btn" class="filter-btn">امسح الكل</button>
+						</div>
+					<div id="letter-filter-container" class="letter-filter-container">
+						<!-- Checkboxes will be dynamically inserted here by JS -->
+					</div>
+                </div>
+                <button id="start-game-btn" class="action-btn">🚀 لنبدأ أول فصول الحكاية</button>
+            </div>
+        </div>
+
+        <!-- =========== SWIPING SCREEN =========== -->
+        <div id="swiping-screen" class="view" style="display:none;">
+            <div class="header">
+                <h1 id="turn-indicator">دورك يا</h1>
+				<div id="swipe-stats" class="swipe-stats"></div>
+            </div>
+            <div class="swipe-deck" id="swipe-deck">
+                <div id="name-card-placeholder" class="card-placeholder">
+                    <div class="loader"></div>
+                    <p>جاري تحضير البطاقات...</p>
+                </div>
+                <!-- Name cards will be injected here by JS -->
+            </div>
+            <div class="swipe-controls">
+                <button id="undo-btn" class="control-btn" aria-label="تراجع">↪️</button>
+                <button id="view-list-btn" class="control-btn" aria-label="عرض القائمة">📜</button>
+                <button id="finish-swipe-btn" class="action-btn">إنهاء</button>
+            </div>
+        </div>
+
+        <!-- =========== RANKING SCREEN ("This vs. That") =========== -->
+        <div id="ranking-screen" class="view" style="display:none;">
+            <div class="header">
+                <h1>أيهما تفضل؟</h1>
+                <p>رتب قائمتك المختصرة</p>
+            </div>
+            <div class="ranking-arena">
+                <button class="vs-card" id="choice-a"></button>
+                <div class="vs-separator">أو</div>
+                <button class="vs-card" id="choice-b"></button>
+            </div>
+            <div id="ranking-progress"></div>
+        </div>
+
+        <!-- =========== HANDOFF SCREEN =========== -->
+        <div id="handoff-screen" class="view" style="display:none;">
+            <div class="view-content center-content">
+                <h2>رائع!</h2>
+                <p id="handoff-message">الآن جاء دورك يا</p>
+                <button id="next-player-btn" class="action-btn">أنا مستعد</button>
+            </div>
+        </div>
+
+        <!-- =========== RESULTS SCREEN =========== -->
+        <div id="results-screen" class="view" style="display:none;">
+            <div class="header">
+                <h1>النتائج النهائية</h1>
+                <p id="results-subtitle">الأسماء التي اتفق عليها كلاكما، مرتبة حسب التوافق</p>
+            </div>
+            <div id="final-list-container" class="view-content">
+                <!-- Final results will be shown here -->
+            </div>
+             <button id="restart-btn" class="action-btn">إبدأ من جديد</button>
+        </div>
+
+        <!-- =========== MODAL for viewing list =========== -->
+        <div id="liked-list-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <span class="close-btn" aria-label="إغلاق">&times;</span>
+                <h2>الأسماء المفضلة</h2>
+                <ul id="liked-list-ul"></ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
