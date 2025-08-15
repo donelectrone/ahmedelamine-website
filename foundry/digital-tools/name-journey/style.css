@@ -216,11 +216,19 @@ input[type="text"]:focus {
     margin-bottom: 5px;
 }
 
+.name-card .latin-name {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #888; /* A muted grey to be less prominent than the origin */
+    margin-bottom: 20px;
+    font-style: normal;
+}
+
 .name-card .origin {
     font-size: 1rem;
     font-weight: 400;
     color: #7f8c8d;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     font-style: italic;
 }
 
@@ -580,5 +588,6 @@ input[type="text"]:focus {
 .creator-credit a:hover {
     text-decoration: underline;
 }
+
 
 
