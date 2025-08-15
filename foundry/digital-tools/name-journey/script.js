@@ -267,6 +267,7 @@ function prepareDeck() {
     card.className = 'name-card';
     card.innerHTML = `
         <h2>${name.l}</h2>
+		<p class="latin-name">${name.a}</p>
         <p class="origin">${name.o}</p>
         <p class="meaning">${name.m}</p>
     `;
@@ -298,6 +299,7 @@ function prepareDeck() {
 			card.className = 'name-card';
 			card.innerHTML = `
 				<h2>${name.l}</h2>
+				<p class="latin-name">${name.a}</p>
 				<p class="origin">${name.o}</p>
 				<p class="meaning">${name.m}</p>
 			`;
@@ -610,5 +612,6 @@ function prepareDeck() {
 
     // Start the application
     init();
+
 
 })();
