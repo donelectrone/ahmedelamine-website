@@ -28,7 +28,7 @@ body {
 .header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #fff;
-    padding: 30px;
+    padding: 15px;
     text-align: center;
 }
 
@@ -522,7 +522,7 @@ input[type="text"]:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px; /* Adjust the space between elements */
+    gap: 8px; /* Adjust the space between elements */
 }
 
 .header-text {
@@ -594,6 +594,7 @@ input[type="text"]:focus {
 .creator-credit a:hover {
     text-decoration: underline;
 }
+
 
 
 
