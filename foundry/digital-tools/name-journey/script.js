@@ -246,10 +246,10 @@ function prepareDeck() {
 				<span>${discardedCount}</span> 👎
 			</div>
 			<div class="stat-item" title="الأسماء المتبقية">
-				<span>${remainingCount}</span>  restante
+				<span>${remainingCount}</span>  متبقي
 			</div>
 			<div class="stat-item" title="المجموع الكلي">
-				<span>${totalCount}</span> Total
+				<span>${totalCount}</span> الكل
 			</div>
 		`;
 	}	
@@ -615,3 +615,4 @@ function prepareDeck() {
 
 
 })();
+
