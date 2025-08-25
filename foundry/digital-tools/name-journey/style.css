@@ -52,6 +52,11 @@ body {
     padding: 30px;
 }
 
+#setup-screen .view-content {
+    padding-top: 5px;
+	text-align:center;
+}
+
 .center-content {
     text-align: center;
     padding-top: 50px;
@@ -132,6 +137,14 @@ body {
     color: #495057;
 }
 
+
+.filter-group:has(#letter-filter-container) {
+    flex-wrap: wrap;
+    align-items: center;
+	align-items: center;
+	column-gap: 20px;
+}
+
 select,
 input[type="text"] {
     padding: 10px 15px;
@@ -155,7 +168,7 @@ input[type="text"]:focus {
     position: relative;
     width: 90%;
     max-width: 350px;
-    height: 450px;
+    height: 400px;
     margin: 20px auto;
 }
 
@@ -257,7 +270,7 @@ input[type="text"]:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 30px;
     padding-bottom: 20px;
 }
 
@@ -439,11 +452,8 @@ input[type="text"]:focus {
 }
 
 .letter-filter-controls {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-    width: 100%;
-    justify-content: center;
+display: flex;
+gap: 10px;
 }
 
 .filter-btn {
@@ -522,7 +532,7 @@ input[type="text"]:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px; /* Adjust the space between elements */
+    gap: 0; /* Adjust the space between elements */
 }
 
 .header-text {
@@ -558,7 +568,7 @@ input[type="text"]:focus {
     }
 
     .setup-header h1 {
-        font-size: 1.8rem; /* Adjust font size for smaller screens */
+        font-size: 2.2rem; /* Adjust font size for smaller screens */
     }
     
     .setup-header p {
@@ -594,7 +604,6 @@ input[type="text"]:focus {
 .creator-credit a:hover {
     text-decoration: underline;
 }
-
 
 
 
