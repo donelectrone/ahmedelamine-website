@@ -110,7 +110,13 @@ body {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 30px;
+    margin: 0 auto 30px;
+    width: 90%;
+    max-width: 500px;
+}
+.player-inputs input[type="text"] {
+    width: 100%;      /* Allow inputs to fill the flex container space */
+    min-width: 0;     /* Override the rigid min-width from the general rule below */
 }
 
 .filter-group {
@@ -588,6 +594,7 @@ input[type="text"]:focus {
 .creator-credit a:hover {
     text-decoration: underline;
 }
+
 
 
 
