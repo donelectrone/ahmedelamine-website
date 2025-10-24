@@ -2128,16 +2128,24 @@ body {
 
 header h1 {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* This separates the title and button */
     align-items: center;
-    flex-wrap: wrap; /* Allows button to wrap on small screens */
+    gap: 20px; /* Adds space between items if they wrap */
+    flex-wrap: wrap; 
 }
 
 #install-pwa-btn {
-    font-size: 0.9rem;
-    padding: 8px 16px;
-    text-transform: none; /* Keep normal case for this button */
+    /* Make it a small button */
+    font-size: 0.8rem; /* Smaller text */
+    padding: 6px 12px; /* Smaller padding */
+    
+    /* Keep the other styles */
+    text-transform: none; 
     letter-spacing: 0;
     box-shadow: none;
     border-width: 2px;
+    
+    /* Make sure it's an inline element that can have padding */
+    display: inline-block; 
 }
+
