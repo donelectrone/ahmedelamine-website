@@ -87,11 +87,11 @@ body::before {
    ======================================== */
 
 header {
-    text-align: center;
-    margin-bottom: 30px;
-    animation: slideIn 0.5s ease-out;
-    position: relative;
-    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 header h1 {
@@ -2135,17 +2135,13 @@ header h1 {
 }
 
 #install-pwa-btn {
-    /* Make it a small button */
-    font-size: 0.8rem; /* Smaller text */
-    padding: 6px 12px; /* Smaller padding */
-    
-    /* Keep the other styles */
+    font-size: 0.8rem;
+    padding: 6px 12px;
     text-transform: none; 
     letter-spacing: 0;
     box-shadow: none;
     border-width: 2px;
-    
-    /* Make sure it's an inline element that can have padding */
     display: inline-block; 
 }
+
 
