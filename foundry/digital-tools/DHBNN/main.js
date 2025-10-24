@@ -119,41 +119,42 @@ async function initializeDatabase() {
 }
 
 /**
- * Load page-specific JavaScript logic based on current URL
+ * Load page-specific JavaScript logic based on current URL,
+ * handling both clean URLs (e.g., /patient-list) and full filenames.
  */
 async function loadPageSpecificLogic() {
     const path = window.location.pathname;
-    console.log(`📄 Loading logic for page: ${path}`);
+    console.log(`📄 Evaluating path for logic: ${path}`);
 
     try {
-        // --- THIS IS THE CORRECTED LOGIC BLOCK ---
-        if (path.endsWith('/') || path.endsWith('index.html')) {
+        // --- THIS IS THE MORE FLEXIBLE LOGIC BLOCK ---
+        if (path.endsWith('/') || path.endsWith('index.html') || path.endsWith('index')) {
             const { initializeForm } = await import('./patient-form.js');
             initializeForm();
             console.log('✓ Initialized patient-form.js');
 
-        } else if (path.endsWith('assessment.html')) {
+        } else if (path.endsWith('/assessment') || path.endsWith('assessment.html')) {
             const { initializeAssessmentPage } = await import('./assessment-logic.js');
             await initializeAssessmentPage();
             console.log('✓ Initialized assessment-logic.js');
 
-        } else if (path.endsWith('patient-list.html')) { // <-- THIS LINE IS NOW CORRECT
+        } else if (path.endsWith('/patient-list') || path.endsWith('patient-list.html')) {
             const { initializePatientListPage } = await import('./patient-list-manager.js');
             await initializePatientListPage();
             console.log('✓ Initialized patient-list-manager.js');
 
-        } else if (path.endsWith('patient-profile.html')) {
+        } else if (path.endsWith('/patient-profile') || path.endsWith('patient-profile.html')) {
             const { initializeProfilePage } = await import('./profile-manager.js');
             await initializeProfilePage();
             console.log('✓ Initialized profile-manager.js');
 
-        } else if (path.endsWith('stats.html')) {
+        } else if (path.endsWith('/stats') || path.endsWith('stats.html')) {
             console.log('Stats page logic not yet implemented.');
 
         } else {
             console.warn(`⚠ No specific logic handler for path: ${path}`);
         }
-        // --- END OF CORRECTED BLOCK ---
+        // --- END OF FLEXIBLE BLOCK ---
 
     } catch (error) {
         console.error(`❌ Error loading page-specific logic for ${path}:`, error);
@@ -392,3 +393,4 @@ document.head.appendChild(style);
 // Export for use in other modules
 
 export { appState, initializeApp, showNotification, showErrorNotification };
+
