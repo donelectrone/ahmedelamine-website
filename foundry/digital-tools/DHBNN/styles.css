@@ -2123,4 +2123,21 @@ body {
 .modal-link:hover {
     color: var(--primary-dark);
     text-decoration: underline;
+
+}
+
+header h1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allows button to wrap on small screens */
+}
+
+#install-pwa-btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    text-transform: none; /* Keep normal case for this button */
+    letter-spacing: 0;
+    box-shadow: none;
+    border-width: 2px;
 }
