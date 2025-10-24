@@ -2091,6 +2091,8 @@ body {
     color: var(--medical-blue);
     margin-bottom: 15px;
     text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600; 
 }
 
 .modal-content p {
@@ -2143,5 +2145,6 @@ header h1 {
     border-width: 2px;
     display: inline-block; 
 }
+
 
 
