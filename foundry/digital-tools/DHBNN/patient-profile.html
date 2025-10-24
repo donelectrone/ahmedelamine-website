@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Profil détaillé du patient DHBNN - Suivi complet et historique médical">
+    <meta name="theme-color" content="#0066CC">
+    <title>DHBNN PWA - Profil Patient</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <header>
+        <h1>👤 Profil: <span id="patient-name-display">Chargement...</span></h1>
+    </header>
+
+    <main id="patient-profile-container">
+        <!-- Top Action Buttons -->
+        <div class="profile-top-actions">
+            <button type="button" id="back-to-list-btn" class="btn btn-secondary">
+                ← Retour à la Liste
+            </button>
+            <button type="button" id="edit-patient-btn" class="btn btn-outline">
+                ✏️ Modifier les Informations
+            </button>
+        </div>
+
+        <!-- Section 1: Patient Summary -->
+        <section id="patient-summary-section" class="profile-section">
+            <h2>📊 Résumé du Patient</h2>
+            
+            <div id="patient-summary-display" class="summary-grid">
+                <!-- Will be populated by JavaScript with structured patient data -->
+                <div class="summary-loading">
+                    <div class="loading-spinner"></div>
+                    <p>Chargement des informations du patient...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Treatment & Evolution -->
+        <section id="treatment-evolution-section" class="profile-section">
+            <h2>💊 Traitement & Évolution</h2>
+            
+            <!-- Initial Treatment Display -->
+            <div class="subsection-card">
+                <h3>Traitement Initial</h3>
+                <div id="initial-treatment-display" class="treatment-info">
+                    <!-- Populated by JavaScript -->
+                    <p class="placeholder-text">Aucun traitement enregistré pour le moment.</p>
+                </div>
+            </div>
+
+            <!-- 48h Follow-up -->
+            <div class="subsection-card">
+                <h3>⏰ Suivi à 48 heures</h3>
+                
+                <!-- Evolution Assessment Controls -->
+                <div id="evolution-assessment-controls" class="evolution-controls">
+                    <p class="control-label">Évaluation de l'évolution clinique:</p>
+                    
+                    <div class="evolution-options">
+                        <div class="evolution-card">
+                            <input type="radio" id="evolution-favorable" name="evolution" value="favorable" class="evolution-radio">
+                            <label for="evolution-favorable" class="evolution-label">
+                                <div class="evolution-icon favorable-icon">✓</div>
+                                <div class="evolution-content">
+                                    <div class="evolution-title">Évolution Favorable</div>
+                                    <div class="evolution-description">
+                                        Amélioration des signes cliniques, diminution de l'inflammation
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="evolution-card">
+                            <input type="radio" id="evolution-defavorable" name="evolution" value="defavorable" class="evolution-radio">
+                            <label for="evolution-defavorable" class="evolution-label">
+                                <div class="evolution-icon unfavorable-icon">✗</div>
+                                <div class="evolution-content">
+                                    <div class="evolution-title">Évolution Défavorable</div>
+                                    <div class="evolution-description">
+                                        Persistance ou aggravation des signes, extension des lésions
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="evolution-actions">
+                        <button type="button" id="validate-evolution-btn" class="btn btn-primary" disabled>
+                            Valider l'Évolution
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Evolution Outcome Display -->
+                <div id="evolution-outcome-display" class="evolution-outcome" style="display: none;">
+                    <!-- Populated by JavaScript after validation -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Photo Timeline -->
+        <section id="photo-timeline-section" class="profile-section">
+            <h2>📸 Suivi Photographique</h2>
+            
+            <!-- Photo Upload Controls -->
+            <div class="photo-upload-controls">
+                <div class="upload-area">
+                    <label for="photo-upload-input" class="upload-label">
+                        <div class="upload-icon">📷</div>
+                        <div class="upload-text">
+                            <strong>Choisir une photo</strong>
+                            <span>ou glisser-déposer ici</span>
+                        </div>
+                    </label>
+                    <input type="file" id="photo-upload-input" accept="image/*" class="photo-input" capture="environment">
+                </div>
+                
+                <div class="photo-description-area">
+                    <input 
+                        type="text" 
+                        id="photo-description-input" 
+                        placeholder="Ajouter une description (ex: J0 - Présentation initiale, J2 - Après traitement...)"
+                        class="photo-description-input">
+                    
+                    <button type="button" id="upload-photo-btn" class="btn btn-primary" disabled>
+                        <span class="btn-icon">+</span>
+                        Ajouter la Photo
+                    </button>
+                </div>
+            </div>
+
+            <!-- Photo Gallery -->
+            <div id="photo-gallery" class="photo-gallery">
+                <div class="gallery-empty">
+                    <div class="empty-icon">🖼️</div>
+                    <p>Aucune photo enregistrée pour le moment.</p>
+                    <p class="empty-hint">Ajoutez des photos pour suivre l'évolution visuelle de la dermohypodermite.</p>
+                </div>
+                <!-- Photos will be added here by JavaScript:
+                <div class="photo-item" data-photo-id="...">
+                    <img src="..." alt="Photo">
+                    <div class="photo-info">
+                        <div class="photo-date">15/10/2025 - 14:30</div>
+                        <div class="photo-description">J0 - Présentation initiale</div>
+                    </div>
+                    <button class="photo-delete-btn">×</button>
+                </div>
+                -->
+            </div>
+        </section>
+
+        <!-- Section 4: Complications Management -->
+        <section id="complications-management-section" class="profile-section" style="display: none;">
+            <h2>⚠️ Gestion des Complications</h2>
+            
+            <div id="complications-display" class="complications-content">
+                <!-- Populated by JavaScript if evolution is unfavorable -->
+            </div>
+        </section>
+
+        <!-- Section 5: Prevention & Cure -->
+        <section id="prevention-cure-section" class="profile-section">
+            <h2>🛡️ Prévention & Guérison</h2>
+            
+            <!-- Prevention Recommendations -->
+            <div class="subsection-card">
+                <h3>Recommandations de Prévention des Récidives</h3>
+                <div id="prevention-recommendations-display" class="prevention-content">
+                    <ul class="recommendation-list">
+                        <li>
+                            <strong>Hygiène cutanée:</strong> Maintenir une bonne hygiène, traiter les mycoses interdigitales
+                        </li>
+                        <li>
+                            <strong>Soins des plaies:</strong> Désinfecter immédiatement toute plaie ou piqûre
+                        </li>
+                        <li>
+                            <strong>Hydratation:</strong> Hydrater régulièrement la peau, notamment en cas de sécheresse
+                        </li>
+                        <li>
+                            <strong>Facteurs de risque:</strong> Contrôler le diabète, l'obésité, l'insuffisance veineuse
+                        </li>
+                        <li>
+                            <strong>Surveillance:</strong> Consulter rapidement en cas de rougeur, chaleur ou douleur inhabituelle
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Cure Management -->
+            <div class="subsection-card cure-card">
+                <h3>Déclaration de Guérison</h3>
+                <div class="cure-content">
+                    <p class="cure-description">
+                        Une fois que le patient présente une guérison complète (disparition des signes inflammatoires, 
+                        cicatrisation complète), vous pouvez marquer ce dossier comme guéri.
+                    </p>
+                    
+                    <div class="cure-checklist">
+                        <label class="cure-check-item">
+                            <input type="checkbox" id="cure-check-signs" class="cure-checkbox">
+                            <span>Disparition complète des signes inflammatoires</span>
+                        </label>
+                        <label class="cure-check-item">
+                            <input type="checkbox" id="cure-check-healing" class="cure-checkbox">
+                            <span>Cicatrisation complète de la lésion</span>
+                        </label>
+                        <label class="cure-check-item">
+                            <input type="checkbox" id="cure-check-advice" class="cure-checkbox">
+                            <span>Conseils de prévention donnés au patient</span>
+                        </label>
+                    </div>
+
+                    <button type="button" id="mark-as-cured-btn" class="btn btn-success" disabled>
+                        ✓ Marquer comme Guéri
+                    </button>
+                    
+                    <div id="cure-confirmation" class="cure-confirmation" style="display: none;">
+                        <!-- Confirmation message after marking as cured -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Chargement du profil patient...</p>
+    </div>
+
+    <script src="main.js" type="module"></script>
+	
+	<!-- Persistent Navigation Tab Bar -->
+<nav class="nav-bar">
+    <ul class="nav-list">
+        <li class="nav-item">
+            <a href="patient-list.html" class="nav-link">
+                <span class="nav-icon">👥</span>
+                <span class="nav-label">Patients</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <button type="button" id="language-toggle-btn" class="nav-link">
+                <span class="nav-icon">🌐</span>
+                <span class="nav-label" id="language-label">EN</span>
+            </button>
+        </li>
+        <li class="nav-item">
+            <a href="stats.html" class="nav-link">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Stats</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

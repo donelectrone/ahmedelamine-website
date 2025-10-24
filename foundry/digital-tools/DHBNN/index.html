@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Système d'aide à la décision clinique pour DHBNN">
+    <meta name="theme-color" content="#2196F3">
+    <title>DHBNN PWA - Enregistrement Patient</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <header>
+        <h1>Enregistrement Patient</h1>
+    </header>
+
+    <main id="patient-registration-form">
+        <!-- Section 1: Identité & Généralités -->
+        <section id="demographics">
+            <h2>Identité & Généralités</h2>
+            
+            <div class="form-group">
+                <label for="input-nom">Nom</label>
+                <input type="text" id="input-nom" name="nom" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="input-prenom">Prénom</label>
+                <input type="text" id="input-prenom" name="prenom" required>
+            </div>
+			
+			<div class="form-group">
+				<label>Sexe</label>
+				<div class="radio-group">
+					<label><input type="radio" name="sexe" value="homme"> Homme</label>
+					<label><input type="radio" name="sexe" value="femme"> Femme</label>
+				</div>
+			</div>
+            
+            <div class="form-group">
+                <label for="input-age">Âge</label>
+                <input type="number" id="input-age" name="age" min="0" max="150" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="input-poids">Poids (kg)</label>
+                <input type="number" id="input-poids" name="poids" min="0" step="0.1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="input-taille">Taille (cm)</label>
+                <input type="number" id="input-taille" name="taille" min="0" step="0.1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="input-profession">Profession</label>
+                <input type="text" id="input-profession" name="profession">
+            </div>
+        </section>
+
+        <!-- Section 2: Antécédents & Facteurs de Risque -->
+        <section id="medical-history">
+            <h2>Antécédents & Facteurs de Risque</h2>
+            
+            <div class="button-toggle-grid">
+                <div class="button-toggle-container">
+                    <input type="checkbox" id="chk-diabete" class="toggle-checkbox">
+                    <label for="chk-diabete" class="toggle-label-button">Diabète</label>
+                </div>
+                
+                <div class="button-toggle-container">
+                    <input type="checkbox" id="chk-hta" class="toggle-checkbox">
+                    <label for="chk-hta" class="toggle-label-button">HTA</label>
+                </div>
+                
+                <div class="button-toggle-container">
+                    <input type="checkbox" id="chk-insuffisance-cardiaque" class="toggle-checkbox">
+                    <label for="chk-insuffisance-cardiaque" class="toggle-label-button">Insuffisance Cardiaque</label>
+                </div>
+                
+                <div class="button-toggle-container">
+                    <input type="checkbox" id="chk-insuffisance-renale" class="toggle-checkbox">
+                    <label for="chk-insuffisance-renale" class="toggle-label-button">Insuffisance Rénale</label>
+                </div>
+                
+                <div class="button-toggle-container">
+                    <input type="checkbox" id="chk-arteriopathie" class="toggle-checkbox">
+                    <label for="chk-arteriopathie" class="toggle-label-button">Artériopathie</label>
+                </div>
+                
+                <div class="button-toggle-container">
+                    <input type="checkbox" id="chk-insuffisance-veineuse" class="toggle-checkbox">
+                    <label for="chk-insuffisance-veineuse" class="toggle-label-button">Insuffisance Veineuse</label>
+                </div>
+                
+                <div class="button-toggle-container">
+                    <input type="checkbox" id="chk-insuffisance-lymphatique" class="toggle-checkbox">
+                    <label for="chk-insuffisance-lymphatique" class="toggle-label-button">Insuffisance Lymphatique</label>
+                </div>
+                
+                <div class="button-toggle-container">
+                    <input type="checkbox" id="chk-immunodepression" class="toggle-checkbox">
+                    <label for="chk-immunodepression" class="toggle-label-button">Immunodépression</label>
+                </div>
+                
+                <div class="button-toggle-container">
+                    <input type="checkbox" id="chk-chirurgie-recente" class="toggle-checkbox">
+                    <label for="chk-chirurgie-recente" class="toggle-label-button">Intervention Chirurgicale Récente</label>
+                </div>
+                
+                <div class="button-toggle-container">
+                    <input type="checkbox" id="chk-hospitalisation-recente" class="toggle-checkbox">
+                    <label for="chk-hospitalisation-recente" class="toggle-label-button">Hospitalisation Récente</label>
+                </div>
+                
+                <div class="button-toggle-container">
+                    <input type="checkbox" id="chk-anti-inflammatoire" class="toggle-checkbox">
+                    <label for="chk-anti-inflammatoire" class="toggle-label-button">Traitement Anti-Inflammatoire</label>
+                </div>
+                
+                <div class="button-toggle-container">
+                    <input type="checkbox" id="chk-atb-actuel" class="toggle-checkbox">
+                    <label for="chk-atb-actuel" class="toggle-label-button">Traitement Antibiotique Actuel</label>
+                </div>
+            </div>
+            
+            <div id="current-atb-details" class="conditional-details" style="display: none;">
+                <div class="form-group">
+                    <label for="input-atb-type">Type d'Antibiotique</label>
+                    <input type="text" id="input-atb-type" name="atb-type">
+                </div>
+                
+                <div class="form-group">
+                    <label for="input-atb-duration">Durée (jours)</label>
+                    <input type="number" id="input-atb-duration" name="atb-duration" min="0" step="1">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="input-recidive-number">Nombre de Récidives</label>
+                <input type="number" id="input-recidive-number" name="recidive-number" value="0" min="0" step="1">
+            </div>
+        </section>
+
+        <!-- Section 3: Présentation Actuelle -->
+        <section id="current-presentation">
+            <h2>Présentation Actuelle</h2>
+            
+            <div class="subsection">
+                <h3>Localisation de la Dermo-Hypodermite</h3>
+                <div id="body-diagram-container">
+                    <!-- Interactive SVG body diagram will be inserted here -->
+                    <p style="text-align: center; color: #666; padding: 20px;">
+                        [Diagramme corporel interactif à venir]
+                    </p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="localization-notes">Notes sur la localisation</label>
+                    <textarea id="localization-notes" name="localization-notes" rows="3" placeholder="Notes sur la localisation (ex: bilatérale, circonférentielle)..."></textarea>
+                </div>
+				<h3>Photo Initiale de la Lésion (J0)</h3>
+				<div class="photo-upload-controls" style="margin-bottom: 20px;">
+					<div class="upload-area">
+						<label for="initial-lesion-photo-input" class="upload-label">
+							<div class="upload-icon">📷</div>
+							<div class="upload-text">
+								<strong>Prendre ou Choisir une Photo</strong>
+							</div>
+						</label>
+						<input type="file" id="initial-lesion-photo-input" accept="image/*" class="photo-input" capture="environment">
+					</div>
+					<div id="initial-photo-preview" class="lesion-photo-preview" style="display: none;">
+						 <img id="lesion-preview-image" src="" alt="Aperçu de la photo">
+						 <button type="button" id="remove-lesion-photo-btn">×</button>
+					</div>
+				</div>
+            </div>
+            
+            <div class="subsection">
+                <h3>Porte d'Entrée</h3>
+                <div class="button-toggle-grid">
+                    <div class="button-toggle-container">
+                        <input type="checkbox" id="chk-entry-intertrigo" class="toggle-checkbox">
+                        <label for="chk-entry-intertrigo" class="toggle-label-button">Intertrigo</label>
+                    </div>
+                    
+                    <div class="button-toggle-container">
+                        <input type="checkbox" id="chk-entry-plaie" class="toggle-checkbox">
+                        <label for="chk-entry-plaie" class="toggle-label-button">Plaie</label>
+                    </div>
+                    
+                    <div class="button-toggle-container">
+                        <input type="checkbox" id="chk-entry-piqure" class="toggle-checkbox">
+                        <label for="chk-entry-piqure" class="toggle-label-button">Piqûre d'Insecte</label>
+                    </div>
+                    
+                    <div class="button-toggle-container">
+                        <input type="checkbox" id="chk-entry-morsure" class="toggle-checkbox">
+                        <label for="chk-entry-morsure" class="toggle-label-button">Morsure ou Griffure</label>
+                    </div>
+                    
+                    <div class="button-toggle-container">
+                        <input type="checkbox" id="chk-entry-inoculation" class="toggle-checkbox">
+                        <label for="chk-entry-inoculation" class="toggle-label-button">Inoculation Aquatique</label>
+                    </div>
+                    
+                    <div class="button-toggle-container">
+                        <input type="checkbox" id="chk-entry-autre" class="toggle-checkbox">
+                        <label for="chk-entry-autre" class="toggle-label-button">Autre</label>
+                    </div>
+                </div>
+                
+                <div id="inoculation-water-details" class="conditional-details" style="display: none;">
+                    <div class="form-group">
+                        <label>Type d'Eau</label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="water-type" value="douce" id="radio-eau-douce">
+                                Eau Douce
+                            </label>
+                            <label>
+                                <input type="radio" name="water-type" value="mer" id="radio-eau-mer">
+                                Eau de Mer
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="entry-other-details" class="conditional-details" style="display: none;">
+                    <div class="form-group">
+                        <label for="input-entry-other-details">Préciser</label>
+                        <input type="text" id="input-entry-other-details" name="entry-other-details" placeholder="Précisez la porte d'entrée...">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h3>Symptômes Associés</h3>
+                <div class="button-toggle-grid">
+                    <div class="button-toggle-container">
+                        <input type="checkbox" id="chk-fievre" class="toggle-checkbox">
+                        <label for="chk-fievre" class="toggle-label-button">Fièvre</label>
+                    </div>
+                    
+                    <div class="button-toggle-container">
+                        <input type="checkbox" id="chk-adenopathie" class="toggle-checkbox">
+                        <label for="chk-adenopathie" class="toggle-label-button">Adénopathie</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Buttons -->
+        <div class="form-actions">
+            <button type="button" id="save-patient-btn" class="btn btn-secondary">Enregistrer Patient</button>
+            <button type="button" id="continue-assessment-btn" class="btn btn-primary">Poursuivre l'Évaluation</button>
+        </div>
+    </main>
+
+    <script src="main.js" type="module"></script>
+	
+	<!-- Persistent Navigation Tab Bar -->
+<nav class="nav-bar">
+    <ul class="nav-list">
+        <li class="nav-item">
+            <a href="patient-list.html" class="nav-link">
+                <span class="nav-icon">👥</span>
+                <span class="nav-label">Patients</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <button type="button" id="language-toggle-btn" class="nav-link">
+                <span class="nav-icon">🌐</span>
+                <span class="nav-label" id="language-label">EN</span>
+            </button>
+        </li>
+        <li class="nav-item">
+            <a href="stats.html" class="nav-link">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Stats</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

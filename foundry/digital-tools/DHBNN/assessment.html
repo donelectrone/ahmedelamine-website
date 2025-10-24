@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Évaluation clinique pour DHBNN - Signes de gravité et critères d'hospitalisation">
+    <meta name="theme-color" content="#0066CC">
+    <title>DHBNN PWA - Évaluation Patient</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <header>
+        <h1>⚕ Évaluation de la Dermohypodermite</h1>
+    </header>
+
+    <main id="assessment-container">
+        <!-- Patient Information Display -->
+        <div class="patient-id-display">
+            <div class="patient-info-card">
+                <span class="patient-label">Patient:</span>
+                <span id="patient-name-display" class="patient-name">Chargement...</span>
+                <span id="patient-details-display" class="patient-details"></span>
+            </div>
+        </div>
+
+        <!-- Section 1: Severity Assessment -->
+        <section id="severity-assessment">
+            <h2>1. Évaluation des Signes de Gravité</h2>
+            
+            <p class="section-description">
+                Appuyez sur les signes de gravité présents chez le patient :
+            </p>
+
+            <div class="assessment-grid">
+                <!-- Sepsis -->
+                <div class="assessment-card">
+                    <input type="checkbox" id="chk-sepsis" class="severity-checkbox assessment-input">
+                    <label for="chk-sepsis" class="assessment-label">
+                        <div class="assessment-icon severity-icon">⚠</div>
+                        <div class="assessment-content">
+                            <div class="assessment-title">Signes de Sepsis</div>
+                            <div class="assessment-description">
+                                Score qSOFA ≥2 ou choc toxinique
+                            </div>
+                        </div>
+                        <div class="assessment-check">✓</div>
+                    </label>
+                </div>
+
+                <!-- Intense Pain -->
+                <div class="assessment-card">
+                    <input type="checkbox" id="chk-intense-pain" class="severity-checkbox assessment-input">
+                    <label for="chk-intense-pain" class="assessment-label">
+                        <div class="assessment-icon severity-icon">⚠</div>
+                        <div class="assessment-content">
+                            <div class="assessment-title">Douleur Intense</div>
+                            <div class="assessment-description">
+                                Pouvant traduire une fasciite nécrosante
+                            </div>
+                        </div>
+                        <div class="assessment-check">✓</div>
+                    </label>
+                </div>
+
+                <!-- Local Severity -->
+                <div class="assessment-card">
+                    <input type="checkbox" id="chk-local-severity" class="severity-checkbox assessment-input">
+                    <label for="chk-local-severity" class="assessment-label">
+                        <div class="assessment-icon severity-icon">⚠</div>
+                        <div class="assessment-content">
+                            <div class="assessment-title">Signes Locaux</div>
+                            <div class="assessment-description">
+                                Lividités, taches cyaniques, crépitation, hypoesthésie
+                            </div>
+                        </div>
+                        <div class="assessment-check">✓</div>
+                    </label>
+                </div>
+
+                <!-- Rapid Extension -->
+                <div class="assessment-card">
+                    <input type="checkbox" id="chk-rapid-extension" class="severity-checkbox assessment-input">
+                    <label for="chk-rapid-extension" class="assessment-label">
+                        <div class="assessment-icon severity-icon">⚠</div>
+                        <div class="assessment-content">
+                            <div class="assessment-title">Extension Rapide</div>
+                            <div class="assessment-description">
+                                Malgré antibiothérapie adaptée 24-48h
+                            </div>
+                        </div>
+                        <div class="assessment-check">✓</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Severity Outcome Display -->
+            <div id="severity-outcome" class="outcome-display">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Section 2: Hospitalization Criteria -->
+        <section id="hospitalization-criteria">
+            <h2>2. Recherche des Critères d'Hospitalisation</h2>
+            
+            <p class="section-description">
+                Appuyez sur tous les critères d'hospitalisation présents :
+            </p>
+
+            <div class="assessment-grid">
+                <!-- Comorbidity -->
+                <div class="assessment-card">
+                    <input type="checkbox" id="chk-comorbidity" class="hospitalization-checkbox assessment-input">
+                    <label for="chk-comorbidity" class="assessment-label">
+                        <div class="assessment-icon hospital-icon">🏥</div>
+                        <div class="assessment-content">
+                            <div class="assessment-title">Comorbidité</div>
+                            <div class="assessment-description">
+                                Diabète, obésité, immunodépression, insuffisances
+                            </div>
+                        </div>
+                        <div class="assessment-check">✓</div>
+                    </label>
+                </div>
+
+                <!-- Morbid Obesity -->
+                <div class="assessment-card">
+                    <input type="checkbox" id="chk-morbid-obesity" class="hospitalization-checkbox assessment-input">
+                    <label for="chk-morbid-obesity" class="assessment-label">
+                        <div class="assessment-icon hospital-icon">🏥</div>
+                        <div class="assessment-content">
+                            <div class="assessment-title">Obésité Morbide</div>
+                            <div class="assessment-description">
+                                IMC ≥40 kg/m²
+                            </div>
+                        </div>
+                        <div class="assessment-check">✓</div>
+                    </label>
+                </div>
+
+                <!-- Long-term Medications -->
+                <div class="assessment-card">
+                    <input type="checkbox" id="chk-long-term-meds" class="hospitalization-checkbox assessment-input">
+                    <label for="chk-long-term-meds" class="assessment-label">
+                        <div class="assessment-icon hospital-icon">🏥</div>
+                        <div class="assessment-content">
+                            <div class="assessment-title">Traitement Long Cours</div>
+                            <div class="assessment-description">
+                                AINS ou corticothérapie
+                            </div>
+                        </div>
+                        <div class="assessment-check">✓</div>
+                    </label>
+                </div>
+
+                <!-- Social Context -->
+                <div class="assessment-card">
+                    <input type="checkbox" id="chk-social-context" class="hospitalization-checkbox assessment-input">
+                    <label for="chk-social-context" class="assessment-label">
+                        <div class="assessment-icon hospital-icon">🏥</div>
+                        <div class="assessment-content">
+                            <div class="assessment-title">Contexte Social</div>
+                            <div class="assessment-description">
+                                Défavorable à la prise en charge ambulatoire
+                            </div>
+                        </div>
+                        <div class="assessment-check">✓</div>
+                    </label>
+                </div>
+
+                <!-- Diagnostic Doubt -->
+                <div class="assessment-card">
+                    <input type="checkbox" id="chk-diagnostic-doubt" class="hospitalization-checkbox assessment-input">
+                    <label for="chk-diagnostic-doubt" class="assessment-label">
+                        <div class="assessment-icon hospital-icon">🏥</div>
+                        <div class="assessment-content">
+                            <div class="assessment-title">Doute Diagnostic</div>
+                            <div class="assessment-description">
+                                Fasciite nécrosante, autre diagnostic
+                            </div>
+                        </div>
+                        <div class="assessment-check">✓</div>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Treatment Recommendation -->
+        <section id="recommendation-section">
+            <h2>Recommandation de Traitement</h2>
+
+            <div id="treatment-recommendation" class="treatment-display">
+                <div class="recommendation-placeholder">
+                    <div class="placeholder-icon">ℹ️</div>
+                    <p>
+                        Complétez l'évaluation des signes de gravité et des critères d'hospitalisation 
+                        pour obtenir une recommandation de traitement personnalisée.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Buttons -->
+        <div class="form-actions">
+            <button type="button" id="back-to-patient-list-btn" class="btn btn-secondary">
+                ← Retour à la Liste
+            </button>
+            <button type="button" id="confirm-treatment-btn" class="btn btn-primary">
+                Confirmer & Programmer Suivi 48h
+            </button>
+        </div>
+    </main>
+
+    <!-- Loading Overlay (hidden by default) -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Chargement des données du patient...</p>
+    </div>
+
+    <script src="main.js" type="module"></script>
+	
+	<!-- Persistent Navigation Tab Bar -->
+<nav class="nav-bar">
+    <ul class="nav-list">
+        <li class="nav-item">
+            <a href="patient-list.html" class="nav-link">
+                <span class="nav-icon">👥</span>
+                <span class="nav-label">Patients</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <button type="button" id="language-toggle-btn" class="nav-link">
+                <span class="nav-icon">🌐</span>
+                <span class="nav-label" id="language-label">EN</span>
+            </button>
+        </li>
+        <li class="nav-item">
+            <a href="stats.html" class="nav-link">
+                <span class="nav-icon">📊</span>
+                <span class="nav-label">Stats</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>
