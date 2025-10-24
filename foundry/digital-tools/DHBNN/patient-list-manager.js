@@ -4,7 +4,7 @@
    ======================================== */
 
 // Import data store functions
-import { getAllPatients, getPatientCount, searchPatients } from './data-store.js';
+import { getAllPatients } from './data-store.js';
 
 // Module-level variables
 let allPatients = [];
@@ -555,3 +555,4 @@ function setupInstallButton() {
         });
     }
 }
+
