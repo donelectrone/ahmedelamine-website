@@ -123,60 +123,40 @@ async function initializeDatabase() {
  */
 async function loadPageSpecificLogic() {
     const path = window.location.pathname;
-    const page = path.split('/').pop() || 'index.html';
-
-    console.log(`📄 Loading logic for page: ${page}`);
+    console.log(`📄 Loading logic for page: ${path}`);
 
     try {
-        // Index page - Patient Registration Form
-        if (path.endsWith('index.html') || path === '/' || page === '' || path.endsWith('/')) {
-            console.log('Loading patient registration form logic...');
+        // --- THIS IS THE CORRECTED LOGIC BLOCK ---
+        if (path.endsWith('/') || path.endsWith('index.html')) {
             const { initializeForm } = await import('./patient-form.js');
             initializeForm();
-            console.log('✓ Patient form initialized');
-        }
-        
-        // Assessment page - Initial Assessment & Hospitalization Criteria
-        else if (path.endsWith('assessment.html')) {
-            console.log('Loading assessment logic...');
+            console.log('✓ Initialized patient-form.js');
+
+        } else if (path.endsWith('assessment.html')) {
             const { initializeAssessmentPage } = await import('./assessment-logic.js');
             await initializeAssessmentPage();
-            console.log('✓ Assessment page initialized');
-        }
-        
-        // Patient Profile page - Individual patient view with follow-up
-        else if (path.endsWith('patient-profile.html')) {
-            console.log('Loading patient profile logic...');
-            const { initializeProfilePage } = await import('./profile-manager.js');
-            await initializeProfilePage();
-            console.log('✓ Patient profile page initialized');
-        }
-        
-        // Patient List page - List all patients with search/filter
-        else if (path.endsWith('patient-list.html')) {
-            console.log('Loading patient list logic...');
+            console.log('✓ Initialized assessment-logic.js');
+
+        } else if (path.endsWith('patient-list.html')) { // <-- THIS LINE IS NOW CORRECT
             const { initializePatientListPage } = await import('./patient-list-manager.js');
             await initializePatientListPage();
-            console.log('✓ Patient list page initialized');
+            console.log('✓ Initialized patient-list-manager.js');
+
+        } else if (path.endsWith('patient-profile.html')) {
+            const { initializeProfilePage } = await import('./profile-manager.js');
+            await initializeProfilePage();
+            console.log('✓ Initialized profile-manager.js');
+
+        } else if (path.endsWith('stats.html')) {
+            console.log('Stats page logic not yet implemented.');
+
+        } else {
+            console.warn(`⚠ No specific logic handler for path: ${path}`);
         }
-        
-        // Statistics Dashboard page - Aggregate statistics
-        else if (path.endsWith('stats.html')) {
-            console.log('Loading statistics logic...');
-            // TODO: Implement stats-manager.js
-            // const { initializeStatsPage } = await import('./stats-manager.js');
-            // await initializeStatsPage();
-            console.log('⚠ Statistics page logic not yet implemented');
-            showPlaceholderMessage('Statistiques', 'Cette page sera bientôt disponible');
-        }
-        
-        // Unknown page
-        else {
-            console.warn(`⚠ No specific logic handler for page: ${page}`);
-        }
+        // --- END OF CORRECTED BLOCK ---
 
     } catch (error) {
-        console.error(`❌ Error loading page-specific logic for ${page}:`, error);
+        console.error(`❌ Error loading page-specific logic for ${path}:`, error);
         throw error;
     }
 }
@@ -410,4 +390,5 @@ style.textContent = `
 document.head.appendChild(style);
 
 // Export for use in other modules
+
 export { appState, initializeApp, showNotification, showErrorNotification };
