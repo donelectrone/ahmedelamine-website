@@ -1,6 +1,6 @@
 {
   "name": "DHBNN Clinical Decision Support",
-  "short_name": "DHBNN PWA",
+  "short_name": "DHBNN",
   "description": "An application to assist doctors in managing non-necrotizing bacterial dermo-hypodermitis (DHBNN).",
   "start_url": "./patient-list.html",
   "display": "standalone",
@@ -21,4 +21,5 @@
       "purpose": "any maskable"
     }
   ]
+
 }
