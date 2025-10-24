@@ -38,6 +38,7 @@ export async function initializePatientListPage() {
 
         // Set up event listeners
         setupEventListeners();
+		setupInstallButton();
 
         // Hide loading state
         showLoadingState(false);
@@ -550,3 +551,4 @@ function setupInstallButton() {
         });
     }
 }
+
