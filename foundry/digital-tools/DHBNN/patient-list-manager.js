@@ -511,44 +511,47 @@ function handleAboutPopup() {
 
 /**
  * Manages the PWA installation button.
- * Listens for the browser's install prompt event and shows our custom button.
+ * Listens for the browser's install prompt event and shows custom button.
+ */
+/**
+ * Manages the PWA installation button.
  */
 function setupInstallButton() {
     let deferredInstallPrompt = null;
     const installButton = document.getElementById('install-pwa-btn');
 
+    // 1. Listen for the browser's "beforeinstallprompt" event
     window.addEventListener('beforeinstallprompt', (event) => {
-        // Prevent the default mini-infobar from appearing on mobile
+        // Prevent the default browser prompt
         event.preventDefault();
         
-        // Stash the event so it can be triggered later.
+        // Save the event for later
         deferredInstallPrompt = event;
         
-        // Show our custom install button.
+        // Show our custom button
         if (installButton) {
-            installButton.style.display = 'block';
+            installButton.style.display = 'inline-block'; // Use inline-block
         }
     });
 
+    // 2. Add a click listener to the button
     if (installButton) {
-        installButton.addEventListener('click', async () => {
-            if (!deferredInstallPrompt) {
-                // The prompt has already been used or wasn't available.
-                return;
+        installButton.addEventListener('click', () => {
+            if (deferredInstallPrompt) {
+                // Trigger the saved browser prompt
+                deferredInstallPrompt.prompt();
+
+                // The prompt can only be used once. Hide our button after use.
+                deferredInstallPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    deferredInstallPrompt = null;
+                    installButton.style.display = 'none';
+                });
             }
-            
-            // Show the browser's official install prompt.
-            deferredInstallPrompt.prompt();
-            
-            // Wait for the user to respond to the prompt.
-            const { outcome } = await deferredInstallPrompt.userChoice;
-            
-            console.log(`User response to the install prompt: ${outcome}`);
-            
-            // We've used the prompt, and can't use it again. Hide the button.
-            deferredInstallPrompt = null;
-            installButton.style.display = 'none';
         });
     }
 }
-
