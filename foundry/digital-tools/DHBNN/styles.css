@@ -567,7 +567,7 @@ line-height: 1.5;
 .assessment-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-gap: 16px;
+gap: 10px;
 margin-bottom: 30px;
 }
 /* Assessment Card */
@@ -583,7 +583,7 @@ pointer-events: none;
 display: flex;
 align-items: flex-start;
 gap: 15px;
-padding: 20px;
+padding: 15px;
 background: var(--white);
 border: 3px solid var(--border-color);
 border-radius: 12px;
@@ -803,7 +803,7 @@ font-weight: 600;
 max-width: 1000px;
 margin: 0 auto;
 background: var(--white);
-padding: 35px;
+padding: 15px;
 border-radius: 12px;
 box-shadow: var(--shadow);
 border-top: 4px solid var(--medical-blue);
@@ -844,7 +844,7 @@ gap: 10px;
 background: linear-gradient(135deg, #F8FBFD 0%, #FFFFFF 100%);
 border: 2px solid var(--border-color);
 border-radius: 12px;
-padding: 25px;
+padding: 15px;
 margin-bottom: 20px;
 }
 .subsection-card h3 {
@@ -1773,7 +1773,7 @@ padding-top: 40px;
 border-radius: 12px;
 box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 width: 100%;
-max-width: 500px;
+max-width: 400px;
 position: relative;
 transform: scale(0.95);
 transition: transform 0.3s ease;
@@ -1816,9 +1816,10 @@ font-size: 1.3rem;
 font-weight: 600;
 }
 .modal-content p {
-line-height: 1.6;
+line-height: 1.5;
 margin-bottom: 15px;
 text-align: center;
+font-size: 0.9rem;
 }
 .modal-content hr {
 border: none;
@@ -1857,4 +1858,9 @@ letter-spacing: 0;
 box-shadow: none;
 border-width: 2px;
 display: inline-block;
+}
+.lesion-photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This is the magic property */
 }
