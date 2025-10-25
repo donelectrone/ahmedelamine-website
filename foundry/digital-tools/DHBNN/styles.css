@@ -36,15 +36,19 @@
     padding: 0;
 }
 
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 body {
     font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     font-size: 16px;
-    line-height: 1.5; /* MODIFIED: Slightly reduced for compactness */
+    line-height: 1.6;
     color: var(--text-color);
     background: linear-gradient(135deg, #E8F4F8 0%, #D6E9F5 100%);
     background-attachment: fixed;
-    padding: 15px; /* MODIFIED: Reduced body padding */
-    padding-bottom: 80px; /* Keep space for nav bar */
+    padding: 15px 5px 80px 5px; /* Adjusted padding */
     min-height: 100vh;
 }
 
@@ -58,11 +62,12 @@ header {
     align-items: center;
     flex-wrap: wrap;
     gap: 15px;
-    margin-bottom: 20px; /* MODIFIED: Reduced margin */
+    padding: 0 10px;
+    margin-bottom: 20px;
 }
 
 header h1 {
-    font-size: 1.8rem; /* MODIFIED: Slightly smaller title */
+    font-size: 1.8rem;
     color: var(--medical-blue);
     font-weight: 600;
     display: flex;
@@ -71,17 +76,17 @@ header h1 {
 }
 
 /* ========================================
-   Main Containers (Centralized Styling)
+   Main Containers & Sections
    ======================================== */
 
-main,
+main#patient-registration-form,
 #assessment-container,
 #patient-list-container,
 #patient-profile-container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     background: var(--white);
-    padding: 20px; /* MODIFIED: Reduced padding */
+    padding: 20px; /* Reduced padding */
     border-radius: 12px;
     box-shadow: var(--shadow);
     border-top: 4px solid var(--medical-blue);
@@ -89,13 +94,9 @@ main,
     z-index: 1;
 }
 
-/* ========================================
-   Sections
-   ======================================== */
-
 section {
-    margin-bottom: 25px; /* MODIFIED: Reduced margin */
-    padding: 20px; /* MODIFIED: Reduced padding */
+    margin-bottom: 25px; /* Reduced margin */
+    padding: 18px; /* Reduced padding */
     background: linear-gradient(135deg, #F8FBFD 0%, #FFFFFF 100%);
     border-radius: 10px;
     border-left: 4px solid var(--accent-color);
@@ -107,16 +108,16 @@ section:last-of-type {
 }
 
 h2 {
-    font-size: 1.4rem; /* MODIFIED: Slightly smaller */
+    font-size: 1.4rem;
     color: var(--medical-blue);
-    margin-bottom: 15px; /* MODIFIED: Reduced margin */
+    margin-bottom: 15px;
     font-weight: 600;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color); /* MODIFIED: Thinner border */
+    border-bottom: 2px solid var(--border-color);
 }
 
 h3 {
-    font-size: 1.1rem; /* MODIFIED: Slightly smaller */
+    font-size: 1.1rem;
     color: var(--text-color);
     margin-bottom: 15px;
     margin-top: 20px;
@@ -124,15 +125,16 @@ h3 {
 }
 
 /* ========================================
-   Form Groups & Toggles
+   Form Groups & Inputs
    ======================================== */
 
 .form-group {
-    margin-bottom: 15px; /* MODIFIED: Reduced margin */
+    margin-bottom: 18px;
 }
 
 .form-group label {
-    margin-bottom: 6px; /* MODIFIED: Reduced margin */
+    display: block;
+    margin-bottom: 6px;
     font-weight: 600;
     font-size: 0.9rem;
 }
@@ -141,10 +143,13 @@ h3 {
 .form-group input[type="number"],
 .form-group textarea {
     width: 100%;
-    padding: 10px 12px; /* MODIFIED: Reduced padding */
-    border: 1px solid var(--border-color); /* MODIFIED: Thinner border */
-    border-radius: 6px;
+    padding: 10px 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
     font-size: 1rem;
+    font-family: inherit;
+    transition: var(--transition);
+    background-color: var(--white);
 }
 
 .form-group input:focus, .form-group textarea:focus {
@@ -153,82 +158,204 @@ h3 {
     box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
 }
 
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ========================================
+   Button-Toggle Grid
+   ======================================== */
+
 .button-toggle-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* MODIFIED: Smaller min width */
-    gap: 10px; /* MODIFIED: Reduced gap */
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.toggle-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .toggle-label-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 8px; /* MODIFIED: Reduced padding */
-    min-height: 55px; /* MODIFIED: Reduced height */
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
+    padding: 12px 8px;
+    min-height: 60px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
     text-align: center;
     cursor: pointer;
     background: var(--white);
     color: var(--text-color);
-    font-size: 0.85rem; /* MODIFIED: Smaller font */
+    font-size: 0.85rem;
     font-weight: 500;
     transition: var(--transition);
+    user-select: none;
+}
+
+.toggle-label-button:hover {
+    border-color: var(--medical-blue);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
 }
 
 .toggle-checkbox:checked + .toggle-label-button {
-    background: var(--danger-color);
+    background: linear-gradient(135deg, #DC143C 0%, #B8001F 100%);
     border-color: var(--danger-dark);
     color: var(--white);
     font-weight: 600;
 }
 
+/* ========================================
+   Conditional Details & Radio Groups
+   ======================================== */
+
 .conditional-details {
+    display: none;
     margin-top: 15px;
     padding: 15px;
-    border: 1px solid var(--accent-color);
-    border-radius: 6px;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    background: #F0F9FF;
 }
 
 .radio-group {
+    display: flex;
     gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 10px;
 }
 
 .radio-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
     padding: 8px 12px;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    background: var(--white);
+    transition: var(--transition);
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 8px;
+    accent-color: var(--medical-blue);
 }
 
 /* ========================================
-   Form Actions & Buttons
+   Photo Upload & Preview Styles (Consolidated)
+   ======================================== */
+
+.photo-upload-controls {
+    display: grid;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.upload-area {
+    border: 3px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    background: #F8FBFD;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.upload-area:hover {
+    border-color: var(--medical-blue);
+}
+
+.upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.upload-icon { font-size: 2.5rem; }
+.upload-text strong { color: var(--medical-blue); }
+.photo-input { display: none; }
+
+.lesion-photo-preview, .photo-item {
+    position: relative;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--clinical-grey);
+}
+
+/* --- FIX FOR PHOTO FIT --- */
+.lesion-photo-preview img, .photo-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover; /* Crucial property to prevent stretching/overflow */
+}
+
+.photo-item { min-height: 200px; }
+
+#remove-lesion-photo-btn, .photo-delete-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(220, 20, 60, 0.8);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    z-index: 10;
+}
+#remove-lesion-photo-btn:hover, .photo-delete-btn:hover {
+    background: var(--danger-dark);
+    transform: scale(1.1);
+}
+
+/* ========================================
+   Action Buttons
    ======================================== */
 
 .form-actions {
     display: flex;
     gap: 15px;
     justify-content: center;
-    margin-top: 25px; /* MODIFIED: Reduced margin */
-    padding-top: 20px; /* MODIFIED: Reduced padding */
-    border-top: 1px solid var(--border-color);
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 2px solid var(--border-color);
 }
 
 .btn {
-    padding: 12px 28px; /* MODIFIED: Reduced padding */
+    padding: 12px 30px;
     border: none;
-    border-radius: 6px;
-    font-size: 0.9rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .btn-primary {
-    background: var(--medical-blue);
+    background: linear-gradient(135deg, var(--medical-blue) 0%, var(--primary-dark) 100%);
     color: var(--white);
 }
 
 .btn-secondary {
-    background: var(--accent-color);
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--medical-teal) 100%);
     color: var(--white);
 }
 
@@ -238,158 +365,158 @@ h3 {
     color: var(--medical-blue);
 }
 
-/* ========================================
-   Photo Upload & Preview Styles
-   ======================================== */
-
-.upload-area {
-    border: 2px dashed var(--border-color);
-    padding: 20px; /* MODIFIED: Reduced padding */
-}
-.upload-icon {
-    font-size: 2.5rem; /* MODIFIED: Smaller icon */
-}
-.upload-text strong {
-    font-size: 1rem;
-}
-
-/* FIX for lesion photo */
-.lesion-photo-preview {
-    position: relative;
-    width: 100%;
-    max-width: 300px;
-    margin: 15px auto 0 auto;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    overflow: hidden;
-}
-.lesion-photo-preview img {
-    width: 100%;
-    height: 100%; /* FIX: Added height */
-    display: block;
-    object-fit: cover; /* FIX: Added object-fit */
-}
-
-/* ========================================
-   Patient List Styles
-   ======================================== */
-
-.controls-bar, .stats-summary, .filter-sort-bar {
-    margin-bottom: 20px; /* MODIFIED: Reduced margin */
-}
-
-.patient-list-item {
-    padding: 15px; /* MODIFIED: Reduced padding */
-    margin-bottom: 12px;
-}
-
-.patient-item-header {
-    margin-bottom: 10px;
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
 }
 
 /* ========================================
    Patient Profile Styles
    ======================================== */
-
-.profile-section {
-    margin-bottom: 25px; /* MODIFIED: Reduced margin */
-}
-
-.subsection-card {
-    padding: 20px; /* MODIFIED: Reduced padding */
-    margin-bottom: 15px;
-}
-
-/* Profile Summary Photo */
 .summary-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 15px; /* MODIFIED: Reduced gap */
+    gap: 15px;
+    align-items: start;
 }
+
 .summary-photo, .summary-photo-placeholder {
+    position: relative;
     width: 100%;
     max-width: 350px;
-    margin: 0 auto;
-    border-radius: 8px; /* MODIFIED: Less rounding */
-    min-height: 200px;
+    margin: 0 auto 10px auto;
+    border: 3px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .summary-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-@media (min-width: 768px) {
-    .summary-grid {
-        grid-template-columns: 200px 1fr; /* MODIFIED: Defined photo column width */
-    }
-    .summary-photo, .summary-photo-placeholder {
-        grid-row: 1 / 4; /* Span more rows if needed */
-        height: 100%;
-    }
-    .summary-group {
-        grid-column: 2 / 3;
-    }
+.summary-photo-placeholder {
+    font-size: 5rem;
+    color: var(--border-color);
 }
 
-
-/* ========================================
-   Modal (Popup) Styles
-   ======================================== */
-
-.modal-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+.photo-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    font-size: 0.9rem;
+}
+
+.summary-group {
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
     padding: 15px;
 }
 
-.modal-content {
+.summary-group-title {
+    font-weight: 700;
+    color: var(--medical-blue);
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+/* Other Profile Styles */
+.profile-top-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.subsection-card {
+    background: #F8FBFD;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.subsection-card h3 {
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+/* ========================================
+   Patient List Styles
+   ======================================== */
+.controls-bar {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.search-container { flex: 1; min-width: 250px; position: relative; }
+.search-container input { width: 100%; padding: 12px 40px 12px 15px; border-radius: 8px; border: 2px solid var(--border-color); }
+.search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); opacity: 0.5; }
+
+.patient-list-item {
     background: var(--white);
-    padding: 25px; /* MODIFIED: Reduced padding */
-    padding-top: 35px;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 450px; /* MODIFIED: Smaller max-width */
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: var(--transition);
     position: relative;
-    transform: scale(0.95);
-    transition: transform 0.3s ease;
 }
+.patient-list-item:hover {
+    border-color: var(--medical-blue);
+    box-shadow: var(--shadow);
+    transform: translateX(5px);
+}
+.patient-item-header { display: flex; align-items: center; gap: 15px; }
+.patient-main-info { flex: 1; }
+.patient-item-name { font-size: 1.1rem; font-weight: 700; }
+.patient-item-meta { display: flex; gap: 12px; font-size: 0.8rem; color: var(--text-secondary); }
+.patient-status-badge { padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+.status-new { background: #E3F2FD; color: #1565C0; }
+.status-ambulatory { background: #E8F5E9; color: #2E7D32; }
+.status-hospitalized { background: #FFF3E0; color: #E65100; }
+.status-followup { background: #F3E5F5; color: #6A1B9A; }
+.status-cured { background: #E0F2F1; color: #00695C; }
+.status-severe { background: #FFEBEE; color: #C62828; }
+.action-icon { position: absolute; top: 50%; right: 15px; transform: translateY(-50%); font-size: 1.5rem; color: var(--medical-blue); }
+.empty-state, .no-results-state { text-align: center; padding: 40px 20px; }
 
-.modal-content h2 {
-    font-size: 1.2rem; /* MODIFIED: Smaller title */
-    margin-bottom: 12px;
-}
-
-.modal-content p {
-    font-size: 0.9rem; /* MODIFIED: Smaller text */
-    margin-bottom: 12px;
-}
-
-.modal-close-btn {
-    top: -12px;
-    right: -12px;
-    width: 36px;
-    height: 36px;
-    font-size: 1.6rem;
-}
 
 /* ========================================
    Navigation Tab Bar Styles
    ======================================== */
-
 .nav-bar {
     position: fixed;
-    bottom: 0; left: 0; right: 0;
-    height: 60px; /* MODIFIED: Smaller height */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
     background: var(--white);
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
@@ -409,24 +536,188 @@ h3 {
     justify-content: center;
     text-decoration: none;
     color: var(--text-secondary);
-    padding: 4px 8px;
-    transition: all 0.2s ease-in-out;
+    padding: 5px 10px;
+    transition: var(--transition);
 }
-.nav-icon { font-size: 1.4rem; }
-.nav-label { font-size: 0.7rem; }
-.nav-item.active .nav-link {
+.nav-icon { font-size: 1.5rem; }
+.nav-label { font-size: 0.75rem; font-weight: 500; }
+.nav-link:hover, .nav-item.active .nav-link { color: var(--medical-blue); }
+
+.nav-link[type="button"] { background: none; border: none; font-family: inherit; font-size: inherit; cursor: pointer; }
+#language-toggle-btn .nav-icon { transition: transform 0.3s ease; }
+#language-toggle-btn:hover .nav-icon { transform: rotate(30deg); }
+
+/* ========================================
+   About/Contact Popup (Modal) Styles
+   ======================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 15px;
+}
+
+.modal-content {
+    background: var(--white);
+    padding: 25px;
+    padding-top: 35px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 450px; /* Reduced max-width */
+    position: relative;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.visible {
+    opacity: 1;
+}
+
+.modal-overlay.visible .modal-content {
+    transform: scale(1);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--danger-color);
+    border: 3px solid var(--white);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.8rem;
+    line-height: 1;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    background: var(--danger-dark);
+    transform: scale(1.1) rotate(90deg);
+}
+
+.modal-content h2 {
+    font-size: 1.25rem; /* Reduced font size */
     color: var(--medical-blue);
+    margin-bottom: 15px;
+    text-align: center;
+}
+.modal-content p {
+    font-size: 0.95rem; /* Reduced font size */
+    line-height: 1.5;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.modal-content hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 20px 0;
+}
+
+.modal-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.modal-link {
+    color: var(--medical-blue);
+    text-decoration: none;
     font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.modal-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
 }
 
 /* ========================================
-   Other Styles from your file...
-   (This section includes rules I haven't modified but are in your file)
+   Responsive & Mobile Adjustments
    ======================================== */
 
-/* Note: I've removed duplicate rules and merged them above for clarity */
-.body::before { display: none; } /* Removed as it's not effective */
-@keyframes pulse-border { 0%, 100% { box-shadow: 0 0 0 0 rgba(0,102,204,0.4); } 50% { box-shadow: 0 0 0 6px rgba(0,102,204,0); } }
-@keyframes slideIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes spin { to { transform: rotate(360deg); } }
-/* ... any other specific rules you have ... */
+@media (min-width: 768px) {
+    .summary-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .summary-photo, .summary-photo-placeholder {
+        grid-column: 1 / 2;
+        grid-row: 1 / 3;
+        margin: 0;
+    }
+    .summary-group {
+        grid-column: 2 / 3;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px 5px 80px 5px;
+    }
+    main#patient-registration-form,
+    #assessment-container,
+    #patient-list-container,
+    #patient-profile-container {
+        padding: 15px;
+    }
+    header h1 {
+        font-size: 1.5rem;
+    }
+    h2 {
+        font-size: 1.2rem;
+    }
+    h3 {
+        font-size: 1rem;
+    }
+    section {
+        padding: 15px;
+    }
+    .button-toggle-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    .form-actions {
+        flex-direction: column;
+    }
+    .btn {
+        width: 100%;
+    }
+}
+
+/* ========================================
+   Custom PWA Install Button
+   ======================================== */
+#install-pwa-btn {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+    text-transform: none; 
+    letter-spacing: 0;
+    box-shadow: none;
+    border-width: 2px;
+    display: inline-block; 
+}
+
+/* Utility Classes */
+.hidden { display: none !important; }
+.visible { display: block !important; }
