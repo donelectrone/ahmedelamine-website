@@ -187,7 +187,7 @@ margin-top: 25px;
 Form Groups
 ======================================== */
 .form-group {
-margin-bottom: 20px;
+margin-bottom: 10px;
 }
 .form-group label {
 display: block;
@@ -1864,3 +1864,4 @@ display: inline-block;
     height: 100%;
     object-fit: cover; /* This is the magic property */
 }
+
