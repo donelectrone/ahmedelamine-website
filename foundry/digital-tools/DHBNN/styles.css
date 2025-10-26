@@ -57,7 +57,7 @@ line-height: 1.6;
 color: var(--text-color);
 background: linear-gradient(135deg, #E8F4F8 0%, #D6E9F5 100%);
 background-attachment: fixed;
-padding: 20px 10px;
+padding: 20px 2px;
 min-height: 100vh;
 }
 /* Medical cross pattern overlay */
@@ -85,7 +85,7 @@ flex-wrap: wrap;
 gap: 20px;
 }
 header h1 {
-font-size: 2rem;
+font-size: 1.8rem;
 color: var(--medical-blue);
 font-weight: 600;
 text-shadow: 0 2px 4px rgba(0, 94, 184, 0.1);
@@ -93,10 +93,10 @@ letter-spacing: 0.5px;
 display: flex;
 align-items: center;
 justify-content: center;
+white-space: nowrap;
 gap: 12px;
 }
 header h1::before {
-content: '⚕';
 font-size: 2.2rem;
 color: var(--accent-color);
 }
@@ -107,7 +107,7 @@ main#patient-registration-form {
 max-width: 900px;
 margin: 0 auto;
 background: var(--white);
-padding: 35px;
+padding: 10px;
 border-radius: 12px;
 box-shadow: var(--shadow);
 animation: slideIn 0.6s ease-out;
@@ -115,23 +115,12 @@ border-top: 4px solid var(--medical-blue);
 position: relative;
 z-index: 1;
 }
-/* Medical card accent */
-main#patient-registration-form::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 6px;
-height: 100px;
-background: linear-gradient(180deg, var(--accent-color) 0%, var(--medical-blue) 100%);
-border-radius: 0 0 6px 0;
-}
 /* ========================================
 Sections
 ======================================== */
 section {
 margin-bottom: 40px;
-padding: 25px;
+padding: 20px;
 background: linear-gradient(135deg, #F8FBFD 0%, #FFFFFF 100%);
 border-radius: 10px;
 border-left: 4px solid var(--accent-color);
@@ -187,7 +176,7 @@ margin-top: 25px;
 Form Groups
 ======================================== */
 .form-group {
-margin-bottom: 10px;
+margin-bottom: 5px;
 }
 .form-group label {
 display: block;
@@ -199,8 +188,8 @@ font-size: 0.95rem;
 .form-group input[type="text"],
 .form-group input[type="number"],
 .form-group textarea {
-width: 100%;
-padding: 12px 14px;
+width: 95%;
+padding: 10px;
 border: 2px solid var(--border-color);
 border-radius: 8px;
 font-size: 1rem;
@@ -449,12 +438,12 @@ Responsive Design - Mobile First
 /* Small screens (phones) */
 @media (max-width: 480px) {
 body {
-padding: 10px 5px;
+padding: 10px 2px;
 }
 
 
 main#patient-registration-form {
-    padding: 25px 16px;
+    padding: 10px 10px;
     border-radius: 10px;
 }
 
@@ -501,7 +490,7 @@ section {
 /* Medium screens (tablets) */
 @media (min-width: 481px) and (max-width: 768px) {
 main#patient-registration-form {
-padding: 30px 24px;
+padding: 10px 10px;
 }
 
 
@@ -801,7 +790,8 @@ font-weight: 600;
 #patient-list-container,
 #patient-profile-container {
 max-width: 1000px;
-margin: 0 auto;
+width: auto;
+margin: 0 5px;
 background: var(--white);
 padding: 15px;
 border-radius: 12px;
@@ -951,7 +941,8 @@ font-style: italic;
 }
 /* Evolution Controls */
 .evolution-controls {
-padding: 20px 0;
+padding: 10px;
+gap:10px;
 }
 .control-label {
 font-weight: 600;
@@ -991,8 +982,8 @@ transform: translateY(-2px);
 box-shadow: 0 4px 16px rgba(0, 102, 204, 0.15);
 }
 .evolution-icon {
-width: 50px;
-height: 50px;
+width: 40px;
+height: 40px;
 border-radius: 50%;
 display: flex;
 align-items: center;
@@ -1013,7 +1004,7 @@ color: var(--danger-color);
 flex: 1;
 }
 .evolution-title {
-font-size: 1.1rem;
+font-size: 1rem;
 font-weight: 700;
 color: var(--text-color);
 margin-bottom: 6px;
@@ -1095,9 +1086,10 @@ font-size: 0.9rem;
 display: none;
 }
 .photo-description-area {
-display: flex;
-gap: 15px;
-align-items: center;
+    display: flex;
+    flex-direction: column; 
+    gap: 10px; 
+    align-items: stretch;
 }
 .photo-description-input {
 flex: 1;
@@ -1641,73 +1633,74 @@ section {
 }
 }
 /* ========================================
-Navigation Tab Bar Styles
-======================================== /
+   Navigation Tab Bar Styles
+   ======================================== */
+
 body {
-/ Add padding to the bottom to prevent content from being hidden by the nav bar */
-padding-bottom: 80px;
+    /* Add padding to the bottom to prevent content from being hidden by the nav bar */
+    padding-bottom: 80px; 
 }
+
 .nav-bar {
-position: fixed;
-bottom: 0;
-left: 0;
-right: 0;
-height: 65px;
-background: var(--white);
-box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-z-index: 1000;
-border-top: 1px solid var(--border-color);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    background: var(--white);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-top: 1px solid var(--border-color);
 }
+
 .nav-list {
-list-style: none;
-display: flex;
-justify-content: space-around;
-align-items: center;
-height: 100%;
-margin: 0;
-padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
+
 .nav-link {
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-text-decoration: none;
-color: var(--text-secondary);
-padding: 5px 10px;
-transition: all 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--text-secondary);
+    padding: 5px 10px;
+    transition: all 0.2s ease-in-out;
 }
+
 .nav-icon {
-font-size: 1.5rem;
-margin-bottom: 2px;
+    font-size: 1.5rem;
+    margin-bottom: 2px;
 }
+
 .nav-label {
-font-size: 0.75rem;
-font-weight: 500;
+    font-size: 0.75rem;
+    font-weight: 500;
 }
+
 .nav-link:hover {
-color: var(--medical-blue);
+    color: var(--medical-blue);
 }
-/* Style for the "Add" button */
-.add-link .nav-icon {
-background: var(--medical-blue);
-color: var(--white);
-border-radius: 50%;
-width: 40px;
-height: 40px;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 2rem;
-line-height: 1;
+
+/* Style for any button inside the nav bar (like the language toggle) */
+.nav-link[type="button"] {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
 }
-.add-link:hover .nav-icon {
-background: var(--primary-dark);
-}
+
 /* Style for the currently active page link */
 .nav-item.active .nav-link {
-color: var(--medical-blue);
-font-weight: 600;
+    color: var(--medical-blue);
+    font-weight: 600;
 }
 /* ========================================
 Profile Summary Photo (Prominent Square)
@@ -1751,20 +1744,21 @@ font-weight: 500;
 About/Contact Popup (Modal) Styles
 ======================================== */
 .modal-overlay {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%; /* Fix: Added width /
-height: 100%; / Fix: Added height /
-background: rgba(0, 0, 0, 0.6);
-backdrop-filter: blur(5px);
-display: flex;
-align-items: center; / Vertically centers the content /
-justify-content: center; / Horizontally centers the content /
-z-index: 2000;
-opacity: 0;
-transition: opacity 0.3s ease;
-padding: 15px; / Add some padding for small screens */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px); /* This creates the blur effect */
+    -webkit-backdrop-filter: blur(5px); /* For Safari compatibility */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 15px;
 }
 .modal-content {
 background: var(--white);
@@ -1784,7 +1778,7 @@ opacity: 1;
 .modal-overlay.visible .modal-content {
 transform: scale(1);
 }
-.modal-close-btn {
+.modal-close-btn, #remove-lesion-photo-btn{
 position: absolute;
 top: -15px;
 right: -15px;
