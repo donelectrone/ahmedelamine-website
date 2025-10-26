@@ -1710,17 +1710,18 @@ body {
 }
 /* ========================================
 Profile Summary Photo (Prominent Square)
-======================================== /
+======================================== */
+
 .summary-photo, .summary-photo-placeholder {
 position: relative;
 width: 100%;
-max-width: 300px; / Or adjust to your preference /
-margin: 0 auto 15px auto; / Center the photo and add space below /
+max-width: 300px; 
+margin: 0 auto 15px auto; 
 border: 3px solid var(--border-color);
-border-radius: 12px; / Rounded corners /
+border-radius: 12px; 
 overflow: hidden;
 box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-min-height: 250px; / For the placeholder */
+min-height: 250px;
 display: flex;
 align-items: center;
 justify-content: center;
