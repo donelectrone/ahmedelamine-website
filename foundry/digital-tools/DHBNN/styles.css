@@ -881,14 +881,14 @@ grid-column: 2 / 3;
 
 @media (max-width: 768px) {
 .summary-grid {
-grid-template-columns: 1fr; / Single column /
+grid-template-columns: 1fr; 
 }
 .summary-photo, .summary-photo-placeholder {
-grid-row: auto; / Reset row span /
-margin: 0 auto 20px auto; / Center the photo /
+grid-row: auto; 
+margin: 0 auto 20px auto; 
 }
 .summary-group {
-grid-column: auto; / Reset column span */
+grid-column: auto; 
 }
 }
 .summary-group {
