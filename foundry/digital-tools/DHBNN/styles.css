@@ -27,7 +27,7 @@ DHBNN PWA - Medical Professional Interface
 /* ========================================
 Base Styles
 ======================================== */
-{
+*{
 box-sizing: border-box;
 margin: 0;
 padding: 0;
@@ -849,10 +849,9 @@ margin-top: 0;
 color: var(--medical-blue);
 font-size: 1.1rem;
 }
-/* Summary Grid /
+Summary Grid /
 .summary-grid {
 display: grid;
-/ Define a flexible grid, but the first column is for the photo */
 grid-template-columns: auto 1fr;
 gap: 20px;
 align-items: start;
@@ -876,10 +875,10 @@ height: 100%;
 object-fit: cover;
 }
 .summary-group {
-/* Make the summary groups span the full width available to them */
+
 grid-column: 2 / 3;
 }
-/* On smaller screens, make everything stack vertically /
+
 @media (max-width: 768px) {
 .summary-grid {
 grid-template-columns: 1fr; / Single column /
@@ -1865,4 +1864,3 @@ display: inline-block;
     height: 100%;
     object-fit: cover; /* This is the magic property */
 }
-
