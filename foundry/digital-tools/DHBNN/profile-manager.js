@@ -5,6 +5,8 @@
 // Import data store functions
 import { getPatient, updatePatient } from './data-store.js';
 
+import { getPatient, updatePatient, deletePatient } from './data-store.js';
+
 import { getParamFromUrl } from './utils.js';
 
 // Module-level variables
@@ -319,4 +321,5 @@ async function handleMarkAsCured() {
 function showLoadingOverlay(show) {
     const overlay = document.getElementById('loading-overlay');
     if (overlay) overlay.style.display = show ? 'flex' : 'none';
+
 }
