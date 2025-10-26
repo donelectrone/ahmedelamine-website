@@ -248,6 +248,7 @@ function updateCureChecklist(patientData) {
 
 function setupEventListeners() {
     document.getElementById('back-to-list-btn')?.addEventListener('click', () => window.location.href = 'patient-list.html');
+	document.getElementById('delete-patient-btn')?.addEventListener('click', handleDeletePatient);
     document.getElementById('edit-patient-btn')?.addEventListener('click', () => window.location.href = `index.html?patientId=${currentPatientId}`);
     document.getElementById('photo-upload-input')?.addEventListener('change', handlePhotoInputChange);
     document.getElementById('upload-photo-btn')?.addEventListener('click', handlePhotoUpload);
@@ -323,3 +324,24 @@ function showLoadingOverlay(show) {
     if (overlay) overlay.style.display = show ? 'flex' : 'none';
 
 }
+
+async function handleDeletePatient() {
+    if (!currentPatientData) return;
+
+    const patientName = `${currentPatientData.nom} ${currentPatientData.prenom}`;
+    // Use a double confirmation to prevent accidental deletion
+    if (prompt(`Pour confirmer la suppression, veuillez taper le nom complet du patient : "${patientName}"`) !== patientName) {
+        alert('La saisie ne correspond pas. Suppression annulée.');
+        return;
+    }
+
+    try {
+        await deletePatient(currentPatientId);
+        alert('Patient supprimé avec succès.');
+        window.location.href = 'patient-list.html'; // Redirect to the patient list
+    } catch (error) {
+        console.error('Error deleting patient:', error);
+        alert('Une erreur est survenue lors de la suppression du patient.');
+    }
+}
+
