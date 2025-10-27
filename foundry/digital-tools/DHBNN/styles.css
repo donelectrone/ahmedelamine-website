@@ -456,7 +456,7 @@ main#patient-registration-form {
     line-height: 1.5;
     margin-bottom: 15px;
     text-align: center;
-    font-size: 0.8rem; /* 
+    font-size: 0.8rem; 
 }
 
 header h1 {
@@ -1877,4 +1877,5 @@ display: inline-block;
     height: 100%;
     object-fit: cover; /* This is the magic property */
 }
+
 
