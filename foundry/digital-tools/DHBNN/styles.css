@@ -450,14 +450,14 @@ Responsive Design - Mobile First
     #patient-list-container,
     #patient-profile-container,
     main#patient-registration-form {
-        padding: 10px;
+        padding: 5px;
         margin: 0 5px;
     }
     
     /* Sections within pages */
     section, .profile-section {
-        padding: 10px;
-        margin-bottom: 10px;
+        padding: 5px;
+        margin-bottom: 5px;
     }
 
     /* Cards within sections */
@@ -467,7 +467,7 @@ Responsive Design - Mobile First
     .treatment-display,
     .treatment-card,
     .treatment-recommendation-content {
-        padding: 10px;
+        padding: 5px;
     }
 
     /* === TYPOGRAPHY & HEADERS === */
@@ -492,7 +492,7 @@ Responsive Design - Mobile First
     .form-group input[type="text"],
     .form-group input[type="number"],
     .form-group textarea {
-        padding: 10px;
+        padding: 5px;
     }
     
     .button-toggle-grid {
@@ -526,7 +526,7 @@ Responsive Design - Mobile First
         grid-template-columns: 1fr; /* Force a single column */
     }
     .evolution-label {
-        padding: 10px;
+        padding: 5px;
         gap: 10px;
     }
     .evolution-icon {
@@ -1923,6 +1923,7 @@ display: inline-block;
     height: 100%;
     object-fit: cover; /* This is the magic property */
 }
+
 
 
 
