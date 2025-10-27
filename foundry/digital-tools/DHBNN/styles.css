@@ -441,8 +441,8 @@ Responsive Design - Mobile First
     /* === GENERAL LAYOUT & SPACING FIXES === */
 
     body {
-        padding: 10px 5px; /* Reduced side padding */
-        padding-bottom: 80px; /* Ensure nav bar doesn't hide content */
+        padding: 10px 5px;
+        padding-bottom: 80px;
     }
 
     /* Main page containers */
@@ -450,14 +450,14 @@ Responsive Design - Mobile First
     #patient-list-container,
     #patient-profile-container,
     main#patient-registration-form {
-        padding: 5px;
+        padding: 10px; /* Kept a little padding */
         margin: 0 5px;
     }
     
     /* Sections within pages */
     section, .profile-section {
-        padding: 5px;
-        margin-bottom: 5px;
+        padding: 10px; /* Kept a little padding */
+        margin-bottom: 15px; /* Reduced from original */
     }
 
     /* Cards within sections */
@@ -467,13 +467,14 @@ Responsive Design - Mobile First
     .treatment-display,
     .treatment-card,
     .treatment-recommendation-content {
-        padding: 5px;
+        padding: 10px; /* Kept a little padding */
+        margin-bottom: 15px; /* Added consistent bottom margin */
     }
 
     /* === TYPOGRAPHY & HEADERS === */
 
     header h1 {
-        font-size: 1.5rem; /* Made slightly smaller */
+        font-size: 1.5rem;
     }
 
     h2 {
@@ -485,6 +486,7 @@ Responsive Design - Mobile First
     h3 {
         font-size: 1rem;
         margin-bottom: 10px;
+        margin-top: 15px; /* Reduced from original */
     }
     
     /* === FORM & BUTTON STYLES === */
@@ -492,7 +494,7 @@ Responsive Design - Mobile First
     .form-group input[type="text"],
     .form-group input[type="number"],
     .form-group textarea {
-        padding: 5px;
+        padding: 12px; /* Slightly more padding for easier touch */
     }
     
     .button-toggle-grid {
@@ -508,6 +510,7 @@ Responsive Design - Mobile First
 
     .form-actions {
         flex-direction: column;
+        margin-top: 20px; /* Reduced from original */
     }
 
     .btn {
@@ -523,10 +526,11 @@ Responsive Design - Mobile First
 
     /* Fix for "Évolution" cards overflowing */
     .evolution-options {
-        grid-template-columns: 1fr; /* Force a single column */
+        grid-template-columns: 1fr;
+        margin-bottom: 15px; /* Reduced from original */
     }
     .evolution-label {
-        padding: 5px;
+        padding: 15px;
         gap: 10px;
     }
     .evolution-icon {
@@ -536,11 +540,31 @@ Responsive Design - Mobile First
     .evolution-title {
         font-size: 1rem;
     }
+    
+    /* Fixes for the RED "Gestion des Complications" section */
+    #complications-display {
+        padding: 0;
+    }
+    #complications-display .subsection-card {
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+
+    /* Fixes for "Prévention des Récidives" green box */
+    #prevention-recommendations-display .treatment-card {
+        padding: 15px;
+        margin-bottom: 0; /* Removes bottom margin from the green box */
+    }
+
+    /* General rule to remove bottom margin from the last card in a section */
+    .profile-section .subsection-card:last-child {
+        margin-bottom: 0;
+    }
 
     /* Styles for the "À Propos" popup text */
     .modal-content p {
-        font-size: 0.8rem;
-        line-height: 1.2;
+        font-size: 0.9rem;
+        line-height: 1.5;
         margin-bottom: 15px;
         text-align: center;
     }
@@ -1923,6 +1947,7 @@ display: inline-block;
     height: 100%;
     object-fit: cover; /* This is the magic property */
 }
+
 
 
 
