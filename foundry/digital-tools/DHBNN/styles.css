@@ -543,7 +543,7 @@ Responsive Design - Mobile First
     
     /* Fixes for the RED "Gestion des Complications" section */
     #complications-display {
-        padding: 0;
+        padding: 5px;
     }
     #complications-display .subsection-card {
         padding: 15px;
@@ -1947,6 +1947,7 @@ display: inline-block;
     height: 100%;
     object-fit: cover; /* This is the magic property */
 }
+
 
 
 
