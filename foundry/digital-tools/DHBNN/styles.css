@@ -437,67 +437,113 @@ Responsive Design - Mobile First
 ======================================== */
 /* Small screens (phones) */
 @media (max-width: 480px) {
-body {
-padding: 10px 2px;
-}
-.treatment-display {
-        padding: 5px;
-}
-.treatment-recommendation-content {
-        padding: 5px;
-}
+    
+    /* === GENERAL LAYOUT & SPACING FIXES === */
 
-main#patient-registration-form {
-    padding: 10px 10px;
-    border-radius: 10px;
-}
+    body {
+        padding: 10px 5px; /* Reduced side padding */
+        padding-bottom: 80px; /* Ensure nav bar doesn't hide content */
+    }
 
-.modal-content p {
-    line-height: 1.5;
-    margin-bottom: 15px;
-    text-align: center;
-    font-size: 0.8rem; 
-}
+    /* Main page containers */
+    #assessment-container,
+    #patient-list-container,
+    #patient-profile-container,
+    main#patient-registration-form {
+        padding: 15px;
+        margin: 0 5px;
+    }
+    
+    /* Sections within pages */
+    section, .profile-section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
 
-header h1 {
-    font-size: 1.6rem;
-}
+    /* Cards within sections */
+    .subsection-card,
+    .assessment-label,
+    .patient-list-item,
+    .treatment-display,
+    .treatment-card,
+    .treatment-recommendation-content {
+        padding: 15px;
+    }
 
-h2 {
-    font-size: 1.3rem;
-}
+    /* === TYPOGRAPHY & HEADERS === */
 
-h3 {
-    font-size: 1.1rem;
-}
+    header h1 {
+        font-size: 1.5rem; /* Made slightly smaller */
+    }
 
-section {
-    padding: 18px;
-}
+    h2 {
+        font-size: 1.2rem;
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+    }
 
-.button-toggle-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-}
+    h3 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+    
+    /* === FORM & BUTTON STYLES === */
+    
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group textarea {
+        padding: 12px;
+    }
+    
+    .button-toggle-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
 
-.toggle-label-button {
-    padding: 12px 10px;
-    min-height: 60px;
-    font-size: 0.9rem;
-}
+    .toggle-label-button {
+        padding: 12px 10px;
+        min-height: 60px;
+        font-size: 0.9rem;
+    }
 
-.form-actions {
-    flex-direction: column;
-}
+    .form-actions {
+        flex-direction: column;
+    }
 
-.btn {
-    width: 100%;
-    padding: 12px 24px;
-}
+    .btn {
+        width: 100%;
+        padding: 12px 24px;
+    }
 
-#body-diagram-container {
-    min-height: 250px;
-}
+    #body-diagram-container {
+        min-height: 250px;
+    }
+
+    /* === SPECIFIC COMPONENT FIXES === */
+
+    /* Fix for "Évolution" cards overflowing */
+    .evolution-options {
+        grid-template-columns: 1fr; /* Force a single column */
+    }
+    .evolution-label {
+        padding: 15px;
+        gap: 10px;
+    }
+    .evolution-icon {
+        width: 40px;
+        height: 40px;
+    }
+    .evolution-title {
+        font-size: 1rem;
+    }
+
+    /* Styles for the "À Propos" popup text */
+    .modal-content p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 15px;
+        text-align: center;
+    }
 }
 /* Medium screens (tablets) */
 @media (min-width: 481px) and (max-width: 768px) {
@@ -1877,6 +1923,7 @@ display: inline-block;
     height: 100%;
     object-fit: cover; /* This is the magic property */
 }
+
 
 
 
