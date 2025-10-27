@@ -450,14 +450,14 @@ Responsive Design - Mobile First
     #patient-list-container,
     #patient-profile-container,
     main#patient-registration-form {
-        padding: 15px;
+        padding: 10px;
         margin: 0 5px;
     }
     
     /* Sections within pages */
     section, .profile-section {
-        padding: 15px;
-        margin-bottom: 20px;
+        padding: 10px;
+        margin-bottom: 10px;
     }
 
     /* Cards within sections */
@@ -467,7 +467,7 @@ Responsive Design - Mobile First
     .treatment-display,
     .treatment-card,
     .treatment-recommendation-content {
-        padding: 15px;
+        padding: 10px;
     }
 
     /* === TYPOGRAPHY & HEADERS === */
@@ -492,7 +492,7 @@ Responsive Design - Mobile First
     .form-group input[type="text"],
     .form-group input[type="number"],
     .form-group textarea {
-        padding: 12px;
+        padding: 10px;
     }
     
     .button-toggle-grid {
@@ -526,7 +526,7 @@ Responsive Design - Mobile First
         grid-template-columns: 1fr; /* Force a single column */
     }
     .evolution-label {
-        padding: 15px;
+        padding: 10px;
         gap: 10px;
     }
     .evolution-icon {
@@ -539,8 +539,8 @@ Responsive Design - Mobile First
 
     /* Styles for the "À Propos" popup text */
     .modal-content p {
-        font-size: 0.9rem;
-        line-height: 1.5;
+        font-size: 0.8rem;
+        line-height: 1.2;
         margin-bottom: 15px;
         text-align: center;
     }
@@ -1923,6 +1923,7 @@ display: inline-block;
     height: 100%;
     object-fit: cover; /* This is the magic property */
 }
+
 
 
 
