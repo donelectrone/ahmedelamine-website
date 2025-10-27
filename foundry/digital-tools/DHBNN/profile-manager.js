@@ -3,7 +3,6 @@
    ======================================== */
 
 // Import data store functions
-import { getPatient, updatePatient } from './data-store.js';
 
 import { getPatient, updatePatient, deletePatient } from './data-store.js';
 
@@ -344,4 +343,5 @@ async function handleDeletePatient() {
         alert('Une erreur est survenue lors de la suppression du patient.');
     }
 }
+
 
