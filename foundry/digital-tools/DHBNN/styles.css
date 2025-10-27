@@ -440,11 +440,23 @@ Responsive Design - Mobile First
 body {
 padding: 10px 2px;
 }
-
+.treatment-display {
+        padding: 15px;
+}
+.treatment-recommendation-content {
+        padding: 15px;
+}
 
 main#patient-registration-form {
     padding: 10px 10px;
     border-radius: 10px;
+}
+
+.modal-content p {
+    line-height: 1.5;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 0.8rem; /* 
 }
 
 header h1 {
@@ -1813,7 +1825,7 @@ transform: scale(1.1) rotate(90deg);
 color: var(--medical-blue);
 margin-bottom: 15px;
 text-align: center;
-font-size: 1.3rem;
+font-size: 1.2rem;
 font-weight: 600;
 }
 .modal-content p {
@@ -1865,3 +1877,4 @@ display: inline-block;
     height: 100%;
     object-fit: cover; /* This is the magic property */
 }
+
