@@ -441,10 +441,10 @@ body {
 padding: 10px 2px;
 }
 .treatment-display {
-        padding: 10px;
+        padding: 5px;
 }
 .treatment-recommendation-content {
-        padding: 10px;
+        padding: 5px;
 }
 
 main#patient-registration-form {
@@ -1877,6 +1877,7 @@ display: inline-block;
     height: 100%;
     object-fit: cover; /* This is the magic property */
 }
+
 
 
 
