@@ -342,41 +342,91 @@ height: 18px;
 accent-color: var(--medical-blue);
 }
 /* ========================================
-Body Diagram Container
-======================================== */
+   Interactive Hotspot Body Map Styles
+   ======================================== */
+
 #body-diagram-container {
-min-height: 350px;
-border: 3px dashed var(--medical-teal);
-border-radius: 12px;
-background: linear-gradient(135deg, #F0F9FF 0%, #E8F4F8 100%);
-display: flex;
-align-items: center;
-justify-content: center;
-margin-bottom: 20px;
-padding: 30px;
-position: relative;
-transition: var(--transition);
+    position: relative;
+    width: 100%;
+    max-width: 400px; /* Wider for side-by-side view */
+    margin: 20px auto;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background-image: url('body.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    aspect-ratio: 1 / 1; /* Adjust for a squarer side-by-side image */
 }
-#body-diagram-container::before {
-content: '⚕';
-position: absolute;
-font-size: 120px;
-color: rgba(0, 169, 165, 0.08);
-pointer-events: none;
+
+.body-hotspot {
+    position: absolute;
+    width: 20px;   /* Slightly smaller dots for more precision */
+    height: 20px;
+    background: rgba(100, 116, 139, 0.5);
+    border: 1px solid rgba(100, 116, 139, 0.7);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
-#body-diagram-container:hover {
-border-color: var(--medical-blue);
-background: linear-gradient(135deg, #E8F4F8 0%, #D6E9F5 100%);
-box-shadow: 0 8px 20px rgba(0, 102, 204, 0.15);
+
+.body-hotspot:hover {
+    transform: scale(1.3);
+    background: rgba(100, 116, 139, 0.8);
 }
-#body-diagram-container p {
-color: var(--text-secondary);
-font-style: italic;
-font-size: 1rem;
-font-weight: 500;
-position: relative;
-z-index: 1;
+
+/* --- NEW 'SELECTED' STATE with PULSATING RED DOT --- */
+.body-hotspot.selected {
+    background: var(--danger-color);
+    border-color: var(--danger-dark);
+    transform: scale(1.2);
+    /* Attach the new pulsating animation */
+    animation: pulse-red 1.5s infinite; 
 }
+
+/* Keyframes for the pulsating red animation */
+@keyframes pulse-red {
+    0% {
+        box-shadow: 0 0 0 0 rgba(220, 20, 60, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 12px rgba(220, 20, 60, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(220, 20, 60, 0);
+    }
+}
+
+
+
+/* Left side of the container (Front View) */
+#loc-face-front       { top: 8%; left: 21%; }
+#loc-neck-front       { top: 15%; left: 21%; }
+#loc-chest            { top: 23%; left: 21%; }
+#loc-abdomen          { top: 35%; left: 21%; }
+#loc-groin-front      { top: 48%; left: 21%; }
+#loc-arm-left-front   { top: 28%; left: 8%; }
+#loc-arm-right-front  { top: 28%; left: 34%; }
+#loc-hand-left-front  { top: 45%; left: 2%; }
+#loc-hand-right-front { top: 45%; left: 40%; }
+#loc-leg-left-front   { top: 65%; left: 16%; }
+#loc-leg-right-front  { top: 65%; left: 26%; }
+#loc-foot-left-front  { top: 90%; left: 13%; }
+#loc-foot-right-front { top: 90%; left: 29%; }
+#loc-toes-left        { top: 95%; left: 12%; }
+#loc-toes-right       { top: 95%; left: 30%; }
+
+/* Right side of the container (Back View) */
+#loc-head-back        { top: 8%; left: 71%; }
+#loc-neck-back        { top: 15%; left: 71%; }
+#loc-back-upper       { top: 26%; left: 71%; }
+#loc-back-lower       { top: 38%; left: 71%; }
+#loc-buttocks         { top: 50%; left: 71%; }
+#loc-arm-left-back    { top: 28%; left: 58%; }
+#loc-arm-right-back   { top: 28%; left: 84%; }
+#loc-leg-left-back    { top: 65%; left: 66%; }
+#loc-leg-right-back   { top: 65%; left: 76%; }
+
 /* ========================================
 Form Actions
 ======================================== */
@@ -1947,6 +1997,7 @@ display: inline-block;
     height: 100%;
     object-fit: cover; /* This is the magic property */
 }
+
 
 
 
