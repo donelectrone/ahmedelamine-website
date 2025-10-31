@@ -400,11 +400,11 @@ accent-color: var(--medical-blue);
 
 
 /* Left side of the container (Front View) */
-#loc-face-front       { top: 8%; left: 35%; }
-#loc-neck-front       { top: 15%; left: 35%; }
-#loc-chest            { top: 23%; left: 21%; }
-#loc-abdomen          { top: 35%; left: 21%; }
-#loc-groin-front      { top: 48%; left: 21%; }
+#loc-face-front       { top: 8%; left: 32%; }
+#loc-neck-front       { top: 15%; left: 32%; }
+#loc-chest            { top: 23%; left: 32%; }
+#loc-abdomen          { top: 35%; left: 32%; }
+#loc-groin-front      { top: 48%; left: 32%; }
 #loc-arm-left-front   { top: 28%; left: 8%; }
 #loc-arm-right-front  { top: 28%; left: 34%; }
 #loc-hand-left-front  { top: 45%; left: 2%; }
@@ -417,14 +417,14 @@ accent-color: var(--medical-blue);
 #loc-toes-right       { top: 95%; left: 30%; }
 
 /* Right side of the container (Back View) */
-#loc-head-back        { top: 8%; left: 65%; }
-#loc-neck-back        { top: 15%; left: 65%; }
-#loc-back-upper       { top: 26%; left: 71%; }
-#loc-back-lower       { top: 38%; left: 71%; }
-#loc-buttocks         { top: 50%; left: 71%; }
-#loc-arm-left-back    { top: 28%; left: 58%; }
+#loc-head-back        { top: 8%; left: 62%; }
+#loc-neck-back        { top: 15%; left: 62%; }
+#loc-back-upper       { top: 26%; left: 62%; }
+#loc-back-lower       { top: 38%; left: 62%; }
+#loc-buttocks         { top: 50%; left: 62%; }
+#loc-arm-left-back    { top: 28%; left: 52%; }
 #loc-arm-right-back   { top: 28%; left: 84%; }
-#loc-leg-left-back    { top: 65%; left: 66%; }
+#loc-leg-left-back    { top: 65%; left: 56%; }
 #loc-leg-right-back   { top: 65%; left: 76%; }
 
 /* ========================================
@@ -1997,6 +1997,7 @@ display: inline-block;
     height: 100%;
     object-fit: cover; /* This is the magic property */
 }
+
 
 
 
