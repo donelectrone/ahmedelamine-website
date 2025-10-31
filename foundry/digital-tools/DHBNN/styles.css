@@ -400,13 +400,13 @@ accent-color: var(--medical-blue);
 
 
 /* Left side of the container (Front View) */
-#loc-face-front       { top: 8%; left: 33%; }
-#loc-neck-front       { top: 15%; left: 33%; }
+#loc-face-front       { top: 9%; left: 33%; }
+#loc-neck-front       { top: 16%; left: 33%; }
 #loc-chest            { top: 23%; left: 33%; }
 #loc-abdomen          { top: 35%; left: 33%; }
 #loc-groin-front      { top: 48%; left: 33%; }
-#loc-arm-left-front   { top: 28%; left: 18%; }
-#loc-arm-right-front  { top: 28%; left: 40%; }
+#loc-arm-left-front   { top: 30%; left: 22%; }
+#loc-arm-right-front  { top: 30%; left: 42%; }
 #loc-hand-left-front  { top: 45%; left: 20%; }
 #loc-hand-right-front { top: 45%; left: 43%; }
 #loc-leg-left-front   { top: 65%; left: 16%; }
@@ -417,15 +417,15 @@ accent-color: var(--medical-blue);
 #loc-toes-right       { top: 95%; left: 30%; }
 
 /* Right side of the container (Back View) */
-#loc-head-back        { top: 8%; left: 62%; }
-#loc-neck-back        { top: 15%; left: 62%; }
+#loc-head-back        { top: 9%; left: 62%; }
+#loc-neck-back        { top: 16%; left: 62%; }
 #loc-back-upper       { top: 26%; left: 62%; }
 #loc-back-lower       { top: 38%; left: 62%; }
-#loc-buttocks         { top: 50%; left: 62%; }
-#loc-arm-left-back    { top: 28%; left: 52%; }
-#loc-arm-right-back   { top: 28%; left: 72%; }
-#loc-leg-left-back    { top: 65%; left: 57%; }
-#loc-leg-right-back   { top: 65%; left: 62%; }
+#loc-buttocks         { top: 48%; left: 62%; }
+#loc-arm-left-back    { top: 30%; left: 52%; }
+#loc-arm-right-back   { top: 30%; left: 72%; }
+#loc-leg-left-back    { top: 65%; left: 58%; }
+#loc-leg-right-back   { top: 65%; left: 65%; }
 
 /* ========================================
 Form Actions
@@ -1997,6 +1997,7 @@ display: inline-block;
     height: 100%;
     object-fit: cover; /* This is the magic property */
 }
+
 
 
 
