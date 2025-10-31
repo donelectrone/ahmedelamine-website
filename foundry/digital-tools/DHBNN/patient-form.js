@@ -8,7 +8,7 @@ import { addPatient, updatePatient, getPatient } from './data-store.js';
 // Global variable to track if we're editing an existing patient
 let currentPatientId = null;
 let initialLesionPhotoData = null;
-
+let selectedRegions = new Set(); //
 /**
  * Initialize the form - set up event listeners and load existing data if editing
  */
@@ -36,9 +36,45 @@ function initializeForm() {
     // Set up form field change tracking
     setupFormChangeTracking();
 
+	setupBodyMap();
+
     console.log('Form initialization complete');
 }
 
+
+/**
+ * Sets up the logic for the interactive hotspot body map.
+ */
+function setupBodyMap() {
+    const container = document.getElementById('body-diagram-container');
+    if (!container) {
+        console.error('Body diagram container not found!');
+        return;
+    }
+
+    // Use event delegation on the container
+    container.addEventListener('click', (event) => {
+        const clickedEl = event.target;
+
+        // Check if the user clicked on an actual hotspot
+        if (clickedEl.classList.contains('body-hotspot')) {
+            const regionName = clickedEl.dataset.region; // Get the user-friendly name
+
+            // Toggle the 'selected' class to change its color
+            clickedEl.classList.toggle('selected');
+
+            // Add or remove the region from our set of selected regions
+            if (selectedRegions.has(regionName)) {
+                selectedRegions.delete(regionName);
+            } else {
+                selectedRegions.add(regionName);
+            }
+            
+            // For debugging: show what's currently selected in the console
+            console.log('Selected Regions:', Array.from(selectedRegions));
+        }
+    });
+}
 
 /**
  * Sets up the logic for the initial lesion photo upload.
@@ -234,6 +270,7 @@ function collectFormData() {
         presentation: {
             initialLesionPhoto: initialLesionPhotoData, // The photo data
             localisationNotes: document.getElementById('localization-notes')?.value.trim() || '',
+			selectedRegions: Array.from(selectedRegions),
             porteEntree: {
                 intertrigo: document.getElementById('chk-entry-intertrigo')?.checked || false,
                 plaie: document.getElementById('chk-entry-plaie')?.checked || false,
@@ -560,4 +597,5 @@ export {
     validateForm,
     handleSavePatient,
     handleContinueAssessment
+
 };
