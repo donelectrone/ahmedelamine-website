@@ -402,15 +402,15 @@ accent-color: var(--medical-blue);
 /* Left side of the container (Front View) */
 #loc-face-front       { top: 9%; left: 33%; }
 #loc-neck-front       { top: 16%; left: 33%; }
-#loc-chest            { top: 23%; left: 33%; }
-#loc-abdomen          { top: 35%; left: 33%; }
+#loc-chest            { top: 25%; left: 33%; }
+#loc-abdomen          { top: 38%; left: 33%; }
 #loc-groin-front      { top: 48%; left: 33%; }
 #loc-arm-left-front   { top: 30%; left: 22%; }
 #loc-arm-right-front  { top: 30%; left: 42%; }
-#loc-hand-left-front  { top: 45%; left: 20%; }
-#loc-hand-right-front { top: 45%; left: 43%; }
-#loc-leg-left-front   { top: 65%; left: 16%; }
-#loc-leg-right-front  { top: 65%; left: 26%; }
+#loc-hand-left-front  { top: 43%; left: 20%; }
+#loc-hand-right-front { top: 43%; left: 44%; }
+#loc-leg-left-front   { top: 62%; left: 28%; }
+#loc-leg-right-front  { top: 62%; left: 32%; }
 #loc-foot-left-front  { top: 90%; left: 13%; }
 #loc-foot-right-front { top: 90%; left: 29%; }
 #loc-toes-left        { top: 95%; left: 12%; }
@@ -1997,6 +1997,7 @@ display: inline-block;
     height: 100%;
     object-fit: cover; /* This is the magic property */
 }
+
 
 
 
