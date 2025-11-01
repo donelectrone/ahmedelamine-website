@@ -3,7 +3,7 @@
    Handles caching for offline functionality and notifications.
    ======================================== */
 
-const CACHE_NAME = 'dhbnn-pwa-v1';
+const CACHE_NAME = 'dhbnn-pwa-v3';
 
 // List of all essential files that need to be cached for the app to work offline.
 // In service-worker.js
@@ -14,7 +14,7 @@ const urlsToCache = [
     './patient-list.html',
     './assessment.html',
     './patient-profile.html',
-    './stats.html',
+    // './stats.html', 
     './styles.css',
     './main.js',
     './data-store.js',
@@ -24,7 +24,9 @@ const urlsToCache = [
     './profile-manager.js',
     './utils.js',
     './manifest.json',
-    './body.png' // <-- THE CRUCIAL ADDITION
+    './body.png',
+    './icons/icon-192x192.png', 
+    './icons/icon-512x512.png'  
 ];
 
 // --- EVENT LISTENERS ---
@@ -102,3 +104,4 @@ self.addEventListener('notificationclick', (event) => {
     );
 
 });
+
