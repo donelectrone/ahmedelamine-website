@@ -6,23 +6,25 @@
 const CACHE_NAME = 'dhbnn-pwa-v1';
 
 // List of all essential files that need to be cached for the app to work offline.
+// In service-worker.js
+
 const urlsToCache = [
-    '/',
-    'index.html',
-    'patient-list.html',
-    'assessment.html',
-    'patient-profile.html',
-    'stats.html',
-    'styles.css',
-    'main.js',
-    'data-store.js',
-    'patient-form.js',
-    'assessment-logic.js',
-    'patient-list-manager.js',
-    'profile-manager.js',
-    'utils.js',
-    'manifest.json'
-    // Add paths to any icons here later, e.g., '/icons/icon-192x192.png'
+    './',
+    './index.html',
+    './patient-list.html',
+    './assessment.html',
+    './patient-profile.html',
+    './stats.html',
+    './styles.css',
+    './main.js',
+    './data-store.js',
+    './patient-form.js',
+    './assessment-logic.js',
+    './patient-list-manager.js',
+    './profile-manager.js',
+    './utils.js',
+    './manifest.json',
+    './body.png' // <-- THE CRUCIAL ADDITION
 ];
 
 // --- EVENT LISTENERS ---
@@ -98,4 +100,5 @@ self.addEventListener('notificationclick', (event) => {
     event.waitUntil(
         clients.openWindow(urlToOpen)
     );
+
 });
