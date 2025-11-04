@@ -82,7 +82,7 @@ function setupEventListeners() {
     const addBtn = document.getElementById('add-new-patient-btn');
     if (addBtn) {
         addBtn.addEventListener('click', () => {
-            window.location.href = '../index.html';
+            window.location.href = './index.html';
         });
     }
 
@@ -280,7 +280,7 @@ function renderPatientList() {
     patientItems.forEach(item => {
         item.addEventListener('click', () => {
             const patientId = item.getAttribute('data-patient-id');
-            window.location.href = `../patient-profile.html?patientId=${patientId}`;
+            window.location.href = `./patient-profile.html?patientId=${patientId}`;
         });
     });
 }
@@ -555,6 +555,7 @@ function setupInstallButton() {
         });
     }
 }
+
 
 
 
