@@ -497,7 +497,7 @@ async function saveAssessment() {
         alert(`✓ Évaluation enregistrée avec succès!\n\nTraitement: ${assessmentData.treatmentPlan.setting === 'hospital' ? 'Hospitalisation' : 'Ambulatoire'}\n\nSuivi programmé dans 48h.`);
 
         // Navigate to patient profile
-        window.location.href = `./patient-profile.html?patientId=${currentPatientId}`;
+        window.location.href = `../patient-profile.html?patientId=${currentPatientId}`;
 
     } catch (error) {
         console.error('Error saving assessment:', error);
@@ -527,4 +527,5 @@ export {
     saveAssessment
 
 };
+
 
