@@ -479,7 +479,7 @@ async function handleContinueAssessment() {
         localStorage.setItem('currentPatientId', patientId);
 
         // Navigate to assessment page
-        window.location.href = `assessment.html?patientId=${patientId}`;
+        window.location.href = `/assessment.html?patientId=${patientId}`;
 
     } catch (error) {
         console.error('Error saving patient:', error);
@@ -599,3 +599,4 @@ export {
     handleContinueAssessment
 
 };
+
