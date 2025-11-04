@@ -246,9 +246,9 @@ function updateCureChecklist(patientData) {
 }
 
 function setupEventListeners() {
-    document.getElementById('back-to-list-btn')?.addEventListener('click', () => window.location.href = 'patient-list.html');
+    document.getElementById('back-to-list-btn')?.addEventListener('click', () => window.location.href = '/patient-list.html');
 	document.getElementById('delete-patient-btn')?.addEventListener('click', handleDeletePatient);
-    document.getElementById('edit-patient-btn')?.addEventListener('click', () => window.location.href = `index.html?patientId=${currentPatientId}`);
+    document.getElementById('edit-patient-btn')?.addEventListener('click', () => window.location.href = `/index.html?patientId=${currentPatientId}`);
     document.getElementById('photo-upload-input')?.addEventListener('change', handlePhotoInputChange);
     document.getElementById('upload-photo-btn')?.addEventListener('click', handlePhotoUpload);
     document.querySelectorAll('input[name="evolution"]').forEach(radio => radio.addEventListener('change', () => {
@@ -343,5 +343,6 @@ async function handleDeletePatient() {
         alert('Une erreur est survenue lors de la suppression du patient.');
     }
 }
+
 
 
