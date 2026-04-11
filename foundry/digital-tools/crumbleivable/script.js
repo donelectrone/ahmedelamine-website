@@ -800,7 +800,7 @@ function showSuccess() {
     `_sent via crumbleivable.com_`
   );
 
-  const bakerPhone = '213XXXXXXXXX'; // ← replace with real number
+  const bakerPhone = '213668994400'; // ← replace with real number
   const waUrl = `https://wa.me/${bakerPhone}?text=${waText}`;
 
   // Inject summary into hidden field before Netlify already submitted,
