@@ -712,28 +712,55 @@ function bindEvents() {
       submitBtn.disabled = true;
       submitBtn.querySelector('span').textContent = 'sending...';
 
-      try {
-        const formData = new FormData(form);
-        const body = new URLSearchParams(formData).toString();
+      // 1. Calculate Grand Totals for each cookie flavor across ALL boxes
+      const cookieTotals = {};
+      cart.forEach(box => {
+        box.cookies.forEach(c => {
+          // Create a clean key to match sheet headers: "the og" -> "theog"
+          const slug = c.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+          cookieTotals[slug] = (cookieTotals[slug] || 0) + c.qty;
+        });
+      });
 
-        const res = await fetch(window.location.pathname, {
+      // 2. Prepare the data for Google Sheets
+      const subtotal = cart.reduce((s, b) => s + b.total, 0);
+      const delivery = document.getElementById('deliveryToggle').checked ? 300 : 0;
+      
+      const params = new URLSearchParams();
+      params.append('Timestamp', new Date().toISOString());
+      params.append('Name', name);
+      params.append('Phone', phone);
+      params.append('Address', address);
+      params.append('Notes', document.getElementById('customerNotes').value.trim());
+      params.append('Method', document.querySelector('input[name="delivery-method"]:checked').value);
+      params.append('Summary', document.getElementById('orderSummaryInput').value);
+      params.append('TotalPrice', subtotal + delivery);
+
+      // Add each cookie flavor count as a separate parameter
+      for (const [slug, qty] of Object.entries(cookieTotals)) {
+        params.append(slug, qty);
+      }
+
+      try {
+        // ⚠️ REPLACE THE URL BELOW WITH YOUR DEPLOYED GOOGLE APPS SCRIPT URL
+        const googleUrl = "https://script.google.com/macros/s/AKfycbx3eEaGBF4nbH3uh5J_AVIt_Q3pxzP-v432DptTb3lEFdofNymwP6E1tOKjFJEOmzeJjQ/exec"; 
+
+        await fetch(googleUrl, {
           method: 'POST',
+          mode: 'no-cors', // Critical: Google Scripts won't work without this
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body
+          body: params.toString()
         });
 
-        if (res.ok) {
-          showSuccess();
-        } else {
-          // Non-200: likely local dev (no Netlify), inform user
-          submitBtn.disabled = false;
-          submitBtn.querySelector('span').textContent = t('submit_btn');
-          showToast('⚠️ deploy to netlify for forms to work — or contact us directly!', 'error');
-        }
+        // Since 'no-cors' mode doesn't allow reading the response, 
+        // we assume success and trigger the UI/WhatsApp flow.
+        showSuccess(); 
+
       } catch (err) {
+        console.error("Order failed", err);
         submitBtn.disabled = false;
         submitBtn.querySelector('span').textContent = t('submit_btn');
-        showToast('⚠️ network error — please deploy to netlify!', 'error');
+        showToast('⚠️ connection error — please check your internet', 'error');
       }
     });
   }
