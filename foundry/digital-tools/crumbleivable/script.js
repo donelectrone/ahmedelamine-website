@@ -716,7 +716,7 @@ function bindEvents() {
         const formData = new FormData(form);
         const body = new URLSearchParams(formData).toString();
 
-        const res = await fetch('/', {
+        const res = await fetch(window.location.pathname, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body
