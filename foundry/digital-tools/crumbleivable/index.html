@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>crumbleivable – chewy, gooey american-style cookies · oran, algeria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,800&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <!-- ===== LANGUAGE BAR ===== -->
+  <div class="lang-bar">
+    <div class="lang-bar-inner">
+      <span class="lang-label" data-i18n="choose_lang">choose your language</span>
+      <div class="lang-buttons">
+        <button class="lang-btn active" data-lang="en">🇬🇧 english</button>
+        <button class="lang-btn" data-lang="fr">🇫🇷 français</button>
+        <button class="lang-btn" data-lang="ar">🇩🇿 عربية</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-bg-blobs">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-brand">🍪 crumbleivable</div>
+      <div class="nav-links">
+        <a href="#builder" data-i18n="nav_build">build a box</a>
+        <a href="#cart" data-i18n="nav_cart">cart</a>
+        <a href="#checkout" data-i18n="nav_order">order</a>
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <div class="hero-badge" data-i18n="hero_badge">✦ handcrafted in oran ✦</div>
+
+      <!-- Cookie bite + logo animation stage -->
+      <div class="logo-stage" id="logoStage">
+        <!-- Cookie image placeholders — replace src with your real cookie photos -->
+        <div class="cookie-anim-wrap" id="cookieAnimWrap">
+          <!-- PLACEHOLDER 1: intact cookie — replace src below with your image -->
+          <img
+            class="cookie-img-ph" id="cookieFull"
+            src="cookieintact.png"
+            alt="intact cookie"
+          />
+          <!-- PLACEHOLDER 2: bitten cookie — replace src below with your image -->
+          <img
+            class="cookie-img-ph cookie-bitten hidden" id="cookieBitten"
+            src="cookiebitten.png"
+            alt="bitten cookie"
+          />
+        </div>
+
+        <!-- Brand name, revealed after animation -->
+        <div class="logo-text-anim hidden" id="logoTextAnim">
+          <span class="logo-letter" style="--d:0">c</span><span class="logo-letter" style="--d:1">r</span><span class="logo-letter" style="--d:2">u</span><span class="logo-letter" style="--d:3">m</span><span class="logo-letter" style="--d:4">b</span><span class="logo-letter" style="--d:5">l</span><span class="logo-letter" style="--d:6">e</span><span class="logo-letter" style="--d:7">i</span><span class="logo-letter" style="--d:8">v</span><span class="logo-letter" style="--d:9">a</span><span class="logo-letter" style="--d:10">b</span><span class="logo-letter" style="--d:11">l</span><span class="logo-letter" style="--d:12">e</span><span class="logo-letter" style="--d:12">!</span>
+        </div>
+      </div>
+
+      <p class="hero-tagline" data-i18n="hero_tagline">premium cookies, crafted to delight — built your way, one perfect box at a time.</p>
+      <p class="hero-motto">chewy, gooey american-style cookies !<strong>bake it happen !</strong></p>
+
+      <a href="#builder" class="btn btn-primary hero-cta">
+        <span data-i18n="hero_cta">build your box</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+
+      <div style="text-align:center; margin-top:16px;">
+        <span class="hero-notice" data-i18n="hero_notice">📅 orders placed today are ready for pickup tomorrow</span>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">12</span><span class="stat-label" data-i18n="stat_flavors">flavors</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">3+</span><span class="stat-label" data-i18n="stat_per_box">per box</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">100%</span><span class="stat-label" data-i18n="stat_homemade">homemade</span></div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span data-i18n="scroll_hint">scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- ===== COOKIE BUILDER ===== -->
+  <section class="builder-section" id="builder">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="builder_tag">✦ the builder</div>
+        <h2 class="section-title" data-i18n="builder_title">curate your perfect box</h2>
+        <p class="section-sub" data-i18n="builder_sub">pick at least 3 cookies — you can pick duplicates! tap the + to add more of the same.</p>
+      </div>
+
+      <div class="selection-status" id="selectionStatus">
+        <div class="selection-bar-wrap">
+          <div class="selection-bar-fill" id="selectionBarFill"></div>
+        </div>
+        <span id="selectionText">0/3 selected</span>
+      </div>
+
+      <!-- Selected cookies pills preview -->
+      <div class="selected-pills-wrap" id="selectedPillsWrap" style="display:none">
+        <div class="selected-pills-label" data-i18n="current_box">your current box:</div>
+        <div class="selected-pills" id="selectedPills"></div>
+      </div>
+
+      <div class="cookie-grid" id="cookieGrid">
+        <!-- Cards injected by JS -->
+      </div>
+
+      <div class="add-box-wrap">
+        <button class="btn btn-primary btn-large" id="addBoxBtn" disabled>
+          <span id="addBoxLabel">select 3 cookies to continue</span>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 8v8M8 12h8"/></svg>
+        </button>
+        <p class="add-box-hint" data-i18n="add_box_hint">minimum 3 per box — because 1 is sad and 2 gets eaten too fast! 😄</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CART ===== -->
+  <section class="cart-section" id="cart">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="cart_tag">✦ your order</div>
+        <h2 class="section-title" data-i18n="cart_title">your boxes</h2>
+        <p class="section-sub" data-i18n="cart_sub">review what you've built before checking out.</p>
+      </div>
+
+      <div id="cartEmpty" class="cart-empty">
+        <div class="cart-empty-icon">🍪</div>
+        <p data-i18n="cart_empty">no boxes yet — start building above!</p>
+      </div>
+
+      <div id="cartBoxes" class="cart-boxes"></div>
+
+      <div id="cartSummary" class="cart-summary hidden">
+        <div class="summary-row">
+          <span data-i18n="subtotal">subtotal</span>
+          <span id="subtotalDisplay">0 DA</span>
+        </div>
+        <div class="summary-row delivery-row">
+          <label class="delivery-toggle">
+            <input type="checkbox" id="deliveryToggle" />
+            <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            <span data-i18n="add_delivery">add delivery <small>(+300 DA)</small></span>
+          </label>
+          <span id="deliveryDisplay">0 DA</span>
+        </div>
+        <div class="summary-row total-row">
+          <span data-i18n="total">total</span>
+          <span id="totalDisplay">0 DA</span>
+        </div>
+        <a href="#checkout" class="btn btn-primary btn-large">
+          <span data-i18n="proceed_checkout">proceed to checkout</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CHECKOUT ===== -->
+  <section class="checkout-section" id="checkout">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="checkout_tag">✦ almost there</div>
+        <h2 class="section-title" data-i18n="checkout_title">complete your order</h2>
+        <p class="section-sub" data-i18n="checkout_sub">fill in your details and we'll confirm via whatsapp.</p>
+      </div>
+
+      <div id="checkoutNoCart" class="cart-empty">
+        <div class="cart-empty-icon">📦</div>
+        <p data-i18n="checkout_no_cart">add at least one box before checking out.</p>
+      </div>
+
+      <div id="checkoutForm" class="checkout-wrap hidden">
+
+        <div class="netlify-note" data-i18n="netlify_note">
+          📧 your order will be sent directly to crumbleivable. we'll reach out via whatsapp to confirm within the hour!
+        </div>
+
+        <!-- IMPORTANT: Netlify Forms requires data-netlify="true" and a hidden form-name field.
+             Submissions appear in the Netlify dashboard → Forms tab.
+             Set up email notifications there: Site settings → Forms → Form notifications. -->
+        <form
+          name="order"
+          method="POST"
+          data-netlify="true"
+          id="orderForm"
+          novalidate
+        >
+          <input type="hidden" name="form-name" value="order" />
+          <input type="hidden" name="order-summary" id="orderSummaryInput" />
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="customerName" data-i18n="label_name">full name *</label>
+              <input type="text" id="customerName" name="name" placeholder="Ahmed El Amine" required />
+            </div>
+            <div class="form-group">
+              <label for="customerPhone" data-i18n="label_phone">phone number *</label>
+              <input type="tel" id="customerPhone" name="phone" placeholder="0555 123 456" required />
+            </div>
+            <div class="form-group full-width">
+              <label for="customerAddress" data-i18n="label_address">address *</label>
+              <input type="text" id="customerAddress" name="address" placeholder="123 rue larbi ben m'hidi, oran" required />
+            </div>
+            <div class="form-group full-width">
+              <label data-i18n="label_delivery_method">delivery method *</label>
+              <div class="delivery-options">
+                <label class="radio-card">
+                  <input type="radio" name="delivery-method" value="delivery" />
+                  <div class="radio-card-inner">
+                    <span class="radio-icon">🚚</span>
+                    <span class="radio-label" data-i18n="delivery_opt">delivery</span>
+                    <span class="radio-desc" data-i18n="delivery_desc">we come to you</span>
+                  </div>
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="delivery-method" value="pickup" checked />
+                  <div class="radio-card-inner">
+                    <span class="radio-icon">🏠</span>
+                    <span class="radio-label" data-i18n="pickup_opt">pickup</span>
+                    <span class="radio-desc" data-i18n="pickup_desc">come grab your box</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div class="form-group full-width">
+              <label for="customerNotes">notes <span class="optional" data-i18n="optional">(optional)</span></label>
+              <textarea id="customerNotes" name="notes" rows="3" placeholder="allergies, special requests, best time to call..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-order-preview" id="formOrderPreview"></div>
+
+          <button type="submit" class="btn btn-primary btn-large btn-submit" id="submitBtn">
+            <span data-i18n="submit_btn">place my order 🍪</span>
+          </button>
+        </form>
+
+        <div id="successMessage" class="success-message hidden">
+          <div class="success-icon">🎉</div>
+          <h3 data-i18n="success_title">order received!</h3>
+          <p data-i18n="success_body">thank you! we'll whatsapp you within the hour to confirm your delicious order.</p>
+          <button class="btn btn-outline" id="newOrderBtn" data-i18n="new_order_btn">start a new order</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand">🍪 crumbleivable</div>
+      <p class="footer-tagline">chewy, gooey american-style cookies — oran, algeria</p>
+      <p class="footer-copy">© 2026 crumbleivable. made with love & butter.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
