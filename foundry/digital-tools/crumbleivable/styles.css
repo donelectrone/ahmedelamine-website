@@ -122,11 +122,7 @@ body[dir="rtl"] .footer-brand{
 /* =========================================
    NAV
    ========================================= */
-.nav{
-  position:absolute;top:0;left:0;right:0;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 24px;z-index:10;
-}
+
 .nav-brand{
   font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:900;
   color:#2B2B2B;letter-spacing:-.01em;
@@ -135,18 +131,6 @@ body[dir="rtl"] .footer-brand{
   border-radius:var(--radius-pill);
   display:inline-flex;align-items:center;gap:4px;
 }
-.nav-links{display:flex;gap:36px;}
-.nav-links a{
-  font-weight:700;font-size:.95rem;color:var(--text);
-  transition:color .2s;position:relative;
-}
-.nav-links a::after{
-  content:'';position:absolute;bottom:-4px;left:0;
-  width:0;height:2.5px;background:var(--accent);
-  border-radius:2px;transition:width .25s ease;
-}
-.nav-links a:hover::after{width:100%;}
-.nav-links a:hover{color:var(--accent);}
 
 /* =========================================
    HERO
