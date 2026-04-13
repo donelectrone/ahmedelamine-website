@@ -182,7 +182,8 @@ body[dir="rtl"] .footer-brand{
   font-size:.78rem;font-weight:800;
   letter-spacing:.14em;text-transform:uppercase;
   padding:8px 22px;border-radius:var(--radius-pill);
-  margin-bottom:0px;
+  margin-bottom:20px;
+  margin-top:0px;
   animation:fadeSlideUp .6s ease both;
 }
 
