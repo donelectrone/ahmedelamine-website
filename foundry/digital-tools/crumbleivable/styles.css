@@ -183,7 +183,7 @@ body[dir="rtl"] .footer-brand{
   align-items:center;gap:18px;
   margin-bottom:28px;
   animation:fadeSlideUp .7s ease .1s both;
-  min-height: 230px;   /* reserves space for cookie + gap + text, nothing shifts */
+  min-height: 200px;   /* reserves space for cookie + gap + text, nothing shifts */
   justify-content: center;
 }
 .cookie-anim-wrap{
