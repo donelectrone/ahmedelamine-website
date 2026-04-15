@@ -120,7 +120,7 @@ body[dir="rtl"] .footer-brand{
 .btn-large{padding:18px 38px;font-size:1.05rem;}
 
 /* =========================================
-   HERO - 3 Part Layout (Centered)
+   HERO - Badge at Top, Stats at Bottom, Center Content Vertically Centered
    ========================================= */
 .hero{
   min-height: 100vh;
@@ -180,7 +180,7 @@ body[dir="rtl"] .footer-brand{
   66%{ transform: translate(-16px,22px) scale(0.97); }
 }
 
-/* Main hero content container - 3 part flex layout */
+/* Main hero content container */
 .hero-content{
   position: relative;
   z-index: 2;
@@ -189,16 +189,13 @@ body[dir="rtl"] .footer-brand{
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 40px 0;
 }
 
-/* ===== PART 1: TOP SECTION ===== */
-/* Adjust margin-top to move badge up/down */
+/* ===== PART 1: TOP SECTION - Pinned to top ===== */
 .hero-top{
   width: 100%;
   text-align: center;
-  margin-top: 0; /* ← ADJUST THIS VALUE to move the badge up/down */
+  padding-top: 12px; /* ← ADJUST THIS - space below language bar */
 }
 
 .hero-badge{
@@ -214,8 +211,7 @@ body[dir="rtl"] .footer-brand{
   animation: fadeSlideUp .6s ease both;
 }
 
-/* ===== PART 2: CENTER SECTION ===== */
-/* Perfectly centered vertically and horizontally */
+/* ===== PART 2: CENTER SECTION - Vertically centered ===== */
 .hero-center{
   flex: 1;
   display: flex;
@@ -390,12 +386,11 @@ body[dir="rtl"] .footer-brand{
   padding: 18px 42px;
 }
 
-/* ===== PART 3: BOTTOM SECTION ===== */
-/* Adjust margin-bottom to move notice+stats up/down */
+/* ===== PART 3: BOTTOM SECTION - Pinned to bottom ===== */
 .hero-bottom{
   width: 100%;
   text-align: center;
-  margin-bottom: 0; /* ← ADJUST THIS VALUE to move the bottom section up/down */
+  padding-bottom: 24px; /* ← ADJUST THIS - space from bottom of page */
 }
 
 .hero-notice-wrapper{
@@ -486,7 +481,9 @@ body[dir="rtl"] .footer-brand{
 
 /* ===== HERO RESPONSIVE ===== */
 @media(max-width: 768px){
-  .hero-content{ padding: 30px 0; }
+  .hero-top{ padding-top: 8px; }
+  
+  .hero-bottom{ padding-bottom: 16px; }
   
   .hero-motto{
     font-size: 0.95rem;
@@ -529,7 +526,6 @@ body[dir="rtl"] .footer-brand{
   .hero-motto{ font-size: 0.8rem; }
   .hero-motto strong{ font-size: 0.9rem; }
 }
-
 /* =========================================
    SHARED SECTIONS
    ========================================= */
