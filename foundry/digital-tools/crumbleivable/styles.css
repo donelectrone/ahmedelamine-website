@@ -120,16 +120,13 @@ body[dir="rtl"] .footer-brand{
 .btn-large{padding:18px 38px;font-size:1.05rem;}
 
 /* =========================================
-   HERO - Independent Top, Center, Bottom
+   HERO - Percentage-based positioning
    ========================================= */
 .hero{
+  position: relative;
   min-height: 100vh;
   background: linear-gradient(155deg, #fdf6f0 0%, #f9eaee 45%, #f3dde4 100%);
-  position: relative;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
-  padding: 0 24px;
 }
 
 /* Blobs */
@@ -179,13 +176,14 @@ body[dir="rtl"] .footer-brand{
   66%{ transform: translate(-16px,22px) scale(0.97); }
 }
 
-/* ===== PART 1: TOP - Independent, pinned to top ===== */
+/* ===== PART 1: TOP BADGE - 5vh below language bar ===== */
 .hero-top{
-  position: relative;
+  position: absolute;
+  top: 5vh; /* 5% of viewport height below top */
+  left: 0;
+  right: 0;
   z-index: 2;
-  width: 100%;
   text-align: center;
-  padding-top: -50px;
 }
 
 .hero-badge{
@@ -201,7 +199,7 @@ body[dir="rtl"] .footer-brand{
   animation: fadeSlideUp .6s ease both;
 }
 
-/* ===== PART 2: CENTER - Absolutely centered ===== */
+/* ===== PART 2: CENTER CONTENT - Vertically centered between top and bottom ===== */
 .hero-center{
   position: absolute;
   top: 50%;
@@ -375,14 +373,14 @@ body[dir="rtl"] .footer-brand{
   padding: 18px 42px;
 }
 
-/* ===== PART 3: BOTTOM - Independent, pinned to bottom ===== */
+/* ===== PART 3: BOTTOM STATS - 10vh above bottom of hero ===== */
 .hero-bottom{
-  position: relative;
+  position: absolute;
+  bottom: 10vh; /* 10% of viewport height above bottom */
+  left: 0;
+  right: 0;
   z-index: 2;
-  width: 100%;
   text-align: center;
-  padding-bottom: 10px;
-  margin-top: auto;
 }
 
 .hero-notice-wrapper{
@@ -444,10 +442,6 @@ body[dir="rtl"] .footer-brand{
 
 /* ===== HERO RESPONSIVE ===== */
 @media(max-width: 768px){
-  .hero-top{ padding-top: 20px; }
-  
-  .hero-bottom{ padding-bottom: 8px; }
-  
   .hero-center{ padding: 0 20px; }
   
   .hero-motto{
@@ -490,8 +484,6 @@ body[dir="rtl"] .footer-brand{
 }
 
 @media(max-width: 480px){
-  .hero-bottom{ padding-bottom: 5px; }
-  
   .hero-motto{ font-size: 0.85rem; }
   .hero-motto strong{ font-size: 1.1rem; }
 }
