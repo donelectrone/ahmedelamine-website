@@ -35,57 +35,46 @@
     <div class="blob blob-3"></div>
   </div>
 
-  <div class="hero-content">
-    <!-- PART 1: TOP - Handmade in Oran badge -->
-    <div class="hero-top">
-      <div class="hero-badge" data-i18n="hero_badge">✦ handcrafted in oran ✦</div>
+  <!-- PART 1: TOP - Independent, pinned to top -->
+  <div class="hero-top">
+    <div class="hero-badge" data-i18n="hero_badge">✦ handcrafted in oran ✦</div>
+  </div>
+
+  <!-- PART 2: CENTER - Vertically and horizontally centered -->
+  <div class="hero-center">
+    <!-- Cookie bite + logo animation stage -->
+    <div class="logo-stage" id="logoStage">
+      <div class="cookie-anim-wrap" id="cookieAnimWrap">
+        <img class="cookie-img-ph" id="cookieFull" src="cookieintact.png" alt="intact cookie" />
+        <img class="cookie-img-ph cookie-bitten hidden" id="cookieBitten" src="cookiebitten.png" alt="bitten cookie" />
+      </div>
+
+      <!-- Brand name, revealed after animation -->
+      <div class="logo-text-anim hidden" id="logoTextAnim">
+        <span class="logo-letter" style="--d:0">c</span><span class="logo-letter" style="--d:1">r</span><span class="logo-letter" style="--d:2">u</span><span class="logo-letter" style="--d:3">m</span><span class="logo-letter" style="--d:4">b</span><span class="logo-letter" style="--d:5">l</span><span class="logo-letter" style="--d:6">e</span><span class="logo-letter" style="--d:7">i</span><span class="logo-letter" style="--d:8">v</span><span class="logo-letter" style="--d:9">a</span><span class="logo-letter" style="--d:10">b</span><span class="logo-letter" style="--d:11">l</span><span class="logo-letter" style="--d:12">e</span><span class="logo-letter" style="--d:12">!</span>
+      </div>
     </div>
 
-    <!-- PART 2: CENTER - Cookie animation + tagline + CTA (centered vertically & horizontally) -->
-    <div class="hero-center">
-      <!-- Cookie bite + logo animation stage -->
-      <div class="logo-stage" id="logoStage">
-        <!-- Cookie image placeholders -->
-        <div class="cookie-anim-wrap" id="cookieAnimWrap">
-          <img
-            class="cookie-img-ph" id="cookieFull"
-            src="cookieintact.png"
-            alt="intact cookie"
-          />
-          <img
-            class="cookie-img-ph cookie-bitten hidden" id="cookieBitten"
-            src="cookiebitten.png"
-            alt="bitten cookie"
-          />
-        </div>
+    <p class="hero-motto">chewy, gooey american-style cookies !<strong>bake it happen !</strong></p>
 
-        <!-- Brand name, revealed after animation -->
-        <div class="logo-text-anim hidden" id="logoTextAnim">
-          <span class="logo-letter" style="--d:0">c</span><span class="logo-letter" style="--d:1">r</span><span class="logo-letter" style="--d:2">u</span><span class="logo-letter" style="--d:3">m</span><span class="logo-letter" style="--d:4">b</span><span class="logo-letter" style="--d:5">l</span><span class="logo-letter" style="--d:6">e</span><span class="logo-letter" style="--d:7">i</span><span class="logo-letter" style="--d:8">v</span><span class="logo-letter" style="--d:9">a</span><span class="logo-letter" style="--d:10">b</span><span class="logo-letter" style="--d:11">l</span><span class="logo-letter" style="--d:12">e</span><span class="logo-letter" style="--d:12">!</span>
-        </div>
-      </div>
+    <a href="#builder" class="btn btn-primary hero-cta">
+      <span data-i18n="hero_cta">build your box</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
 
-      <p class="hero-motto">chewy, gooey american-style cookies ! <strong>bake it happen !</strong></p>
-
-      <a href="#builder" class="btn btn-primary hero-cta">
-        <span data-i18n="hero_cta">build your box</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+  <!-- PART 3: BOTTOM - Independent, pinned to bottom -->
+  <div class="hero-bottom">
+    <div class="hero-notice-wrapper">
+      <span class="hero-notice" data-i18n="hero_notice">📅 orders placed today are ready for pickup tomorrow</span>
     </div>
 
-    <!-- PART 3: BOTTOM - Notice + Stats -->
-    <div class="hero-bottom">
-      <div class="hero-notice-wrapper">
-        <span class="hero-notice" data-i18n="hero_notice">📅 orders placed today are ready for pickup tomorrow</span>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat"><span class="stat-num">12</span><span class="stat-label" data-i18n="stat_flavors">flavors</span></div>
-        <div class="stat-divider"></div>
-        <div class="stat"><span class="stat-num">3</span><span class="stat-label" data-i18n="stat_per_box">per box</span></div>
-        <div class="stat-divider"></div>
-        <div class="stat"><span class="stat-num">100%</span><span class="stat-label" data-i18n="stat_homemade">homemade</span></div>
-      </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">12</span><span class="stat-label" data-i18n="stat_flavors">flavors</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">3</span><span class="stat-label" data-i18n="stat_per_box">per box</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">100%</span><span class="stat-label" data-i18n="stat_homemade">homemade</span></div>
     </div>
   </div>
 </section>
