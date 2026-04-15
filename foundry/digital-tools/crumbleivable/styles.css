@@ -522,6 +522,32 @@ body[dir="rtl"] .footer-brand{
     padding: 14px 32px;
   }
 }
+
+/* =========================================
+   SHARED SECTIONS
+   ========================================= */
+.container{max-width:1160px;margin:0 auto;padding:0 24px;}
+.builder-section,.cart-section,.checkout-section{padding:100px 0;}
+.builder-section{background:var(--white);}
+.cart-section{background:var(--cream);}
+.checkout-section{background:var(--white);}
+
+.section-header{text-align:center;margin-bottom:52px;}
+.section-tag{
+  display:inline-block;color:var(--accent);
+  font-size:.78rem;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;
+}
+.section-title{
+  font-size:clamp(1.9rem,4vw,2.8rem);font-weight:900;
+  letter-spacing:-.02em;line-height:1.18;
+  color:var(--text);margin-bottom:12px;
+}
+.section-sub{color:var(--text-muted);font-size:1rem;font-weight:600;max-width:500px;margin:0 auto;}
+
+
+
+
 /* =========================================
    SELECTION STATUS
    ========================================= */
