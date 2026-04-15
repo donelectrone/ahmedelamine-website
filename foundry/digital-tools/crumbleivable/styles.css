@@ -120,7 +120,7 @@ body[dir="rtl"] .footer-brand{
 .btn-large{padding:18px 38px;font-size:1.05rem;}
 
 /* =========================================
-   HERO - Badge at Top, Stats at Bottom, Center Content Vertically Centered
+   HERO - Independent Top, Center, Bottom
    ========================================= */
 .hero{
   min-height: 100vh;
@@ -128,7 +128,6 @@ body[dir="rtl"] .footer-brand{
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
   overflow: hidden;
   padding: 0 24px;
 }
@@ -180,19 +179,10 @@ body[dir="rtl"] .footer-brand{
   66%{ transform: translate(-16px,22px) scale(0.97); }
 }
 
-/* Main hero content container */
-.hero-content{
+/* ===== PART 1: TOP - Independent, pinned to top ===== */
+.hero-top{
   position: relative;
   z-index: 2;
-  max-width: 780px;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ===== PART 1: TOP SECTION - Pinned to top ===== */
-.hero-top{
   width: 100%;
   text-align: center;
   padding-top: 20px; /* 20px below language bar */
@@ -211,15 +201,21 @@ body[dir="rtl"] .footer-brand{
   animation: fadeSlideUp .6s ease both;
 }
 
-/* ===== PART 2: CENTER SECTION - Vertically centered ===== */
+/* ===== PART 2: CENTER - Absolutely centered ===== */
 .hero-center{
-  flex: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 100%;
+  max-width: 780px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 16px;
-  width: 100%;
+  padding: 0 24px;
 }
 
 /* Cookie bite animation stage */
@@ -365,7 +361,7 @@ body[dir="rtl"] .footer-brand{
 }
 
 .hero-motto strong{
-  display: block; /* Forces new line */
+  display: block;
   font-size: 1.35rem;
   font-weight: 900;
   color: var(--accent);
@@ -379,11 +375,14 @@ body[dir="rtl"] .footer-brand{
   padding: 18px 42px;
 }
 
-/* ===== PART 3: BOTTOM SECTION - Pinned to bottom ===== */
+/* ===== PART 3: BOTTOM - Independent, pinned to bottom ===== */
 .hero-bottom{
+  position: relative;
+  z-index: 2;
   width: 100%;
   text-align: center;
-  padding-bottom: 10px; /* Reduced - moves stats higher up */
+  padding-bottom: 10px;
+  margin-top: auto;
 }
 
 .hero-notice-wrapper{
@@ -438,36 +437,6 @@ body[dir="rtl"] .footer-brand{
   background: var(--border);
 }
 
-/* Scroll hint (hidden by default, can be removed if not used) */
-.hero-scroll-hint{
-  position: absolute;
-  bottom: 36px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-light);
-  font-size: .72rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  font-weight: 700;
-  animation: fadeSlideUp 1s ease .9s both;
-}
-
-.scroll-line{
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, transparent, var(--accent));
-  animation: scrollPulse 2s ease-in-out infinite;
-}
-
-@keyframes scrollPulse{
-  0%, 100%{ opacity: .4; transform: scaleY(1); }
-  50%{ opacity: 1; transform: scaleY(1.2); }
-}
-
 @keyframes fadeSlideUp{
   from{ opacity: 0; transform: translateY(28px); }
   to{ opacity: 1; transform: translateY(0); }
@@ -477,7 +446,9 @@ body[dir="rtl"] .footer-brand{
 @media(max-width: 768px){
   .hero-top{ padding-top: 20px; }
   
-  .hero-bottom{ padding-bottom: 8px; } /* Even less on mobile */
+  .hero-bottom{ padding-bottom: 8px; }
+  
+  .hero-center{ padding: 0 20px; }
   
   .hero-motto{
     font-size: 0.95rem;
