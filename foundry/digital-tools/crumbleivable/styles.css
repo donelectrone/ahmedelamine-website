@@ -224,22 +224,22 @@ body[dir="rtl"] .footer-brand{
   gap: 18px;
   margin-bottom: 28px;
   animation: fadeSlideUp .7s ease .1s both;
-  min-height: 230px;
+  min-height: 280px; /* Increased from 230px */
   justify-content: center;
 }
 
 .cookie-anim-wrap{
   position: relative;
-  width: 130px;
-  height: 130px;
+  width: 170px; /* Increased from 130px */
+  height: 170px; /* Increased from 130px */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .cookie-svg{
-  width: 130px;
-  height: 130px;
+  width: 170px; /* Increased from 130px */
+  height: 170px; /* Increased from 130px */
   filter: drop-shadow(0 8px 24px rgba(192,84,110,0.2));
   transition: transform .3s ease;
 }
@@ -249,8 +249,8 @@ body[dir="rtl"] .footer-brand{
 
 /* Cookie image placeholders */
 .cookie-img-ph{
-  width: 130px;
-  height: 130px;
+  width: 170px; /* Increased from 130px */
+  height: 170px; /* Increased from 130px */
   border-radius: 50%;
   object-fit: cover;
   filter: drop-shadow(0 8px 24px rgba(233,30,140,0.2));
@@ -302,7 +302,7 @@ body[dir="rtl"] .footer-brand{
   justify-content: center;
   flex-wrap: nowrap;
   font-family: 'Nunito', sans-serif;
-  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-size: clamp(3rem, 8vw, 5.5rem); /* Increased from clamp(2.4rem, 6vw, 4.5rem) */
   font-weight: 900;
   color: var(--text);
   letter-spacing: -.02em;
@@ -347,7 +347,7 @@ body[dir="rtl"] .footer-brand{
 
 /* Motto - two separate lines */
 .hero-motto{
-  font-size: 1.1rem;
+  font-size: 1.4rem; /* Increased from 1.1rem */
   font-weight: 700;
   color: var(--text-muted);
   margin-bottom: 36px;
@@ -355,22 +355,22 @@ body[dir="rtl"] .footer-brand{
   line-height: 1.5;
   text-align: center;
   max-width: 100%;
-  padding: 0 5px;
+  padding: 0 15px; /* Increased from 5px */
 }
 
 .hero-motto strong{
   display: block;
-  font-size: 1.35rem;
+  font-size: 1.8rem; /* Increased from 1.35rem */
   font-weight: 900;
   color: var(--accent);
-  margin-top: 6px;
+  margin-top: 8px; /* Increased from 6px */
 }
 
 /* CTA Button */
 .hero-cta{
   animation: fadeSlideUp .7s ease .3s both;
-  font-size: 1.1rem;
-  padding: 18px 42px;
+  font-size: 1.25rem; /* Increased from 1.1rem */
+  padding: 22px 50px; /* Increased from 18px 42px */
 }
 
 /* ===== PART 3: BOTTOM STATS - 15vh above bottom of hero ===== */
@@ -444,33 +444,41 @@ body[dir="rtl"] .footer-brand{
 @media(max-width: 768px){
   .hero-center{ padding: 0 20px; }
   
-  .hero-motto{
-    font-size: 0.95rem;
-  }
-  
-  .hero-motto strong{ 
-    font-size: 1.2rem;
-    margin-top: 4px;
-  }
-  
-  .logo-text-anim{ font-size: 2.2rem; }
+  .logo-stage{ min-height: 220px; } /* Increased from 180px */
   
   .cookie-anim-wrap{
-    width: 100px;
-    height: 100px;
+    width: 130px; /* Increased from 100px */
+    height: 130px; /* Increased from 100px */
   }
   
   .cookie-svg{
-    width: 100px;
-    height: 100px;
+    width: 130px; /* Increased from 100px */
+    height: 130px; /* Increased from 100px */
   }
   
   .cookie-img-ph{
-    width: 100px;
-    height: 100px;
+    width: 130px; /* Increased from 100px */
+    height: 130px; /* Increased from 100px */
   }
   
-  .logo-stage{ min-height: 180px; }
+  .logo-text-anim{ 
+    font-size: clamp(2.6rem, 7vw, 4rem); /* Increased from 2.2rem */
+  }
+  
+  .hero-motto{
+    font-size: 1.2rem; /* Increased from 0.95rem */
+    padding: 0 12px;
+  }
+  
+  .hero-motto strong{ 
+    font-size: 1.5rem; /* Increased from 1.2rem */
+    margin-top: 6px;
+  }
+  
+  .hero-cta{
+    font-size: 1.15rem;
+    padding: 18px 40px;
+  }
   
   .hero-stats{ gap: 18px; }
   
@@ -484,8 +492,35 @@ body[dir="rtl"] .footer-brand{
 }
 
 @media(max-width: 480px){
-  .hero-motto{ font-size: 0.85rem; }
-  .hero-motto strong{ font-size: 1.1rem; }
+  .logo-stage{ min-height: 190px; }
+  
+  .cookie-anim-wrap{
+    width: 110px;
+    height: 110px;
+  }
+  
+  .cookie-svg, .cookie-img-ph{
+    width: 110px;
+    height: 110px;
+  }
+  
+  .logo-text-anim{ 
+    font-size: clamp(2.2rem, 6vw, 3rem);
+  }
+  
+  .hero-motto{ 
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+  
+  .hero-motto strong{ 
+    font-size: 1.3rem;
+  }
+  
+  .hero-cta{
+    font-size: 1rem;
+    padding: 14px 32px;
+  }
 }
 /* =========================================
    SELECTION STATUS
