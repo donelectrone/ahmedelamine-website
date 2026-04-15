@@ -195,7 +195,7 @@ body[dir="rtl"] .footer-brand{
 .hero-top{
   width: 100%;
   text-align: center;
-  padding-top: 12px; /* ← ADJUST THIS - space below language bar */
+  padding-top: 20px; /* 20px below language bar */
 }
 
 .hero-badge{
@@ -351,32 +351,25 @@ body[dir="rtl"] .footer-brand{
 /* Hero tagline - hidden */
 .hero-tagline{ display: none; }
 
-/* Motto - single line, scrollable if needed */
+/* Motto - two separate lines */
 .hero-motto{
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--text-muted);
   margin-bottom: 36px;
   animation: fadeSlideUp .7s ease .25s both;
-  line-height: 1.7;
+  line-height: 1.5;
   text-align: center;
-  white-space: nowrap;
   max-width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   padding: 0 5px;
 }
 
-/* Hide scrollbar but keep functionality */
-.hero-motto::-webkit-scrollbar{ display: none; }
-.hero-motto{ -ms-overflow-style: none; scrollbar-width: none; }
-
 .hero-motto strong{
-  display: inline;
-  font-size: 1.2rem;
+  display: block; /* Forces new line */
+  font-size: 1.35rem;
   font-weight: 900;
   color: var(--accent);
-  margin-left: 5px;
+  margin-top: 6px;
 }
 
 /* CTA Button */
@@ -390,7 +383,7 @@ body[dir="rtl"] .footer-brand{
 .hero-bottom{
   width: 100%;
   text-align: center;
-  padding-bottom: 24px; /* ← ADJUST THIS - space from bottom of page */
+  padding-bottom: 10px; /* Reduced - moves stats higher up */
 }
 
 .hero-notice-wrapper{
@@ -417,6 +410,7 @@ body[dir="rtl"] .footer-brand{
   align-items: center;
   justify-content: center;
   gap: 32px;
+  margin-top: 0;
   animation: fadeSlideUp .7s ease .4s both;
 }
 
@@ -481,16 +475,18 @@ body[dir="rtl"] .footer-brand{
 
 /* ===== HERO RESPONSIVE ===== */
 @media(max-width: 768px){
-  .hero-top{ padding-top: 8px; }
+  .hero-top{ padding-top: 20px; }
   
-  .hero-bottom{ padding-bottom: 16px; }
+  .hero-bottom{ padding-bottom: 8px; } /* Even less on mobile */
   
   .hero-motto{
     font-size: 0.95rem;
-    white-space: nowrap;
   }
   
-  .hero-motto strong{ font-size: 1.05rem; }
+  .hero-motto strong{ 
+    font-size: 1.2rem;
+    margin-top: 4px;
+  }
   
   .logo-text-anim{ font-size: 2.2rem; }
   
@@ -523,31 +519,11 @@ body[dir="rtl"] .footer-brand{
 }
 
 @media(max-width: 480px){
-  .hero-motto{ font-size: 0.8rem; }
-  .hero-motto strong{ font-size: 0.9rem; }
+  .hero-bottom{ padding-bottom: 5px; }
+  
+  .hero-motto{ font-size: 0.85rem; }
+  .hero-motto strong{ font-size: 1.1rem; }
 }
-/* =========================================
-   SHARED SECTIONS
-   ========================================= */
-.container{max-width:1160px;margin:0 auto;padding:0 24px;}
-.builder-section,.cart-section,.checkout-section{padding:100px 0;}
-.builder-section{background:var(--white);}
-.cart-section{background:var(--cream);}
-.checkout-section{background:var(--white);}
-
-.section-header{text-align:center;margin-bottom:52px;}
-.section-tag{
-  display:inline-block;color:var(--accent);
-  font-size:.78rem;font-weight:800;
-  letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;
-}
-.section-title{
-  font-size:clamp(1.9rem,4vw,2.8rem);font-weight:900;
-  letter-spacing:-.02em;line-height:1.18;
-  color:var(--text);margin-bottom:12px;
-}
-.section-sub{color:var(--text-muted);font-size:1rem;font-weight:600;max-width:500px;margin:0 auto;}
-
 /* =========================================
    SELECTION STATUS
    ========================================= */
