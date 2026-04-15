@@ -444,40 +444,48 @@ body[dir="rtl"] .footer-brand{
 @media(max-width: 768px){
   .hero-center{ padding: 0 20px; }
   
-  .logo-stage{ min-height: 220px; } /* Increased from 180px */
+  .logo-stage{ 
+    min-height: 260px; /* Increased from 220px */
+    gap: 16px;
+  }
   
   .cookie-anim-wrap{
-    width: 130px; /* Increased from 100px */
-    height: 130px; /* Increased from 100px */
+    width: 160px; /* Increased from 130px */
+    height: 160px; /* Increased from 130px */
   }
   
   .cookie-svg{
-    width: 130px; /* Increased from 100px */
-    height: 130px; /* Increased from 100px */
+    width: 160px; /* Increased from 130px */
+    height: 160px; /* Increased from 130px */
   }
   
   .cookie-img-ph{
-    width: 130px; /* Increased from 100px */
-    height: 130px; /* Increased from 100px */
+    width: 160px; /* Increased from 130px */
+    height: 160px; /* Increased from 130px */
   }
   
   .logo-text-anim{ 
-    font-size: clamp(2.6rem, 7vw, 4rem); /* Increased from 2.2rem */
+    font-size: clamp(3rem, 8vw, 4.5rem); /* Increased */
   }
   
   .hero-motto{
-    font-size: 1.2rem; /* Increased from 0.95rem */
-    padding: 0 12px;
+    font-size: 1.3rem; /* Increased from 1.2rem */
+    padding: 0 16px;
   }
   
   .hero-motto strong{ 
-    font-size: 1.5rem; /* Increased from 1.2rem */
-    margin-top: 6px;
+    font-size: 1.8rem; /* Increased from 1.5rem */
+    margin-top: 8px;
   }
   
   .hero-cta{
-    font-size: 1.15rem;
-    padding: 18px 40px;
+    font-size: 1.25rem;
+    padding: 22px 48px;
+  }
+  
+  .hero-cta svg{
+    width: 20px;
+    height: 20px;
   }
   
   .hero-stats{ gap: 18px; }
@@ -492,34 +500,39 @@ body[dir="rtl"] .footer-brand{
 }
 
 @media(max-width: 480px){
-  .logo-stage{ min-height: 190px; }
+  .logo-stage{ min-height: 220px; }
   
   .cookie-anim-wrap{
-    width: 110px;
-    height: 110px;
+    width: 140px; /* Increased from 110px */
+    height: 140px; /* Increased from 110px */
   }
   
   .cookie-svg, .cookie-img-ph{
-    width: 110px;
-    height: 110px;
+    width: 140px; /* Increased from 110px */
+    height: 140px; /* Increased from 110px */
   }
   
   .logo-text-anim{ 
-    font-size: clamp(2.2rem, 6vw, 3rem);
+    font-size: clamp(2.5rem, 7vw, 3.5rem);
   }
   
   .hero-motto{ 
-    font-size: 1rem;
-    padding: 0 10px;
+    font-size: 1.1rem;
+    padding: 0 12px;
   }
   
   .hero-motto strong{ 
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
   
   .hero-cta{
-    font-size: 1rem;
-    padding: 14px 32px;
+    font-size: 1.1rem;
+    padding: 18px 36px;
+  }
+  
+  .hero-cta svg{
+    width: 18px;
+    height: 18px;
   }
 }
 
