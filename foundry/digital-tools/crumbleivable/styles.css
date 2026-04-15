@@ -373,10 +373,10 @@ body[dir="rtl"] .footer-brand{
   padding: 18px 42px;
 }
 
-/* ===== PART 3: BOTTOM STATS - 10vh above bottom of hero ===== */
+/* ===== PART 3: BOTTOM STATS - 15vh above bottom of hero ===== */
 .hero-bottom{
   position: absolute;
-  bottom: 10vh; /* 10% of viewport height above bottom */
+  bottom: 15vh; /* 15% of viewport height above bottom */
   left: 0;
   right: 0;
   z-index: 2;
