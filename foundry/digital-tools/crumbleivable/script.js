@@ -487,7 +487,7 @@ function renderCookieGrid() {
     >
 	<div class="cookie-img-wrap">
 	  ${c.image ? 
-	    `<img src="images/${c.image}" class="cookie-card-img" alt="${c.name}">` : 
+	    `<img src="${c.image}" class="cookie-card-img" alt="${c.name}">` : 
 	    `<span class="cookie-emoji-big">${c.emoji}</span>`
 	  }
 	</div>
