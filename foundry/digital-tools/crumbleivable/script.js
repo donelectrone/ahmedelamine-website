@@ -9,18 +9,21 @@
 const COOKIES = [
   {
     name:  "the og",
+	image: "theog.png",
     desc:  "classic chocolate chip cookie",
     price: 350,
     emoji: "🍪"
   },
   {
     name:  "rainbow chip",
+    image: "rainbowchip.png",
     desc:  "m&ms cookie",
     price: 400,
     emoji: "🌈"
   },
   {
     name:  "kookinder",
+    image: "cookinder.png",
     desc:  "kinder cookie",
     price: 400,
     emoji: "🍫"
@@ -39,6 +42,7 @@ const COOKIES = [
   },
   {
     name:  "cookistachio",
+    image: "cookistachio.png",
     desc:  "pistachio cookie",
     price: 450,
     emoji: "💚"
@@ -481,9 +485,12 @@ function renderCookieGrid() {
       role="group"
       aria-label="${c.name}"
     >
-      <div class="cookie-img-wrap">
-        <span class="cookie-emoji-big">${c.emoji}</span>
-      </div>
+	<div class="cookie-img-wrap">
+	  ${c.image ? 
+	    `<img src="images/${c.image}" class="cookie-card-img" alt="${c.name}">` : 
+	    `<span class="cookie-emoji-big">${c.emoji}</span>`
+	  }
+	</div>
       <div class="cookie-count-badge">${qty}</div>
       <div class="cookie-qty-controls">
         <button class="qty-btn qty-minus" data-index="${i}" aria-label="remove one ${c.name}">−</button>
