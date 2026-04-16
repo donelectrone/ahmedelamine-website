@@ -926,3 +926,31 @@ body[dir="rtl"] .footer-brand{
   .builder-section,.cart-section,.checkout-section{padding:70px 0;}
   .lang-bar-inner{flex-direction:column;gap:10px;}
 }
+
+
+/* Styling for the real cookie photos */
+.cookie-card-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%; /* Adjust this based on your image padding */
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+}
+
+/* Hover effect for real photos */
+.cookie-card:hover .cookie-card-img {
+  transform: translate(-50%, -52%) scale(1.1) rotate(3deg);
+}
+
+/* Ensure the wrapper handles the images well */
+.cookie-img-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* Aspect ratio of the card top */
+  overflow: hidden;
+  background: var(--pink-soft); /* Light pink background behind the cookie */
+}
