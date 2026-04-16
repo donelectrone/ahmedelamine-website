@@ -937,8 +937,7 @@ body[dir="rtl"] .footer-brand{
   width: 85%; /* Adjust this based on your image padding */
   height: auto;
   object-fit: contain;
-  transition: transform 0.3s ease;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+  filter: drop-shadow(0 6px 15px rgba(0,0,0,0.15)); /* Adds depth to the photo */
 }
 
 /* Hover effect for real photos */
