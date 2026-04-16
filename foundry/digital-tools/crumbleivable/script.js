@@ -42,7 +42,7 @@ const COOKIES = [
   },
   {
     name:  "cookistachio",
-    image: "cookistachio.png",
+    image: "cookiestachio.png",
     desc:  "pistachio cookie",
     price: 450,
     emoji: "💚"
