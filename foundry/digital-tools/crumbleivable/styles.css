@@ -909,7 +909,7 @@ body[dir="rtl"] .footer-brand{
   .hero{padding:120px 20px 70px;}
   .hero-stats{gap:18px;}
   .stat-num{font-size:1.5rem;}
-  .cookie-grid{grid-template-columns:repeat(2,1fr);gap:14px;}
+  .cookie-grid{grid-template-columns:repeat(3,1fr);gap:14px;}
   .cart-box{flex-direction:column;}
   .form-grid{grid-template-columns:1fr;}
   .form-group.full-width{grid-column:1;}
@@ -919,13 +919,25 @@ body[dir="rtl"] .footer-brand{
   .cookie-svg{width:100px;height:100px;}
    .logo-stage{ min-height: 180px; }
   .hero-stats{ gap: 18px; }
+  .cookie-info{padding:10px 8px 12px;}
+  .cookie-name{font-size:0.85rem;}
+  .cookie-desc{font-size:0.7rem;}
+  .cookie-price{font-size:0.8rem;}
+  .cookie-emoji-big{font-size:2.8rem;}
 }
 @media(max-width:480px){
   .nav-links{display:none;}
-  .cookie-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .cookie-grid{grid-template-columns:repeat(3,1fr);gap:10px;}
   .builder-section,.cart-section,.checkout-section{padding:70px 0;}
   .lang-bar-inner{flex-direction:column;gap:10px;}
+  .cookie-info{padding:8px 6px 10px;}
+  .cookie-name{font-size:0.75rem;}
+  .cookie-desc{font-size:0.65rem;}
+  .cookie-price{font-size:0.75rem;}
+  .cookie-emoji-big{font-size:2.2rem;}
+  .cookie-count-badge{width:24px;height:24px;font-size:0.7rem;top:6px;right:6px;}
 }
+
 
 
 /* Styling for the real cookie photos */
