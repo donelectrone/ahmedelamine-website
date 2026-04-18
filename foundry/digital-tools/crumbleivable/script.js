@@ -37,6 +37,7 @@ const COOKIES = [
   },
   {
     name:  "cookulos",
+	image: "cookinder.png",
     desc:  "lotus biscoff cookie",
     price: 400,
     emoji: "🧡"
