@@ -30,6 +30,7 @@ const COOKIES = [
   },
   {
     name:  "buenookie",
+	image: "theog.png",
     desc:  "bueno cookie",
     price: 400,
     emoji: "🤎"
@@ -49,36 +50,42 @@ const COOKIES = [
   },
   {
     name:  "cookamissu",
+	image: "rainbowchip.png",
     desc:  "tiramisu cookie",
     price: 400,
     emoji: "☕"
   },
   {
     name:  "oreookie",
+	image: "cookiestachio.png",
     desc:  "oreo cookie",
     price: 400,
     emoji: "⚫"
   },
   {
     name:  "snookie",
+	image: "rainbowchip.png",
     desc:  "salted caramel & peanuts",
     price: 350,
     emoji: "🥜"
   },
   {
     name:  "jumeirah cookie",
+	image: "theog.png",
     desc:  "dubai chocolate cookie",
     price: 450,
     emoji: "✨"
   },
   {
     name:  "strawberry shortcookie",
+	image: "rainbowchip.png",
     desc:  "strawberry and cream cookie",
     price: 450,
     emoji: "🍓"
   },
   {
     name:  "velvookie",
+	image: "cookinder.png",
     desc:  "red velvet and cream cheese cookie",
     price: 450,
     emoji: "❤️"
