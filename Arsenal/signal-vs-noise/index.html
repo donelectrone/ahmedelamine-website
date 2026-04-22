@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Podcast Tier List — The Artificer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+/* ─────────────────────────────────────────────
+   DESIGN TOKENS  (mirrors your site's system)
+───────────────────────────────────────────── */
+:root {
+  --font-heading: 'Lora', serif;
+  --font-body: 'Inter', sans-serif;
+
+  --color-bg:         #FBF8F3;
+  --color-panel:      #FFFEF7;
+  --color-text:       #1C1917;
+  --color-text-muted: #78716C;
+  --color-pop:        #1E40AF;
+  --color-border:     #E7E5E4;
+
+  /* Tier palette — exact TierMaker rainbow */
+  --s-color: #ff7f7f;   /* red    */
+  --s-bg:    #fff0f0;
+  --a-color: #ffbf7f;   /* orange */
+  --a-bg:    #fff7ed;
+  --b-color: #ffdf80;   /* yellow */
+  --b-bg:    #fffbeb;
+  --c-color: #7fff7f;   /* green  */
+  --c-bg:    #f0fff0;
+  --f-color: #9999ff;   /* purple */
+  --f-bg:    #f3f0ff;
+}
+
+/* ─────────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+.container { width: 90%; max-width: 1280px; margin: 0 auto; }
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text);
+}
+
+a { color: var(--color-pop); text-decoration: none; transition: opacity 0.2s; }
+a:hover { opacity: 0.75; }
+
+/* ─────────────────────────────────────────────
+   HEADER
+───────────────────────────────────────────── */
+.site-header {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--color-border);
+  background-color: color-mix(in srgb, var(--color-bg) 85%, transparent);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-content { display: flex; justify-content: space-between; align-items: center; }
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-mark {
+  width: 40px; height: 40px;
+  background-color: var(--color-text);
+  border-radius: 8px;
+  display: grid; place-items: center;
+  color: var(--color-bg);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.logo-text { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 600; color: var(--color-text); }
+.site-nav a { color: var(--color-text); font-weight: 500; margin-left: 28px; font-size: 0.95rem; }
+
+/* ─────────────────────────────────────────────
+   PAGE HERO
+───────────────────────────────────────────── */
+.page-hero {
+  padding: 48px 0 0;
+  text-align: center;
+}
+.page-hero .panel-title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-pop);
+  margin-bottom: 12px;
+  display: block;
+}
+.page-hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 12px; }
+.page-hero p {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  max-width: 55ch;
+  margin: 0 auto 40px;
+}
+
+/* ─────────────────────────────────────────────
+   CONTROLS BAR
+───────────────────────────────────────────── */
+.controls-wrapper {
+  background-color: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 50px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(30,64,175,0.04);
+}
+
+.search-wrap { position: relative; flex: 1; }
+.search-wrap svg {
+  position: absolute;
+  left: 10px; top: 50%; transform: translateY(-50%);
+  color: var(--color-text-muted); pointer-events: none;
+}
+#search-input {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 7px 12px 7px 34px;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  outline: none;
+  width: 100%;
+}
+#search-input::placeholder { color: var(--color-text-muted); }
+
+/* ─────────────────────────────────────────────
+   STATS BAR — pills are the filter controls
+───────────────────────────────────────────── */
+.stats-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.stats-bar > div { font-size: 0.85rem; color: var(--color-text-muted); font-weight: 500; margin-right: 4px; }
+.stats-bar strong { color: var(--color-text); font-family: var(--font-heading); }
+
+.stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 13px;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  letter-spacing: 0.3px;
+}
+.stat-pill:hover { filter: brightness(0.92); transform: translateY(-1px); }
+
+/* Colors using TierMaker palette */
+.stat-pill.all { background: #e5e5e5;   color: #444;     border-color: #ccc; }
+.stat-pill.s   { background: #ff7f7f33; color: #b94040;  border-color: #ff7f7f; }
+.stat-pill.a   { background: #ffbf7f33; color: #a05a20;  border-color: #ffbf7f; }
+.stat-pill.b   { background: #ffdf8033; color: #7a6000;  border-color: #ffdf80; }
+.stat-pill.c   { background: #7fff7f33; color: #2a6e2a;  border-color: #7fff7f; }
+.stat-pill.f   { background: #9999ff33; color: #4040bb;  border-color: #9999ff; }
+
+/* Active states — solid fill */
+.stat-pill.all.active { background: #555;     color: white;    border-color: #555; }
+.stat-pill.s.active   { background: #ff7f7f;  color: white;    border-color: #ff7f7f; }
+.stat-pill.a.active   { background: #ffbf7f;  color: #5a3200;  border-color: #ffbf7f; }
+.stat-pill.b.active   { background: #ffdf80;  color: #4a3500;  border-color: #ffdf80; }
+.stat-pill.c.active   { background: #7fff7f;  color: #1a4d1a;  border-color: #7fff7f; }
+.stat-pill.f.active   { background: #9999ff;  color: white;    border-color: #9999ff; }
+
+.stat-pill.dimmed { opacity: 0.35; }
+
+/* ─────────────────────────────────────────────
+   TIER ROWS  — TierMaker style
+───────────────────────────────────────────── */
+main { padding: 32px 0 80px; }
+
+.tier-section {
+  margin-bottom: 0;
+  transition: opacity 0.25s;
+}
+.tier-section.collapsed { display: none; }
+
+/* Wrap all tier rows in one bordered block */
+#tier-container { border: 2px solid #000; border-radius: 4px; overflow: hidden; }
+
+/* Black border between each row */
+.tier-section + .tier-section { border-top: 2px solid #000; }
+/* Also separate the detail slot from the next row */
+.tier-section + div[id^="detail-slot"] + .tier-section { border-top: 2px solid #000; }
+
+.tier-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 0;
+  overflow: hidden;
+}
+
+/* Tier label column — bold, saturated, TierMaker-style */
+.tier-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 6px;
+  gap: 2px;
+  min-height: 100px;
+}
+.tier-label .grade {
+  font-family: var(--font-body);
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.25);
+}
+.tier-label .label {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  text-align: center;
+  opacity: 0.9;
+  max-width: 84px;
+  line-height: 1.2;
+}
+
+/* TierMaker exact row colors — all black text */
+.tier-S .tier-label { background: #ff7f7f; color: #000; }
+.tier-A .tier-label { background: #ffbf7f; color: #000; }
+.tier-B .tier-label { background: #ffdf80; color: #000; }
+.tier-C .tier-label { background: #7fff7f; color: #000; }
+.tier-F .tier-label { background: #9999ff; color: #000; }
+
+/* Tiles area — dark background exactly like TierMaker */
+.tier-tiles {
+  background: #1c1c1e;
+  padding: 6px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-content: flex-start;
+  min-height: 100px;
+  border-left: 2px solid #000;
+}
+
+.empty-tier {
+  color: rgba(255,255,255,0.25);
+  font-size: 0.8rem;
+  font-style: italic;
+  align-self: center;
+  padding: 8px;
+}
+
+/* ─────────────────────────────────────────────
+   PODCAST TILES
+───────────────────────────────────────────── */
+.podcast-tile {
+  width: 90px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.15s ease, opacity 0.15s;
+  position: relative;
+}
+.podcast-tile:hover { transform: scale(1.06); opacity: 0.92; }
+.podcast-tile.hidden { display: none; }
+
+.tile-logo {
+  width: 82px;
+  height: 82px;
+  border-radius: 4px;   /* TierMaker uses nearly square tiles */
+  overflow: hidden;
+  border: 3px solid transparent;
+  transition: border-color 0.18s, box-shadow 0.18s;
+  background: #2c2c2e;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.tile-logo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.tile-initials {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: white;
+  letter-spacing: -0.5px;
+  user-select: none;
+}
+
+.podcast-tile.active .tile-logo {
+  border-color: white;
+  box-shadow: 0 0 0 2px var(--tier-color, #fff), 0 0 12px rgba(255,255,255,0.3);
+}
+
+.tile-name {
+  font-size: 0.64rem;
+  font-weight: 600;
+  text-align: center;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.25;
+  max-width: 86px;
+  word-break: break-word;
+}
+
+/* ─────────────────────────────────────────────
+   DETAIL PANEL
+───────────────────────────────────────────── */
+.detail-panel {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 32px 36px;
+  margin-bottom: 40px;
+  box-shadow: 0 8px 32px rgba(30,64,175,0.08);
+  display: none;
+  animation: slideDown 0.22s ease;
+}
+.detail-panel.visible { display: flex; gap: 32px; align-items: flex-start; }
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.detail-logo {
+  width: 96px; height: 96px;
+  border-radius: 16px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 3px solid var(--color-border);
+  background: var(--color-bg);
+  display: grid;
+  place-items: center;
+}
+.detail-logo img { width: 100%; height: 100%; object-fit: cover; }
+.detail-initials {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 2rem;
+  color: white;
+}
+
+.detail-body { flex: 1; }
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.detail-header h2 { font-size: 1.5rem; }
+
+.tier-badge {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 50px;
+  border: 2px solid;
+}
+.tier-badge.S { background: var(--s-bg); color: var(--s-color); border-color: var(--s-color); }
+.tier-badge.A { background: var(--a-bg); color: var(--a-color); border-color: var(--a-color); }
+.tier-badge.B { background: var(--b-bg); color: var(--b-color); border-color: var(--b-color); }
+.tier-badge.C { background: var(--c-bg); color: var(--c-color); border-color: var(--c-color); }
+.tier-badge.F { background: var(--f-bg); color: var(--f-color); border-color: var(--f-color); }
+
+.detail-notes {
+  font-size: 1rem;
+  color: var(--color-text);
+  line-height: 1.75;
+  margin-bottom: 16px;
+  max-width: 680px;
+}
+
+.detail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-pop);
+}
+.detail-link:hover { opacity: 0.75; }
+
+.detail-close {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  padding: 4px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+.detail-close:hover { color: var(--color-text); background: var(--color-bg); }
+
+/* ─────────────────────────────────────────────
+   NO RESULTS
+───────────────────────────────────────────── */
+.no-results {
+  display: none;
+  text-align: center;
+  padding: 80px 24px;
+  color: var(--color-text-muted);
+}
+.no-results.visible { display: block; }
+.no-results p { margin: 8px auto 0; }
+
+/* ─────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────── */
+.site-footer {
+  padding: 32px 0;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+.site-footer p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  max-width: none;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .site-nav { display: none; }
+  .stats-bar { flex-wrap: wrap; gap: 8px; }
+}
+
+@media (max-width: 640px) {
+  .controls-wrapper { flex-direction: column; align-items: stretch; }
+  #search-input { width: 100%; }
+  .search-wrap { width: 100%; }
+
+  .tier-row { grid-template-columns: 70px 1fr; }
+  .tier-label { padding: 10px 4px; }
+  .tier-label .grade { font-size: 2rem; }
+  .tier-label .label { font-size: 0.5rem; }
+
+  .podcast-tile { width: 70px; }
+  .tile-logo { width: 64px; height: 64px; }
+
+  .detail-panel.visible { flex-direction: column; padding: 24px 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ─── HEADER ─────────────────────────────────── -->
+<header class="site-header">
+  <div class="container header-content">
+    <a href="#" class="logo">
+      <div class="logo-mark">A</div>
+      <span class="logo-text">The Artificer</span>
+    </a>
+	<nav class="site-nav">
+		<a href="/codex.html">Codex</a>
+		<a href="/foundry.html">Foundry</a>
+		<a href="/arsenal.html">Arsenal</a>
+		<a href="/guild.html">Guild</a>
+		<a href="/about.html">Story</a>
+	</nav>
+  </div>
+</header>
+
+<!-- ─── PAGE HERO ──────────────────────────────── -->
+<div class="page-hero container">
+  <span class="panel-title">The Artificer's Ear</span>
+  <h1>The Signal-Vs-Noise Podcast Tier List</h1>
+  <p>Every show ranked by relationship status. From deeply committed to officially done — here's where things stand.</p>
+</div>
+
+<!-- ─── MAIN ───────────────────────────────────── -->
+<main class="container">
+
+  <!-- Controls -->
+  <div class="controls-wrapper">
+    <div class="search-wrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="search-input" type="text" placeholder="Search podcasts…" autocomplete="off" />
+    </div>
+  </div>
+
+  <!-- Stats Bar — pills double as filter buttons -->
+  <div class="stats-bar">
+    <div><strong id="stats-count">0</strong>&nbsp;shown</div>
+    <span class="stat-pill all active" id="pill-ALL" data-tier="ALL">All</span>
+    <span class="stat-pill s" id="pill-S" data-tier="S">S <span id="count-S">0</span></span>
+    <span class="stat-pill a" id="pill-A" data-tier="A">A <span id="count-A">0</span></span>
+    <span class="stat-pill b" id="pill-B" data-tier="B">B <span id="count-B">0</span></span>
+    <span class="stat-pill c" id="pill-C" data-tier="C">C <span id="count-C">0</span></span>
+    <span class="stat-pill f" id="pill-F" data-tier="F">F <span id="count-F">0</span></span>
+  </div>
+
+  <!-- Detail Panel (shared, moved by JS) -->
+  <div id="detail-panel" class="detail-panel" role="region" aria-live="polite">
+    <div class="detail-logo" id="detail-logo"></div>
+    <div class="detail-body">
+      <div class="detail-header">
+        <h2 id="detail-name">—</h2>
+        <span class="tier-badge" id="detail-badge"></span>
+        <button class="detail-close" id="detail-close" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <p class="detail-notes" id="detail-notes"></p>
+      <a class="detail-link" id="detail-link" href="#" target="_blank" rel="noopener" style="display:none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Visit Website
+      </a>
+    </div>
+  </div>
+
+  <!-- Tier Sections generated by JS -->
+  <div id="tier-container"></div>
+
+  <!-- No Results -->
+  <div id="no-results" class="no-results">
+    <h3>No podcasts found</h3>
+    <p>Try a different search or filter.</p>
+  </div>
+
+</main>
+
+<!-- ─── FOOTER ─────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2025 The Artificer's Empire · Built with intention</p>
+  </div>
+</footer>
+
+<!-- ─── DATA + LOGIC ────────────────────────────── -->
+<script>
+/* ────────────────────────────────────────────────
+   PODCAST DATA
+   Add/remove podcasts here. Fields:
+     id       – unique slug
+     name     – display name
+     tier     – S / A / B / C / F
+     logo     – URL string OR null (shows initials)
+     initials – 1–3 chars (used when logo is null)
+     color    – bg color for initials tile
+     notes    – your personal take
+     website  – URL or null
+──────────────────────────────────────────────── */
+const PODCASTS = [
+  /* ── S TIER ── */
+  {
+    id: "huberman",
+    name: "Huberman Lab",
+    tier: "S",
+    logo: null,
+    initials: "HL",
+    color: "#0F766E",
+    notes: "The gold standard for translating neuroscience into daily protocols. I've genuinely restructured my morning routine around episodes. Andrew's rigor and depth are unmatched — I never leave without actionable tools.",
+    website: "https://hubermanlab.com"
+  },
+  {
+    id: "lex-fridman",
+    name: "Lex Fridman",
+    tier: "S",
+    logo: null,
+    initials: "LF",
+    color: "#1C1917",
+    notes: "Long-form conversations with people who genuinely shape the world — scientists, engineers, founders, philosophers. The patience Lex brings to complex topics is rare. Every episode feels like a gift of time.",
+    website: "https://lexfridman.com/podcast"
+  },
+  {
+    id: "naval",
+    name: "Naval",
+    tier: "S",
+    logo: null,
+    initials: "N",
+    color: "#1E40AF",
+    notes: "Naval's solo episodes on wealth, happiness, and leverage are the most idea-dense audio I've ever encountered. I've relisten-ed to 'How to Get Rich' more times than I can count.",
+    website: null
+  },
+
+  /* ── A TIER ── */
+  {
+    id: "diary-of-ceo",
+    name: "Diary of a CEO",
+    tier: "A",
+    logo: null,
+    initials: "DC",
+    color: "#1E40AF",
+    notes: "Steven Bartlett consistently pulls out vulnerability from guests who usually guard themselves. The entrepreneurship-meets-psychology angle is my lane. Some episodes hit harder than any book I've read.",
+    website: "https://stevenbartlett.com/doac"
+  },
+  {
+    id: "all-in",
+    name: "All-In Podcast",
+    tier: "A",
+    logo: null,
+    initials: "AI",
+    color: "#7C3AED",
+    notes: "The besties format is chaotic and I love it. Four sharp minds with skin in the game arguing about tech, markets, and geopolitics. Occasionally insufferable, consistently illuminating.",
+    website: "https://allinpodcast.co"
+  },
+  {
+    id: "my-first-million",
+    name: "My First Million",
+    tier: "A",
+    logo: null,
+    initials: "MF",
+    color: "#0EA5E9",
+    notes: "The brainstorming session I didn't know I needed. Sam and Shaan's riff-style ideation on business opportunities is endlessly generative for my own Artificer ventures.",
+    website: "https://www.mfmpod.com"
+  },
+  {
+    id: "tim-ferriss",
+    name: "Tim Ferriss Show",
+    tier: "A",
+    logo: null,
+    initials: "TF",
+    color: "#DC2626",
+    notes: "The OG long-form interview podcast. Tim's preparation is surgical — he gets guests to reveal systems and routines they've never publicly shared. Not every episode lands, but the classics are essential.",
+    website: "https://tim.blog/podcast"
+  },
+
+  /* ── B TIER ── */
+  {
+    id: "founders",
+    name: "Founders",
+    tier: "B",
+    logo: null,
+    initials: "F",
+    color: "#92400E",
+    notes: "David Senra's passion for founder biographies is contagious, but the single-host format can feel repetitive over time. Outstanding for isolated listens — harder to binge.",
+    website: "https://founderspodcast.com"
+  },
+  {
+    id: "acquired",
+    name: "Acquired",
+    tier: "B",
+    logo: null,
+    initials: "AQ",
+    color: "#0F766E",
+    notes: "Absurdly deep company histories. The Nvidia and LVMH episodes are masterclasses. The problem: 4-hour episodes demand a commitment I can't always give. Love the depth, hate the scheduling.",
+    website: "https://acquired.fm"
+  },
+  {
+    id: "knowledge-project",
+    name: "The Knowledge Project",
+    tier: "B",
+    logo: null,
+    initials: "KP",
+    color: "#4338CA",
+    notes: "Shane Parrish is one of the clearest thinkers in the space and his Farnam Street work is phenomenal. The podcast sometimes feels a step behind the blog content. Solid, not spectacular.",
+    website: "https://fs.blog/podcast"
+  },
+
+  /* ── C TIER ── */
+  {
+    id: "impact-theory",
+    name: "Impact Theory",
+    tier: "C",
+    logo: null,
+    initials: "IT",
+    color: "#B45309",
+    notes: "Tom Bilyeu's energy is admirable, but the format has started feeling formulaic. Every guest ends up delivering the same self-help framework. Burned through the back-catalogue, not sure I'm still the audience.",
+    website: null
+  },
+  {
+    id: "school-greatness",
+    name: "School of Greatness",
+    tier: "C",
+    logo: null,
+    initials: "SG",
+    color: "#D97706",
+    notes: "Lewis Howes is sincere and the guest list is impressive — but the conversations rarely go deep enough for my taste. I've gotten more value from the YouTube clips than full episodes.",
+    website: null
+  },
+
+  /* ── F TIER ── */
+  {
+    id: "mindset-mentor",
+    name: "The Mindset Mentor",
+    tier: "F",
+    logo: null,
+    initials: "MM",
+    color: "#991B1B",
+    notes: "Started strong when I discovered it. Over time the content started cycling through the same ideas with diminishing returns. Fully unfollowed — moved on to primary sources instead of summaries.",
+    website: null
+  },
+  {
+    id: "ed-mylett",
+    name: "Ed Mylett Show",
+    tier: "F",
+    logo: null,
+    initials: "EM",
+    color: "#7F1D1D",
+    notes: "The production quality is excellent. The content, however, pivoted too far into hype and motivation-porn territory for me. Respect the hustle, but we're no longer aligned on substance.",
+    website: null
+  },
+];
+
+/* ─────────────────────────────────────────
+   TIER CONFIG
+───────────────────────────────────────── */
+const TIERS = [
+  { id: "S", label: "Committed",       color: "#16A34A" },
+  { id: "A", label: "Dating",          color: "#2563EB" },
+  { id: "B", label: "It's Complicated",color: "#D97706" },
+  { id: "C", label: "On the Rocks",    color: "#EA580C" },
+  { id: "F", label: "Broke Up",        color: "#DC2626" },
+];
+
+/* ─────────────────────────────────────────
+   STATE
+───────────────────────────────────────── */
+let activeFilter = "ALL";
+let searchQuery  = "";
+let activePodcast = null; // id string
+
+/* ─────────────────────────────────────────
+   BUILD DOM
+───────────────────────────────────────── */
+function buildTiers() {
+  const container = document.getElementById("tier-container");
+  container.innerHTML = "";
+
+  TIERS.forEach(tier => {
+    const section = document.createElement("div");
+    section.className = "tier-section";
+    section.dataset.tier = tier.id;
+    section.id = `tier-section-${tier.id}`;
+
+    section.innerHTML = `
+      <div class="tier-row tier-${tier.id}">
+        <div class="tier-label">
+          <span class="grade">${tier.id}</span>
+          <span class="label">${tier.label.replace("It's ", "It's\u00A0")}</span>
+        </div>
+        <div class="tier-tiles" id="tiles-${tier.id}"></div>
+      </div>
+    `;
+
+    container.appendChild(section);
+
+    // Insert detail panel slot after this tier section
+    const slotDiv = document.createElement("div");
+    slotDiv.id = `detail-slot-${tier.id}`;
+    container.appendChild(slotDiv);
+
+    // Render tiles
+    const tilesEl = section.querySelector(`#tiles-${tier.id}`);
+    const podcasts = PODCASTS.filter(p => p.tier === tier.id);
+    if (podcasts.length === 0) {
+      tilesEl.innerHTML = `<span class="empty-tier">No shows yet.</span>`;
+    } else {
+      podcasts.forEach(p => tilesEl.appendChild(makeTile(p, tier.color)));
+    }
+  });
+}
+
+function makeTile(podcast, tierColor) {
+  const tile = document.createElement("div");
+  tile.className = "podcast-tile";
+  tile.dataset.id   = podcast.id;
+  tile.dataset.tier = podcast.tier;
+  tile.style.setProperty("--tier-color", tierColor);
+  tile.setAttribute("role", "button");
+  tile.setAttribute("tabindex", "0");
+  tile.setAttribute("aria-label", podcast.name);
+
+  const logoHtml = podcast.logo
+    ? `<img src="${podcast.logo}" alt="${podcast.name}" loading="lazy" />`
+    : `<div class="tile-initials">${podcast.initials}</div>`;
+
+  const logoBg = podcast.logo ? "" : `background:${podcast.color};`;
+
+  tile.innerHTML = `
+    <div class="tile-logo" style="${logoBg}">${logoHtml}</div>
+    <span class="tile-name">${podcast.name}</span>
+  `;
+
+  tile.addEventListener("click",  () => selectPodcast(podcast.id));
+  tile.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") selectPodcast(podcast.id); });
+
+  return tile;
+}
+
+/* ─────────────────────────────────────────
+   DETAIL PANEL
+───────────────────────────────────────── */
+function selectPodcast(id) {
+  const panel   = document.getElementById("detail-panel");
+  const podcast = PODCASTS.find(p => p.id === id);
+  const tier    = TIERS.find(t => t.id === podcast.tier);
+
+  // Toggle off if same
+  if (activePodcast === id) {
+    closePanel();
+    return;
+  }
+
+  activePodcast = id;
+
+  // Highlight tile
+  document.querySelectorAll(".podcast-tile").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(`.podcast-tile[data-id="${id}"]`).forEach(t => t.classList.add("active"));
+
+  // Fill content
+  const logoEl = document.getElementById("detail-logo");
+  if (podcast.logo) {
+    logoEl.innerHTML = `<img src="${podcast.logo}" alt="${podcast.name}" />`;
+    logoEl.style.background = "";
+  } else {
+    logoEl.innerHTML = `<div class="detail-initials">${podcast.initials}</div>`;
+    logoEl.style.background = podcast.color;
+  }
+
+  document.getElementById("detail-name").textContent  = podcast.name;
+  document.getElementById("detail-notes").textContent = podcast.notes;
+
+  const badge = document.getElementById("detail-badge");
+  badge.textContent  = `${tier.id} — ${tier.label}`;
+  badge.className    = `tier-badge ${tier.id}`;
+
+  const link = document.getElementById("detail-link");
+  if (podcast.website) {
+    link.href = podcast.website;
+    link.style.display = "inline-flex";
+  } else {
+    link.style.display = "none";
+  }
+
+  // Move panel into the correct slot
+  const slot = document.getElementById(`detail-slot-${podcast.tier}`);
+  slot.innerHTML = "";
+  slot.appendChild(panel);
+  panel.classList.add("visible");
+  panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function closePanel() {
+  activePodcast = null;
+  document.querySelectorAll(".podcast-tile").forEach(t => t.classList.remove("active"));
+  document.getElementById("detail-panel").classList.remove("visible");
+}
+
+document.getElementById("detail-close").addEventListener("click", closePanel);
+
+/* ─────────────────────────────────────────
+   FILTERING + SEARCH
+───────────────────────────────────────── */
+function applyFilters() {
+  const q = searchQuery.toLowerCase().trim();
+  let totalShown = 0;
+  const tierCounts = { S:0, A:0, B:0, C:0, F:0 };
+
+  TIERS.forEach(tier => {
+    const section = document.getElementById(`tier-section-${tier.id}`);
+    if (!section) return;
+
+    const showTier = activeFilter === "ALL" || activeFilter === tier.id;
+    let tierHasVisible = false;
+
+    const tiles = section.querySelectorAll(".podcast-tile");
+    tiles.forEach(tile => {
+      const podcast = PODCASTS.find(p => p.id === tile.dataset.id);
+      const matchesQ = !q || podcast.name.toLowerCase().includes(q);
+      const visible  = showTier && matchesQ;
+      tile.classList.toggle("hidden", !visible);
+      if (visible) { tierHasVisible = true; totalShown++; tierCounts[tier.id]++; }
+    });
+
+    section.classList.toggle("collapsed", !showTier || (!tierHasVisible && q));
+  });
+
+  // Update stats count
+  document.getElementById("stats-count").textContent = totalShown;
+
+  // Update tier count pills + dim empty ones
+  TIERS.forEach(tier => {
+    const cnt  = tierCounts[tier.id];
+    const pill = document.getElementById(`pill-${tier.id}`);
+    document.getElementById(`count-${tier.id}`).textContent = cnt;
+    pill.classList.toggle("dimmed", cnt === 0);
+  });
+
+  // Update active pill highlight
+  document.querySelectorAll(".stat-pill[data-tier]").forEach(p => p.classList.remove("active"));
+  const activePill = document.getElementById(activeFilter === "ALL" ? "pill-ALL" : `pill-${activeFilter}`);
+  if (activePill) activePill.classList.add("active");
+
+  // No results message
+  document.getElementById("no-results").classList.toggle("visible", totalShown === 0);
+
+  // Close detail if its podcast is hidden
+  if (activePodcast) {
+    const activeTile = document.querySelector(`.podcast-tile[data-id="${activePodcast}"]`);
+    if (activeTile && activeTile.classList.contains("hidden")) closePanel();
+  }
+}
+
+/* ─────────────────────────────────────────
+   EVENT LISTENERS
+───────────────────────────────────────── */
+// Pill buttons as filters
+document.querySelectorAll(".stat-pill[data-tier]").forEach(pill => {
+  pill.addEventListener("click", () => {
+    activeFilter = pill.dataset.tier;
+    closePanel();
+    applyFilters();
+  });
+});
+
+document.getElementById("search-input").addEventListener("input", e => {
+  searchQuery = e.target.value;
+  applyFilters();
+});
+
+/* ─────────────────────────────────────────
+   INIT
+───────────────────────────────────────── */
+buildTiers();
+applyFilters();
+</script>
+
+</body>
+</html>
