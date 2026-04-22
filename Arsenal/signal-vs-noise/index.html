@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Podcast Tier List — The Artificer</title>
+<title>Podcast Tier List - The Artificer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -23,7 +23,7 @@
   --color-pop:        #1E40AF;
   --color-border:     #E7E5E4;
 
-  /* Tier palette — exact TierMaker rainbow */
+  /* Tier palette - exact TierMaker rainbow */
   --s-color: #ff7f7f;   /* red    */
   --s-bg:    #fff0f0;
   --a-color: #ffbf7f;   /* orange */
@@ -148,7 +148,7 @@ a:hover { opacity: 0.75; }
 #search-input::placeholder { color: var(--color-text-muted); }
 
 /* ─────────────────────────────────────────────
-   STATS BAR — pills are the filter controls
+   STATS BAR - pills are the filter controls
 ───────────────────────────────────────────── */
 .stats-bar {
   display: flex;
@@ -184,7 +184,7 @@ a:hover { opacity: 0.75; }
 .stat-pill.c   { background: #7fff7f33; color: #2a6e2a;  border-color: #7fff7f; }
 .stat-pill.f   { background: #9999ff33; color: #4040bb;  border-color: #9999ff; }
 
-/* Active states — solid fill */
+/* Active states - solid fill */
 .stat-pill.all.active { background: #555;     color: white;    border-color: #555; }
 .stat-pill.s.active   { background: #ff7f7f;  color: white;    border-color: #ff7f7f; }
 .stat-pill.a.active   { background: #ffbf7f;  color: #5a3200;  border-color: #ffbf7f; }
@@ -195,7 +195,7 @@ a:hover { opacity: 0.75; }
 .stat-pill.dimmed { opacity: 0.35; }
 
 /* ─────────────────────────────────────────────
-   TIER ROWS  — TierMaker style
+   TIER ROWS  - TierMaker style
 ───────────────────────────────────────────── */
 main { padding: 32px 0 80px; }
 
@@ -220,7 +220,7 @@ main { padding: 32px 0 80px; }
   overflow: hidden;
 }
 
-/* Tier label column — bold, saturated, TierMaker-style */
+/* Tier label column - bold, saturated, TierMaker-style */
 .tier-label {
   display: flex;
   flex-direction: column;
@@ -250,14 +250,14 @@ main { padding: 32px 0 80px; }
   line-height: 1.2;
 }
 
-/* TierMaker exact row colors — all black text */
+/* TierMaker exact row colors - all black text */
 .tier-S .tier-label { background: #ff7f7f; color: #000; }
 .tier-A .tier-label { background: #ffbf7f; color: #000; }
 .tier-B .tier-label { background: #ffdf80; color: #000; }
 .tier-C .tier-label { background: #7fff7f; color: #000; }
 .tier-F .tier-label { background: #9999ff; color: #000; }
 
-/* Tiles area — dark background exactly like TierMaker */
+/* Tiles area - dark background exactly like TierMaker */
 .tier-tiles {
   background: #1c1c1e;
   padding: 6px 8px;
@@ -503,8 +503,8 @@ main { padding: 32px 0 80px; }
 <!-- ─── PAGE HERO ──────────────────────────────── -->
 <div class="page-hero container">
   <span class="panel-title">The Artificer's Ear</span>
-  <h1>The Signal-Vs-Noise Podcast Tier List</h1>
-  <p>Every show ranked by relationship status. From deeply committed to officially done — here's where things stand.</p>
+  <h1>The Signal-Vs-Noise (Podcast Tier List)</h1>
+  <p>Every show ranked by relationship status. From deeply committed to officially done - here's where things stand.</p>
 </div>
 
 <!-- ─── MAIN ───────────────────────────────────── -->
@@ -518,7 +518,7 @@ main { padding: 32px 0 80px; }
     </div>
   </div>
 
-  <!-- Stats Bar — pills double as filter buttons -->
+  <!-- Stats Bar - pills double as filter buttons -->
   <div class="stats-bar">
     <div><strong id="stats-count">0</strong>&nbsp;shown</div>
     <span class="stat-pill all active" id="pill-ALL" data-tier="ALL">All</span>
@@ -534,7 +534,7 @@ main { padding: 32px 0 80px; }
     <div class="detail-logo" id="detail-logo"></div>
     <div class="detail-body">
       <div class="detail-header">
-        <h2 id="detail-name">—</h2>
+        <h2 id="detail-name">-</h2>
         <span class="tier-badge" id="detail-badge"></span>
         <button class="detail-close" id="detail-close" aria-label="Close">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -589,7 +589,7 @@ const PODCASTS = [
     logo: null,
     initials: "HL",
     color: "#0F766E",
-    notes: "The gold standard for translating neuroscience into daily protocols. I've genuinely restructured my morning routine around episodes. Andrew's rigor and depth are unmatched — I never leave without actionable tools.",
+    notes: "The gold standard for translating neuroscience into daily protocols. I've genuinely restructured my morning routine around episodes. Andrew's rigor and depth are unmatched - I never leave without actionable tools.",
     website: "https://hubermanlab.com"
   },
   {
@@ -599,7 +599,7 @@ const PODCASTS = [
     logo: null,
     initials: "LF",
     color: "#1C1917",
-    notes: "Long-form conversations with people who genuinely shape the world — scientists, engineers, founders, philosophers. The patience Lex brings to complex topics is rare. Every episode feels like a gift of time.",
+    notes: "Long-form conversations with people who genuinely shape the world - scientists, engineers, founders, philosophers. The patience Lex brings to complex topics is rare. Every episode feels like a gift of time.",
     website: "https://lexfridman.com/podcast"
   },
   {
@@ -651,7 +651,7 @@ const PODCASTS = [
     logo: null,
     initials: "TF",
     color: "#DC2626",
-    notes: "The OG long-form interview podcast. Tim's preparation is surgical — he gets guests to reveal systems and routines they've never publicly shared. Not every episode lands, but the classics are essential.",
+    notes: "The OG long-form interview podcast. Tim's preparation is surgical - he gets guests to reveal systems and routines they've never publicly shared. Not every episode lands, but the classics are essential.",
     website: "https://tim.blog/podcast"
   },
 
@@ -663,7 +663,7 @@ const PODCASTS = [
     logo: null,
     initials: "F",
     color: "#92400E",
-    notes: "David Senra's passion for founder biographies is contagious, but the single-host format can feel repetitive over time. Outstanding for isolated listens — harder to binge.",
+    notes: "David Senra's passion for founder biographies is contagious, but the single-host format can feel repetitive over time. Outstanding for isolated listens - harder to binge.",
     website: "https://founderspodcast.com"
   },
   {
@@ -705,7 +705,7 @@ const PODCASTS = [
     logo: null,
     initials: "SG",
     color: "#D97706",
-    notes: "Lewis Howes is sincere and the guest list is impressive — but the conversations rarely go deep enough for my taste. I've gotten more value from the YouTube clips than full episodes.",
+    notes: "Lewis Howes is sincere and the guest list is impressive - but the conversations rarely go deep enough for my taste. I've gotten more value from the YouTube clips than full episodes.",
     website: null
   },
 
@@ -717,7 +717,7 @@ const PODCASTS = [
     logo: null,
     initials: "MM",
     color: "#991B1B",
-    notes: "Started strong when I discovered it. Over time the content started cycling through the same ideas with diminishing returns. Fully unfollowed — moved on to primary sources instead of summaries.",
+    notes: "Started strong when I discovered it. Over time the content started cycling through the same ideas with diminishing returns. Fully unfollowed - moved on to primary sources instead of summaries.",
     website: null
   },
   {
@@ -852,7 +852,7 @@ function selectPodcast(id) {
   document.getElementById("detail-notes").textContent = podcast.notes;
 
   const badge = document.getElementById("detail-badge");
-  badge.textContent  = `${tier.id} — ${tier.label}`;
+  badge.textContent  = `${tier.id} - ${tier.label}`;
   badge.className    = `tier-badge ${tier.id}`;
 
   const link = document.getElementById("detail-link");
