@@ -234,7 +234,7 @@
     <!-- REPLACE 'action=""' with your unique Google FormResponse URL -->
     <form id="google-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdhqfKiNbm45K4HCvaHgI96hZ4B7Mtgs408Rq9KvDbrhr-2xQ/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;" class="form-group">
       <!-- REPLACE 'name="entry.xxxxxxxxx"' with your Google input field ID -->
-      <input type="email" name="entry.1292665134" class="form-input" placeholder="Your email address" required>
+      <input type="email" name="entry.1292665134" class="form-input" placeholder="Your email address" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. .com)" required>
       <button type="submit" class="submit-btn">Get Early Access</button>
     </form>
     
@@ -247,7 +247,7 @@
     <div class="tile">
       <h2 class="lang-label">English</h2>
       <!-- Point this href directly to your hosted PDF file path in GitHub -->
-      <a href="/assets/Pantry_Checklist_EN.pdf" class="download-button" download>Download PDF</a>
+      <a href="/assets/Pantry_Checklist_EN.pdf" class="download-button" data-umami-event="Download English PDF" download>Download PDF</a>
     </div>
 
     <!-- FRENCH (COMING SOON) -->
