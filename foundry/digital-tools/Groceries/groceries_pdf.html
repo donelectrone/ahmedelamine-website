@@ -230,12 +230,10 @@
     
     <!-- Hidden iframe trick to handle submission without redirecting to Google -->
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(typeof submitted !== 'undefined' && submitted) { showSuccess(); }"></iframe>
-    
-    <!-- REPLACE 'action=""' with your unique Google FormResponse URL -->
-    <form id="google-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdhqfKiNbm45K4HCvaHgI96hZ4B7Mtgs408Rq9KvDbrhr-2xQ/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;" class="form-group">
-      <!-- REPLACE 'name="entry.xxxxxxxxx"' with your Google input field ID -->
-      <input type="email" name="entry.1292665134" class="form-input" placeholder="Your email address" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address with a domain (e.g. .com)" required>
-      <button type="submit" class="submit-btn">Get Early Access</button>
+
+    <form id="google-form" action="" method="POST" target="hidden_iframe" class="form-group">
+      <input type="email" id="email-input" name="entry.123456789" class="form-input" placeholder="Your email address" required>
+      <button type="submit" class="submit-btn" onclick="return validateEmail()">Get Early Access</button>
     </form>
     
     <div id="success-msg" class="success-message">🎉 Thank you! You are officially on the early-access list.</div>
@@ -271,9 +269,27 @@
 </div>
 
 <script>
+  let submitted = false;
+
+  function validateEmail() {
+    const email = document.getElementById('email-input').value;
+    // Strict rule: must have text, @, text, dot, and at least 2 letters at the end
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    
+    if (!regex.test(email)) {
+      alert("Please enter a valid email address (e.g., name@gmail.com)");
+      return false; // Blocks the submission entirely
+    }
+    
+    submitted = true; // Allows the success message to trigger
+    return true; // Submits to Google
+  }
+
   function showSuccess() {
-    document.getElementById('google-form').style.display = 'none';
-    document.getElementById('success-msg').style.display = 'block';
+    if(submitted) {
+      document.getElementById('google-form').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    }
   }
 </script>
 
