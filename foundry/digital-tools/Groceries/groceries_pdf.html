@@ -6,10 +6,7 @@
 <title>Downloads — Master Pantry Checklist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,500;1,400&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-
-<!-- GUMROAD OVERLAY SCRIPT -->
-<script src="https://gumroad.com/js/autobound.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,500;1,400&family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -42,9 +39,9 @@
     text-align: center;
   }
 
-  /* Simple Header (Exact Brand Style, No Ad Copy) */
+  /* Simple Header */
   header {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -61,6 +58,78 @@
     direction: rtl;
   }
 
+  /* VIP NEWSLETTER BOX (Optional but Alluring) */
+  .newsletter-box {
+    max-width: 600px;
+    margin: 0 auto 50px auto;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed var(--card-border);
+    padding: 28px;
+    border-radius: 12px;
+    text-align: center;
+    position: relative;
+  }
+  .newsletter-tag {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--pink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  .newsletter-desc {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .form-group {
+    display: flex;
+    gap: 10px;
+    transition: opacity 0.3s ease;
+  }
+  .form-input {
+    flex: 1;
+    background: #000000;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: #FFFFFF;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  .form-input:focus {
+    border-color: var(--pink-soft);
+  }
+  .submit-btn {
+    background: var(--pink-deep);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  .submit-btn:hover {
+    background-color: var(--pink-soft);
+  }
+
+  /* Inline Success Message */
+  .success-message {
+    display: none;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--pink-soft);
+    padding: 10px 0;
+  }
+
   /* Grid Layout */
   .grid {
     display: grid;
@@ -69,7 +138,7 @@
     margin-bottom: 50px;
   }
 
-  /* Clean, Minimalist Tiles */
+  /* Tiles */
   .tile {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -79,6 +148,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  /* Greyed out coming soon styling */
+  .tile.disabled {
+    opacity: 0.4;
+    border-color: rgba(255, 255, 255, 0.05);
   }
 
   .lang-label {
@@ -93,28 +168,34 @@
     font-size: 24px;
   }
 
-  /* Gumroad Button matching your brand styles */
-  .gumroad-button {
+  /* Clean download buttons */
+  .download-button {
     width: 100%;
-    background-color: var(--pink-deep) !important;
-    background-image: none !important;
-    color: #FFFFFF !important;
+    background-color: var(--pink-deep);
+    color: #FFFFFF;
     text-decoration: none;
     padding: 14px 20px;
     border-radius: 10px;
     font-size: 15px;
     font-weight: 700;
-    font-family: var(--font-body) !important;
     transition: background-color 0.2s ease;
     text-align: center;
-    border: none !important;
     cursor: pointer;
+    border: none;
   }
-  .gumroad-button:hover {
-    background-color: var(--pink-soft) !important;
+  .download-button:hover {
+    background-color: var(--pink-soft);
   }
-  .gumroad-button.ar {
-    font-family: 'Amiri', serif !important;
+
+  /* Disabled button style */
+  .download-button.disabled-btn {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.4);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .download-button.disabled-btn.ar {
+    font-family: 'Amiri', serif;
     font-size: 18px;
     padding: 10px 20px;
   }
@@ -128,30 +209,6 @@
     color: var(--pink-soft);
     text-decoration: none;
   }
-  /* Prominent free/support info box */
-  .info-box {
-    background: rgba(255, 92, 131, 0.05);
-    border: 1px dashed var(--pink-primary);
-    border-radius: 12px;
-    padding: 20px;
-    margin: 0 auto 40px auto;
-    max-width: 650px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-  }
-  .info-text {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 600;
-    line-height: 1.4;
-  }
-  .info-text.ar {
-    font-family: 'Amiri', serif;
-    font-size: 18px;
-    direction: rtl;
-  }
 </style>
 </head>
 <body>
@@ -163,33 +220,46 @@
     <h1 class="brand-title">La Liste de Courses Mensuelle</h1>
     <h1 class="brand-title ar">قائمة المشتريات الشهرية</h1>
   </header>
-<!-- INFO BOX TO INSERT -->
-  <div class="info-box">
-    <p class="info-text">💡 Enter 0 to download for free, or any amount to support my work!</p>
-    <p class="info-text">💡 Entrez 0 pour télécharger gratuitement, ou le montant de votre choix pour me soutenir !</p>
-    <p class="info-text ar">💡 أدخل 0 للتحميل مجاناً، أو أي مبلغ تريد لدعم عملي!</p>
+
+  <!-- OPTIONAL EMAIL CAPTURE (100% Free Google Forms integration) -->
+  <div class="newsletter-box">
+    <div class="newsletter-tag"> ✨ Join the inner circle (Optional) ✨ </div>
+    <p class="newsletter-desc">
+      Enter your email to get early access to future systems, exclusive freebies, and priority updates before anyone else.
+    </p>
+    
+    <!-- Hidden iframe trick to handle submission without redirecting to Google -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(typeof submitted !== 'undefined' && submitted) { showSuccess(); }"></iframe>
+    
+    <!-- REPLACE 'action=""' with your unique Google FormResponse URL -->
+    <form id="google-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdhqfKiNbm45K4HCvaHgI96hZ4B7Mtgs408Rq9KvDbrhr-2xQ/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;" class="form-group">
+      <!-- REPLACE 'name="entry.xxxxxxxxx"' with your Google input field ID -->
+      <input type="email" name="entry.1292665134" class="form-input" placeholder="Your email address" required>
+      <button type="submit" class="submit-btn">Get Early Access</button>
+    </form>
+    
+    <div id="success-msg" class="success-message">🎉 Thank you! You are officially on the early-access list.</div>
   </div>
+
   <div class="grid">
 
-    <!-- ENGLISH -->
+    <!-- ENGLISH (ACTIVE) -->
     <div class="tile">
       <h2 class="lang-label">English</h2>
-      <!-- Replace the '#' below with your English Gumroad URL -->
-      <a href="https://electrone.gumroad.com/l/twxsq?wanted=true" class="gumroad-button">Download PDF</a>
+      <!-- Point this href directly to your hosted PDF file path in GitHub -->
+      <a href="/assets/Pantry_Checklist_EN.pdf" class="download-button" download>Download PDF</a>
     </div>
 
-    <!-- FRENCH -->
-    <div class="tile">
+    <!-- FRENCH (COMING SOON) -->
+    <div class="tile disabled">
       <h2 class="lang-label">Français</h2>
-      <!-- Replace the '#' below with your French Gumroad URL -->
-      <a href="#" class="gumroad-button">Télécharger PDF</a>
+      <button class="download-button disabled-btn">Arrive Bientôt</button>
     </div>
 
-    <!-- ARABIC -->
-    <div class="tile">
+    <!-- ARABIC (COMING SOON) -->
+    <div class="tile disabled">
       <h2 class="lang-label ar">العربية</h2>
-      <!-- Replace the '#' below with your Arabic Gumroad URL -->
-      <a href="#" class="gumroad-button ar">تحميل PDF</a>
+      <button class="download-button disabled-btn ar">قريباً</button>
     </div>
 
   </div>
@@ -199,6 +269,13 @@
   </footer>
 
 </div>
+
+<script>
+  function showSuccess() {
+    document.getElementById('google-form').style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+  }
+</script>
 
 </body>
 </html>
