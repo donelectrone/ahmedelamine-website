@@ -345,6 +345,10 @@ Amina a un ami.</textarea>
       const board = document.getElementById('preview-board');
       board.className = `preview-pane ${orient}`;
 
+      const gapSize = document.getElementById('in-gap').value;
+      document.getElementById('gap-size-val').innerText = gapSize;
+
+      
       if (orient === 'portrait') {
         if (layoutCount === '4') {
           board.style.gridTemplateColumns = '1fr';
