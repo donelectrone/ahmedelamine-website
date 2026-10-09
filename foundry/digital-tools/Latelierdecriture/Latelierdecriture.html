@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'Atelier d'Écriture | Cursive Worksheet Studio</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Gochi+Hand&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================
+       1. FONT IMPORT (Active for Netlify/GitHub)
+       ========================================= */
+    
+    @font-face {
+      font-family: 'MarelleLignes';
+      src: url('MarelleLIGNES-Regular.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'MarelleNoLignes';
+      src: url('Marelle-Regular.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    :root {
+      --chalk-green: #244433; 
+      --wood-frame: #6b4423;  
+      --wood-inner: #4a2f18;  
+      --chalk-white: #fbf8cc;
+      --ui-bg: rgba(255, 255, 255, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #121212;
+      font-family: 'Inter', sans-serif;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .app-container {
+      display: flex;
+      gap: 40px;
+      max-width: 1600px;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* =========================================
+       LEFT: THE VINTAGE CHALKBOARD
+       ========================================= */
+    .controls {
+      flex: 0 0 460px;
+      background-color: var(--chalk-green);
+      border: 16px solid var(--wood-frame);
+      border-radius: 8px;
+      padding: 25px 30px;
+      color: var(--chalk-white);
+      box-shadow: 
+        inset 0 0 0 4px var(--wood-inner), 
+        inset 0 0 60px rgba(0,0,0,0.8),    
+        10px 10px 30px rgba(0,0,0,0.7);    
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
+      overflow-y: auto;
+    }
+
+    .controls::-webkit-scrollbar { width: 8px; }
+    .controls::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 4px; }
+    .controls::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
+    .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px dashed rgba(251, 248, 204, 0.3); padding-bottom: 15px;}
+    .controls h1 { font-family: 'Gochi Hand', cursive; font-size: 34px; letter-spacing: 1px; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+    .lang-toggle { font-size: 28px; cursor: pointer; user-select: none; transition: transform 0.2s; filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5)); }
+    .lang-toggle:hover { transform: scale(1.15); }
+
+    .input-group { margin-bottom: 15px; }
+    .input-group label { display: block; font-family: 'Gochi Hand', cursive; font-size: 20px; margin-bottom: 6px; letter-spacing: 0.5px;}
+    .input-group input, .input-group textarea, .input-group select {
+      width: 100%; background: var(--ui-bg); border: 1px solid rgba(251, 248, 204, 0.4); color: #FFF;
+      padding: 8px 12px; font-size: 14px; font-family: 'Inter', sans-serif; border-radius: 6px; outline: none;
+      box-shadow: inset 2px 2px 5px rgba(0,0,0,0.2);
+    }
+    .input-group textarea { resize: vertical; min-height: 80px; }
+    .input-group select option { background: #222; color: #FFF; }
+
+    .meta-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;
+      background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px dashed rgba(251, 248, 204, 0.2);
+    }
+    .meta-grid .input-group { margin-bottom: 0; }
+
+    .slider-row { display: flex; justify-content: space-between; font-family: 'Inter', sans-serif; font-size: 13px; margin-bottom: 8px; font-weight: 600;}
+    input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+    input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; background: rgba(251, 248, 204, 0.3); border-radius: 3px; }
+    input[type=range]::-webkit-slider-thumb { height: 18px; width: 18px; border-radius: 50%; background: var(--chalk-white); cursor: pointer; -webkit-appearance: none; margin-top: -6px; box-shadow: 0 2px 5px rgba(0,0,0,0.5);}
+
+    .btn-print {
+      width: 100%; background: var(--chalk-white); color: var(--chalk-green); font-family: 'Gochi Hand', cursive;
+      font-size: 28px; padding: 14px; border: none; border-radius: 8px; cursor: pointer; margin-top: 15px; 
+      transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    .btn-print:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.5); }
+
+    /* =========================================
+       2. THE A4 PREVIEW (White Paper Area)
+       ========================================= */
+    .preview-wrapper {
+      flex: 1; display: flex; justify-content: center; align-items: flex-start;
+      overflow-y: auto; padding: 20px;
+    }
+
+    .preview-pane {
+      background: white; box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+      border-radius: 4px; background-color: #FFF; color: #000;
+      display: grid; overflow: hidden; transition: width 0.3s, height 0.3s;
+    }
+
+    .preview-pane.portrait { width: 210mm; height: 297mm; min-height: 297mm; }
+    .preview-pane.landscape { width: 297mm; height: 210mm; min-height: 210mm; }
+
+    .ticket {
+      border: 1px dashed #999;
+      padding: 6mm 10mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 12px;
+      overflow: hidden;
+      min-height: 0; 
+    }
+
+    .ticket-header {
+      display: flex; justify-content: space-between; font-weight: 600;
+      border-bottom: 1.5px solid #000; padding-bottom: 6px; font-family: 'Inter', sans-serif;
+    }
+    .ticket-meta-left { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* Title using MarelleNoLignes */
+    .ticket-title {
+      font-family: 'MarelleNoLignes', 'Inter', sans-serif; 
+      text-align: center; font-weight: 700; text-transform: uppercase;
+    }
+
+    .text-container {
+      display: flex; flex-direction: column; gap: 5px;
+      overflow: hidden; 
+    }
+
+    /* Content using MarelleLignes (falls back to Caveat if file not found) */
+    .content-text {
+      font-family: 'MarelleLignes', 'Caveat', cursive; 
+      color: #000080; white-space: pre-wrap; line-height: 1.3;
+    }
+    .trace-text { color: #D3D3D3; }
+
+    /* =========================================
+       3. PRINT MEDIA QUERY
+       ========================================= */
+    @media print {
+      body { background: white; padding: 0; margin: 0; overflow: visible; }
+      .controls { display: none !important; }
+      .app-container { gap: 0; max-width: 100%; display: block; }
+      .preview-wrapper { overflow: visible; padding: 0; }
+      .preview-pane { box-shadow: none; border-radius: 0; page-break-after: avoid; }
+      @page { size: auto; margin: 0; }
+      .preview-pane.portrait { width: 100vw; height: 100vh; }
+      .preview-pane.landscape { width: 100vw; height: 100vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- LEFT: THE CHALKBOARD -->
+    <div class="controls">
+      <div class="header-row">
+        <!-- New French Name -->
+        <h1 id="app-title">L'Atelier d'Écriture</h1>
+        <div class="lang-toggle" onclick="toggleLang()" title="Switch Language">🇫🇷</div>
+      </div>
+
+      <div class="meta-grid">
+        <div class="input-group">
+          <label id="lbl-date">Date:</label>
+          <input type="text" id="in-date" value="Dimanche 11 Octobre" oninput="updatePreview()">
+        </div>
+        <div class="input-group">
+          <label id="lbl-level">Level:</label>
+          <input type="text" id="in-level" value="3AP" oninput="updatePreview()">
+        </div>
+        <div class="input-group">
+          <label id="lbl-seq">Sequence:</label>
+          <input type="text" id="in-seq" value="Projet 1 / Séq 1" oninput="updatePreview()">
+        </div>
+        <div class="input-group">
+          <label id="lbl-sec">Section:</label>
+          <input type="text" id="in-sec" value="Écriture" oninput="updatePreview()">
+        </div>
+        <div class="input-group" style="grid-column: span 2;">
+          <label id="lbl-ses">Session:</label>
+          <input type="text" id="in-ses" value="Séance 1 (Les lettres m et a)" oninput="updatePreview()">
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label id="lbl-lesson">Lesson Title:</label>
+        <input type="text" id="in-lesson" value="J'écris en cursive" oninput="updatePreview()">
+      </div>
+
+      <div class="input-group">
+        <label id="lbl-text">Text to trace (Model):</label>
+        <textarea id="in-text" oninput="updatePreview()">m a  ma     m i  mi
+Amina a un ami.</textarea>
+      </div>
+
+      <div class="meta-grid">
+        <div class="input-group">
+          <label id="lbl-orient">Orientation:</label>
+          <select id="in-orient" onchange="updatePreview()">
+            <option value="portrait" selected>Portrait</option>
+            <option value="landscape">Landscape</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label id="lbl-layout">Layout (Tickets):</label>
+          <select id="in-layout" onchange="updatePreview()">
+            <option value="4" selected>4 Tickets</option>
+            <option value="6">6 Tickets</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Sliders -->
+      <div class="input-group">
+        <div class="slider-row">
+          <span id="lbl-headersize">Header Size:</span>
+          <span><span id="header-size-val">13</span>px</span>
+        </div>
+        <input type="range" id="in-headersize" min="10" max="22" value="13" oninput="updatePreview()">
+      </div>
+
+      <div class="input-group">
+        <div class="slider-row">
+          <span id="lbl-fontsize">Cursive Font Size:</span>
+          <span><span id="font-size-val">36</span>px</span>
+        </div>
+        <!-- Minimum font size changed to 12 -->
+        <input type="range" id="in-fontsize" min="12" max="72" value="36" oninput="updatePreview()">
+      </div>
+
+      <button class="btn-print" onclick="window.print()" id="btn-print">🖨️ Generate PDF</button>
+    </div>
+
+    <!-- RIGHT: PREVIEW -->
+    <div class="preview-wrapper">
+      <div class="preview-pane portrait" id="preview-board"></div>
+    </div>
+
+  </div>
+
+  <script>
+    let isEnglish = true;
+    const dict = {
+      en: {
+        title: "Cursive Studio", flag: "🇫🇷",
+        date: "Date:", level: "Level:", seq: "Sequence:", sec: "Section:", ses: "Session:",
+        lesson: "Lesson Title:", text: "Text to trace (Model):", orient: "Orientation:", layout: "Layout (Tickets):",
+        headersize: "Header Size:", fontsize: "Cursive Font Size:", print: "🖨️ Generate PDF"
+      },
+      fr: {
+        title: "L'Atelier d'Écriture", flag: "🇬🇧",
+        date: "Date :", level: "Niveau :", seq: "Séquence :", sec: "Rubrique :", ses: "Séance :",
+        lesson: "Titre de la leçon :", text: "Texte (Modèle) :", orient: "Orientation :", layout: "Disposition (Billets) :",
+        headersize: "Taille de l'en-tête :", fontsize: "Taille de l'écriture :", print: "🖨️ Imprimer / PDF"
+      }
+    };
+
+    function toggleLang() {
+      isEnglish = !isEnglish;
+      const lang = isEnglish ? 'en' : 'fr';
+      document.getElementById('app-title').innerText = dict[lang].title;
+      document.querySelector('.lang-toggle').innerText = dict[lang].flag;
+      
+      document.getElementById('lbl-date').innerText = dict[lang].date;
+      document.getElementById('lbl-level').innerText = dict[lang].level;
+      document.getElementById('lbl-seq').innerText = dict[lang].seq;
+      document.getElementById('lbl-sec').innerText = dict[lang].sec;
+      document.getElementById('lbl-ses').innerText = dict[lang].ses;
+      document.getElementById('lbl-lesson').innerText = dict[lang].lesson;
+      document.getElementById('lbl-text').innerText = dict[lang].text;
+      document.getElementById('lbl-orient').innerText = dict[lang].orient;
+      document.getElementById('lbl-layout').innerText = dict[lang].layout;
+      document.getElementById('lbl-headersize').innerText = dict[lang].headersize;
+      document.getElementById('lbl-fontsize').innerText = dict[lang].fontsize;
+      document.getElementById('btn-print').innerText = dict[lang].print;
+    }
+
+    function updatePreview() {
+      const date = document.getElementById('in-date').value;
+      const level = document.getElementById('in-level').value;
+      const seq = document.getElementById('in-seq').value;
+      const sec = document.getElementById('in-sec').value;
+      const ses = document.getElementById('in-ses').value;
+      const lesson = document.getElementById('in-lesson').value;
+      const text = document.getElementById('in-text').value;
+      
+      const orient = document.getElementById('in-orient').value;
+      const layoutCount = document.getElementById('in-layout').value;
+      
+      const headerSize = document.getElementById('in-headersize').value;
+      const fontSize = document.getElementById('in-fontsize').value;
+      
+      document.getElementById('header-size-val').innerText = headerSize;
+      document.getElementById('font-size-val').innerText = fontSize;
+
+      const board = document.getElementById('preview-board');
+      board.className = `preview-pane ${orient}`;
+
+      if (orient === 'portrait') {
+        if (layoutCount === '4') {
+          board.style.gridTemplateColumns = '1fr';
+          board.style.gridTemplateRows = 'repeat(4, 1fr)';
+        } else if (layoutCount === '6') {
+          board.style.gridTemplateColumns = '1fr';
+          board.style.gridTemplateRows = 'repeat(6, 1fr)';
+        }
+      } else if (orient === 'landscape') {
+        if (layoutCount === '4') {
+          board.style.gridTemplateColumns = 'repeat(2, 1fr)';
+          board.style.gridTemplateRows = 'repeat(2, 1fr)';
+        } else if (layoutCount === '6') {
+          board.style.gridTemplateColumns = 'repeat(3, 1fr)';
+          board.style.gridTemplateRows = 'repeat(2, 1fr)';
+        }
+      }
+
+      let html = '';
+      for(let i=0; i<parseInt(layoutCount); i++) {
+        html += `
+          <div class="ticket">
+            <div class="ticket-header" style="font-size: ${headerSize}px;">
+              <div class="ticket-meta-left">
+                <span><b>${level}</b></span> | <span>${seq}</span> | <span>${sec}</span> | <span>${ses}</span>
+              </div>
+              <span>${date}</span>
+            </div>
+            
+            <div class="ticket-title" style="font-size: ${parseInt(headerSize) + 4}px;">${lesson}</div>
+            
+            <div class="text-container" style="font-size: ${fontSize}px;">
+              <div class="content-text">${text}</div>
+              <div class="content-text trace-text">${text}</div>
+            </div>
+          </div>
+        `;
+      }
+      board.innerHTML = html;
+    }
+
+    updatePreview();
+  </script>
+</body>
+</html>
