@@ -146,18 +146,25 @@
     /* Title using MarelleNoLignes */
     .ticket-title {
       font-family: 'MarelleNoLignes', 'Inter', sans-serif; 
-      text-align: center; font-weight: 700; text-transform: uppercase;
+      text-align: center; font-weight: 700;
     }
 
     .text-container {
-      display: flex; flex-direction: column; gap: 5px;
+      display: flex; 
+      flex-direction: column; 
+      /* Increases the gap between the solid text and the tracing text below it */
+      gap: 30px; 
       overflow: hidden; 
+      /* Adds breathing room at the top and bottom so the 3-up/2-down lines don't get clipped by the box */
+      padding: 15px 5px; 
     }
 
-    /* Content using MarelleLignes (falls back to Caveat if file not found) */
     .content-text {
       font-family: 'MarelleLignes', 'Caveat', cursive; 
-      color: #000080; white-space: pre-wrap; line-height: 1.3;
+      color: #000080; 
+      white-space: pre-wrap; 
+      /* Expands the space between lines of text within the same paragraph so the loops don't crash */
+      line-height: 1.8; 
     }
     .trace-text { color: #D3D3D3; }
 
