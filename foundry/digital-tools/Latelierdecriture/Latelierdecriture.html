@@ -264,6 +264,14 @@ Amina a un ami.</textarea>
         <input type="range" id="in-fontsize" min="12" max="72" value="36" oninput="updatePreview()">
       </div>
 
+      <div class="input-group">
+        <div class="slider-row">
+          <span id="lbl-gap">Space Between Texts:</span>
+          <span><span id="gap-size-val">30</span>px</span>
+        </div>
+        <input type="range" id="in-gap" min="0" max="100" value="30" oninput="updatePreview()">
+      </div>
+      
       <button class="btn-print" onclick="window.print()" id="btn-print">🖨️ Generate PDF</button>
     </div>
 
@@ -281,13 +289,17 @@ Amina a un ami.</textarea>
         title: "Cursive Studio", flag: "🇫🇷",
         date: "Date:", level: "Level:", seq: "Sequence:", sec: "Section:", ses: "Session:",
         lesson: "Lesson Title:", text: "Text to trace (Model):", orient: "Orientation:", layout: "Layout (Tickets):",
-        headersize: "Header Size:", fontsize: "Cursive Font Size:", print: "🖨️ Generate PDF"
+        headersize: "Header Size:", fontsize: "Cursive Font Size:", 
+        gap: "Space Between Texts:",
+        print: "🖨️ Generate PDF"
       },
       fr: {
         title: "L'Atelier d'Écriture", flag: "🇬🇧",
         date: "Date :", level: "Niveau :", seq: "Séquence :", sec: "Rubrique :", ses: "Séance :",
         lesson: "Titre de la leçon :", text: "Texte (Modèle) :", orient: "Orientation :", layout: "Disposition (Billets) :",
-        headersize: "Taille de l'en-tête :", fontsize: "Taille de l'écriture :", print: "🖨️ Imprimer / PDF"
+        headersize: "Taille de l'en-tête :", fontsize: "Taille de l'écriture :", 
+        gap: "Espace entre les textes :", 
+        print: "🖨️ Imprimer / PDF"
       }
     };
 
@@ -309,6 +321,7 @@ Amina a un ami.</textarea>
       document.getElementById('lbl-headersize').innerText = dict[lang].headersize;
       document.getElementById('lbl-fontsize').innerText = dict[lang].fontsize;
       document.getElementById('btn-print').innerText = dict[lang].print;
+      document.getElementById('lbl-gap').innerText = dict[lang].gap;
     }
 
     function updatePreview() {
@@ -363,7 +376,7 @@ Amina a un ami.</textarea>
             
             <div class="ticket-title" style="font-size: ${parseInt(headerSize) + 4}px;">${lesson}</div>
             
-            <div class="text-container" style="font-size: ${fontSize}px;">
+            <div class="text-container" style="font-size: ${fontSize}px; gap: ${gapSize}px;">
               <div class="content-text">${text}</div>
               <div class="content-text trace-text">${text}</div>
             </div>
