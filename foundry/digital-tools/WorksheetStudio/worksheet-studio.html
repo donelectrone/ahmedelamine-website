@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="4c1f7e98-00c2-45f1-a71c-af051c51fc21"></script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorksheetStudio by ahmedelamine.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Edu+SA+Beginner:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #15151a;
+    --ink-dim: rgba(21, 21, 26, 0.58);
+    --ink-faint: rgba(21, 21, 26, 0.38);
+    --accent-a: #00d4aa;
+    --accent-b: #5b8cff;
+    --accent-c: #d9568f;
+    --neon: linear-gradient(135deg, #00e0c0 0%, #5b8cff 52%, #b25cff 100%);
+    --neon-glow: 0 8px 24px rgba(91,140,255,.40), 0 0 0 1px rgba(255,255,255,.35) inset;
+    --glass: linear-gradient(135deg, rgba(255,255,255,0.64), rgba(255,255,255,0.28));
+    --glass-line: rgba(255,255,255,0.9);
+    --field: rgba(255,255,255,0.78);
+    --field-line: rgba(0,0,0,0.12);
+    --s: 1; /* canvas scale, set by JS */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { min-height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Inter', system-ui, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 13.5px;
+    font-weight: 400;
+    letter-spacing: -.1px;
+    color: var(--ink);
+    background: #f6f2ec;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Aurora backdrop (gives the glass something to blur) ---------- */
+  /* Bright ivory backdrop with soft pastel washes so the frost has something to blur */
+  .aurora { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: linear-gradient(160deg, #fbf8f3 0%, #f4efe8 55%, #eef1f6 100%); }
+  .blob { position: absolute; border-radius: 50%; filter: blur(80px); will-change: transform; }
+  .blob.b1 { width: 42vw; height: 42vw; left: -10vw; top: -12vw; background: #bfe0ff; opacity: .75; animation: drift1 40s ease-in-out infinite alternate; }
+  .blob.b2 { width: 38vw; height: 38vw; right: -8vw; top: 12vh; background: #e2d6ff; opacity: .7; animation: drift2 46s ease-in-out infinite alternate; }
+  .blob.b3 { width: 34vw; height: 34vw; left: 32vw; bottom: -16vw; background: #ffd8c4; opacity: .7; animation: drift3 52s ease-in-out infinite alternate; }
+  .blob.b4 { width: 24vw; height: 24vw; left: 4vw; bottom: 6vh; background: #c9f0de; opacity: .6; animation: drift2 44s ease-in-out infinite alternate-reverse; }
+  @keyframes drift1 { to { transform: translate(8vw, 6vh) scale(1.08); } }
+  @keyframes drift2 { to { transform: translate(-7vw, 8vh) scale(.95); } }
+  @keyframes drift3 { to { transform: translate(-9vw, -6vh) scale(1.1); } }
+  .grain { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .06; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  @media (prefers-reduced-motion: reduce) { .blob { animation: none; } }
+
+  /* ---------- Glass primitive ---------- */
+  .glass {
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(28px) saturate(170%);
+    backdrop-filter: blur(28px) saturate(170%);
+    border: 1px solid var(--glass-line);
+    box-shadow: 0 20px 50px rgba(60, 70, 110, 0.14), inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(255,255,255,0.3);
+  }
+
+  svg.i { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+  /* ---------- App bar ---------- */
+  .app-bar {
+    position: sticky; top: 12px; z-index: 50;
+    margin: 12px auto 0; max-width: 1500px; width: calc(100% - 32px);
+    border-radius: 18px; padding: 10px 14px 10px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .logo {
+    width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center;
+    background: var(--neon);
+    color: #fff; box-shadow: 0 6px 20px rgba(91,140,255,.45), inset 0 1px 0 rgba(255,255,255,.5);
+  }
+  .brand b { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif; font-size: 18px; font-weight: 650; letter-spacing: -.45px; line-height: 1.1; display: block; }
+  .brand small { font-size: 11px; font-weight: 400; letter-spacing: -.05px; color: var(--ink-dim); }
+  .brand small a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(21,21,26,.25); transition: .2s; }
+  .brand small a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+  .print-btn {
+    display: flex; align-items: center; gap: 8px;
+    border: 0; cursor: pointer; font: inherit; font-weight: 600; font-size: 13px; letter-spacing: -.1px;
+    padding: 10px 20px; border-radius: 14px; color: #fff; text-shadow: 0 1px 2px rgba(20,30,90,.35);
+    background: var(--neon);
+    box-shadow: 0 8px 24px rgba(91,140,255,.40), inset 0 1px 0 rgba(255,255,255,.55);
+    transition: transform .15s, box-shadow .2s;
+  }
+  .print-btn:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(91,140,255,.55), 0 0 18px rgba(0,224,192,.35), inset 0 1px 0 rgba(255,255,255,.55); }
+  .print-btn:active { transform: scale(.97); }
+
+  /* ---------- Layout ---------- */
+  .workspace {
+    display: grid; grid-template-columns: 372px minmax(0, 1fr); gap: 20px;
+    max-width: 1500px; margin: 0 auto; padding: 20px 16px 40px;
+  }
+
+  .dock {
+    border-radius: 24px; padding: 14px;
+    display: flex; flex-direction: column; gap: 12px;
+    height: calc(100vh - 110px); position: sticky; top: 88px; overflow-y: auto;
+    scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.2) transparent;
+  }
+  .dock::-webkit-scrollbar { width: 6px; }
+  .dock::-webkit-scrollbar-thumb { background: rgba(0,0,0,.18); border-radius: 6px; }
+
+  .group {
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.85);
+    border-radius: 18px; padding: 12px;
+    box-shadow: 0 2px 10px rgba(60,70,110,0.05), inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+  .group-title {
+    font-size: 10px; font-weight: 650; letter-spacing: .9px; text-transform: uppercase;
+    color: var(--ink-dim); margin-bottom: 9px; display: flex; justify-content: space-between; align-items: center;
+  }
+
+  /* ---------- Segmented control with sliding thumb ---------- */
+  .seg {
+    --n: 2; --i: 0;
+    position: relative; display: grid; grid-template-columns: repeat(var(--n), 1fr);
+    padding: 3px; border-radius: 14px; background: rgba(0,0,0,.05);
+    border: 1px solid rgba(0,0,0,.06);
+  }
+  .seg::before {
+    content: ''; position: absolute; top: 3px; bottom: 3px; left: 3px;
+    width: calc((100% - 6px) / var(--n)); border-radius: 11px;
+    transform: translateX(calc(var(--i) * 100%));
+    transition: transform .4s cubic-bezier(.3, 1.35, .5, 1);
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(91,140,255,.28), 0 0 0 1.5px rgba(91,140,255,.45);
+  }
+  .seg button {
+    position: relative; z-index: 1; background: none; border: 0; color: var(--ink-dim);
+    font: inherit; font-weight: 500; font-size: 12.5px; padding: 8px 6px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 7px; border-radius: 11px;
+    transition: color .2s;
+  }
+  .seg button:hover { color: var(--ink); }
+  .seg button.on { color: var(--ink); }
+  .seg.types button { flex-direction: column; gap: 4px; padding: 9px 2px 7px; font-size: 10px; }
+  .seg.types svg.i { width: 20px; height: 20px; }
+
+  .flag { width: 22px; height: 15px; border-radius: 4px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,255,255,.35), 0 2px 6px rgba(0,0,0,.3); flex: none; }
+  .flag svg { width: 100%; height: 100%; display: block; }
+
+  .tab-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,.18); transition: .2s; }
+  .tab-dot.live { background: var(--accent-a); box-shadow: 0 0 8px var(--accent-a); }
+
+  /* ---------- Switch ---------- */
+  .switch-row { display: flex; align-items: center; justify-content: space-between; margin: 12px 2px; font-weight: 550; font-size: 12px; }
+  .switch { position: relative; width: 42px; height: 24px; flex: none; }
+  .switch input { position: absolute; inset: 0; opacity: 0; cursor: pointer; z-index: 2; }
+  .switch span {
+    position: absolute; inset: 0; border-radius: 20px; background: rgba(0,0,0,.12);
+    border: 1px solid rgba(0,0,0,.06); transition: .25s;
+  }
+  .switch span::after {
+    content: ''; position: absolute; top: 2px; left: 2px; width: 18px; height: 18px; border-radius: 50%;
+    background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.35); transition: transform .3s cubic-bezier(.3,1.4,.5,1);
+  }
+  .switch input:checked + span { background: var(--neon); border-color: transparent; box-shadow: 0 0 14px rgba(91,140,255,.5); }
+  .switch input:checked + span::after { transform: translateX(18px); }
+
+  /* ---------- Fields ---------- */
+  input[type="text"], textarea {
+    width: 100%; background: var(--field); border: 1px solid var(--field-line); border-radius: 11px;
+    padding: 8px 11px; font: inherit; font-size: 13px; color: var(--ink); outline: none; transition: .2s;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.05);
+  }
+  input[type="text"]::placeholder, textarea::placeholder { color: var(--ink-faint); }
+  input[type="text"]:focus, textarea:focus { border-color: #5b8cff; background: #fff; box-shadow: 0 0 0 3px rgba(91,140,255,.22), 0 0 16px rgba(0,224,192,.25); }
+  textarea { resize: vertical; min-height: 64px; line-height: 1.5; }
+
+  input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 5px; border-radius: 5px; background: rgba(0,0,0,.13); outline: none; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--neon); box-shadow: 0 0 0 3px #fff, 0 0 12px rgba(91,140,255,.6); cursor: pointer; }
+  input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: var(--neon); box-shadow: 0 0 0 3px #fff, 0 0 12px rgba(91,140,255,.6); cursor: pointer; }
+
+  /* ---------- Item cards ---------- */
+  .item-card { background: rgba(5,8,24,.22); border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 9px; margin-bottom: 8px; display: flex; flex-direction: column; gap: 8px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .tools { display: flex; align-items: center; gap: 8px; }
+  .size-ctl { flex: 1; display: flex; align-items: center; gap: 8px; font-size: 10.5px; color: var(--ink-dim); }
+  .size-ctl output { min-width: 32px; text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+
+  .up-wrap { position: relative; flex: none; }
+  .up {
+    width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; cursor: pointer; overflow: hidden;
+    border: 1px dashed rgba(0,0,0,.28); color: var(--ink-dim); background: rgba(255,255,255,.6); transition: .2s;
+  }
+  .up:hover { color: var(--ink); border-color: #5b8cff; background: #fff; box-shadow: 0 0 12px rgba(91,140,255,.3); }
+  .up.has { border-style: solid; background: #fff; padding: 2px; }
+  .up img { width: 100%; height: 100%; object-fit: contain; }
+  .up-wrap .x {
+    position: absolute; top: -6px; right: -6px; width: 17px; height: 17px; border-radius: 50%; border: 0; cursor: pointer;
+    background: #ff6b8b; color: #fff; font-size: 12px; line-height: 17px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,.4);
+  }
+  .top-card { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px; }
+  .top-card .seg { flex: none; }
+  #seg-lang button { padding: 8px 13px; }
+  #seg-grid button { flex-direction: column; gap: 1px; min-width: 60px; padding: 6px 8px; line-height: 1.05; }
+  #seg-grid button b { font-size: 16px; font-weight: 500; }
+  #seg-grid button span { font-size: 9.5px; font-weight: 400; letter-spacing: .5px; opacity: .75; }
+  .size-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; color: var(--ink-dim); }
+  .size-row output { min-width: 34px; text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 500; font-size: 11.5px; }
+  .row-m { display: grid; grid-template-columns: minmax(0,1fr) 34px minmax(0,1fr) 34px 30px; gap: 6px; align-items: center; margin-bottom: 9px; }
+  .row-o { display: grid; grid-template-columns: minmax(0,1fr) 34px; gap: 8px; align-items: center; margin-bottom: 9px; }
+  .row-m input, .row-o input { padding: 7px 9px; }
+  .row-m .ghost-btn.icon { padding: 5px; justify-content: center; }
+  .tag { font-size: 9.5px; font-weight: 700; color: var(--ink-faint); position: absolute; bottom: -2px; left: 50%; transform: translate(-50%, 100%); display: none; }
+
+  .ghost-btn {
+    display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,.7); border: 1px solid rgba(0,0,0,.12);
+    color: var(--ink); border-radius: 10px; padding: 7px 11px; font: inherit; font-size: 12px; font-weight: 500; cursor: pointer; transition: .2s;
+  }
+  .ghost-btn:hover { background: #fff; border-color: rgba(0,0,0,.3); }
+  .ghost-btn.icon { padding: 7px; }
+  .ghost-btn.danger:hover { background: rgba(217,86,143,.12); border-color: rgba(217,86,143,.5); color: #b3306b; }
+  .btn-row { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .warn { display: none; margin-top: 10px; padding: 8px 10px; border-radius: 10px; font-size: 11px; line-height: 1.4;
+    background: rgba(255, 196, 87, .16); border: 1px solid rgba(255, 196, 87, .45); color: #7a4f00; }
+  .warn.show { display: block; }
+
+  /* ---------- Canvas ---------- */
+  .canvas { display: flex; justify-content: center; align-items: flex-start; min-width: 0; }
+  .scale-frame { width: calc(210mm * var(--s)); height: calc(297mm * var(--s)); flex: none; }
+  .a4-sheet {
+    width: 210mm; height: 297mm; background: #fff; color: #111; overflow: hidden;
+    font-family: 'Inter', system-ui, sans-serif; letter-spacing: 0; font-weight: 400;
+    transform: scale(var(--s)); transform-origin: top left;
+    box-shadow: 0 30px 70px rgba(60,70,110,.2), 0 0 0 1px rgba(0,0,0,.05);
+    border-radius: 3px;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .sheet-grid { display: grid; width: 210mm; height: 297mm; }
+  .grid-4 { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(2, 148.5mm); }
+  .grid-6 { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 99mm); }
+
+  .slip-tile { padding: 6mm 8mm 4mm; display: flex; flex-direction: column; background: #fff; position: relative; overflow: hidden; min-height: 0; }
+  .grid-4 .slip-tile:nth-child(odd), .grid-6 .slip-tile:nth-child(odd) { border-right: 1px dashed #94a3b8; }
+  .grid-4 .slip-tile:nth-child(-n+2) { border-bottom: 1px dashed #94a3b8; }
+  .grid-6 .slip-tile:nth-child(-n+4) { border-bottom: 1px dashed #94a3b8; }
+
+  .scissor { position: absolute; right: -1px; top: 0; width: 13px; height: 13px; color: #94a3b8; background: #fff; transform: translate(50%, 3mm) rotate(90deg); padding: 1px; z-index: 2; }
+  .slip-tile:nth-child(even) .scissor { display: none; }
+  .scissor svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
+  .slip-header { display: grid; grid-template-columns: 1.65fr 1fr; gap: 5mm; font-size: 11px; font-weight: 600; margin-bottom: 5mm; flex: none; }
+  .hf { display: flex; align-items: flex-end; gap: 6px; }
+  .hf .line { flex: 1; border-bottom: 1.2px solid #111; height: 18px; }
+
+  .slip-body { flex: 1; display: flex; flex-direction: column; gap: 5mm; min-height: 0; }
+  .activity-unit { display: flex; flex-direction: column; gap: 2.5mm; }
+  .prompt-text { font-size: 11.5px; font-weight: 700; }
+
+  .match-matrix { display: flex; justify-content: space-between; gap: 10px; font-size: 11px; }
+  .match-col { display: flex; flex-direction: column; gap: 2.6mm; justify-content: space-between; }
+  .match-item { display: flex; align-items: center; gap: 7px; min-height: 18px; }
+  .match-item.right { justify-content: flex-end; }
+  .m-txt { font-weight: 500; font-size: 12px; }
+  .target-dot { width: 6px; height: 6px; border-radius: 50%; background: #111; flex: none; }
+
+  .odd-cluster { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; text-align: center; }
+  .odd-box { border: 1.2px solid #111; border-radius: 9px; padding: 5px 3px; font-size: 11px; font-weight: 500; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 30px; overflow: hidden; }
+
+  .dyn-img { height: var(--sz, 35px); width: auto; max-width: 100%; object-fit: contain; display: block; }
+
+  .word-bank { display: flex; flex-wrap: wrap; gap: 5px; border: 1.2px solid #111; border-radius: 9px; padding: 4px 6px; margin-bottom: 3px; width: fit-content; max-width: 100%; }
+  .word-bank span { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 6px; background: #f1f5f9; }
+  .cloze-text { font-size: 14px; line-height: 2.1; font-family: 'Edu SA Beginner', cursive, sans-serif; }
+  .blank-space { display: inline-block; border-bottom: 1.5px dashed #111; min-width: 70px; height: 14px; margin: 0 4px; }
+
+  .choice-text { font-size: 12.5px; font-weight: 500; line-height: 2.1; font-family: 'Edu SA Beginner', cursive, sans-serif; }
+  .opt { display: inline-flex; align-items: center; gap: 4px; margin: 0 5px; padding: 0 4px; }
+  .opt i { width: 11px; height: 11px; border: 1.3px solid #111; border-radius: 50%; display: inline-block; }
+
+  .watermark { text-align: right; font-size: 8px; color: rgba(0,0,0,.22); padding-top: 1.5mm; flex: none; }
+  .empty-note { color: #aab; font-size: 10px; text-align: center; padding-top: 10mm; }
+
+  @media (max-width: 980px) {
+    .workspace { grid-template-columns: 1fr; }
+    .dock { position: static; height: auto; }
+  }
+
+  @media print {
+    body { background: #fff !important; }
+    .aurora, .grain, .app-bar, .dock { display: none !important; }
+    .workspace { display: block !important; padding: 0 !important; margin: 0 !important; max-width: none !important; }
+    :root { --s: 1 !important; }
+    .a4-sheet { box-shadow: none !important; border-radius: 0 !important; }
+    @page { size: A4 portrait; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="aurora"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div></div>
+<div class="grain"></div>
+
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-match" viewBox="0 0 24 24"><circle cx="5" cy="7" r="2.2"/><circle cx="19" cy="17" r="2.2"/><path d="M7.2 7.4c6.5 0 4.6 9.6 9.6 9.6"/></symbol>
+  <symbol id="i-odd" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><path d="M14.5 14.5l6 6M20.5 14.5l-6 6"/></symbol>
+  <symbol id="i-cloze" viewBox="0 0 24 24"><path d="M3 21h8"/><path d="M14.5 4.5l5 5L9 20l-5.5 1 1-5.5z"/></symbol>
+  <symbol id="i-choice" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.6" fill="currentColor"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6"/><rect x="3" y="9" width="18" height="9" rx="2.5"/><path d="M7 14h10v7H7z"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M4 18l5.5-5 4 3.5 3-2.5L21 17"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M3 7h3.5c5 0 5 10 10 10H21M3 17h3.5c1.7 0 2.9-.9 3.8-2.1M21 7h-4.5c-1.7 0-2.9.9-3.8 2.1M18 4l3 3-3 3M18 14l3 3-3 3"/></symbol>
+  <symbol id="i-sheet" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+</svg>
+
+<header class="app-bar glass">
+  <div class="brand">
+    <div class="logo"><svg class="i"><use href="#i-sheet"/></svg></div>
+    <div><b>Worksheet Studio</b><small><a href="https://ahmedelamine.com" target="_blank" rel="noopener">by ahmedelamine.com</a></small></div>
+  </div>
+  <button class="print-btn" onclick="window.print()"><svg class="i"><use href="#i-print"/></svg><span data-i18n="print">Print A4 Sheet</span></button>
+</header>
+
+<main class="workspace">
+  <aside class="dock glass">
+
+    <!-- Language (left) + format (right) -->
+    <div class="group top-card">
+      <div class="seg" id="seg-lang" style="--n:2;--i:0">
+        <button class="on" id="lang-en" onclick="setLang('en')" title="English">
+          <span class="flag"><svg viewBox="0 0 60 40" preserveAspectRatio="xMidYMid slice"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#C8102E" stroke-width="3"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="13"/><path d="M30 0v40M0 20h60" stroke="#C8102E" stroke-width="7"/></svg></span>EN
+        </button>
+        <button id="lang-fr" onclick="setLang('fr')" title="Français">
+          <span class="flag"><svg viewBox="0 0 60 40" preserveAspectRatio="none"><rect width="20" height="40" fill="#0055A4"/><rect x="20" width="20" height="40" fill="#fff"/><rect x="40" width="20" height="40" fill="#EF4135"/></svg></span>FR
+        </button>
+      </div>
+      <div class="seg" id="seg-grid" style="--n:2;--i:0">
+        <button class="on" onclick="setGrid(4)"><b>4</b><span data-i18n="perpage">per page</span></button>
+        <button onclick="setGrid(6)"><b>6</b><span data-i18n="perpage">per page</span></button>
+      </div>
+    </div>
+    <div class="warn" id="warn" style="margin-top:0"></div>
+
+    <!-- Activity -->
+    <div class="group">
+      <div class="seg" id="seg-slot" style="--n:3;--i:0;margin-bottom:12px">
+        <button class="on" onclick="switchSlot(0)"><span class="tab-dot" id="dot-0"></span><span class="t-act">Activity</span> 1</button>
+        <button onclick="switchSlot(1)"><span class="tab-dot" id="dot-1"></span><span class="t-act">Activity</span> 2</button>
+        <button onclick="switchSlot(2)"><span class="tab-dot" id="dot-2"></span><span class="t-act">Activity</span> 3</button>
+      </div>
+
+      <div class="seg types" id="seg-type" style="--n:4;--i:0">
+        <button data-type="match" onclick="setType('match')"><svg class="i"><use href="#i-match"/></svg><span data-i18n="type_match">Match</span></button>
+        <button data-type="odd" onclick="setType('odd')"><svg class="i"><use href="#i-odd"/></svg><span data-i18n="type_odd">Odd one</span></button>
+        <button data-type="cloze" onclick="setType('cloze')"><svg class="i"><use href="#i-cloze"/></svg><span data-i18n="type_cloze">Fill in</span></button>
+        <button data-type="choice" onclick="setType('choice')"><svg class="i"><use href="#i-choice"/></svg><span data-i18n="type_choice">Choose</span></button>
+      </div>
+
+      <label class="switch-row">
+        <span data-i18n="enable">Enable this activity</span>
+        <span class="switch"><input type="checkbox" id="check-enable" onchange="toggleEnable(this.checked)"><span></span></span>
+      </label>
+
+      <input type="text" id="slot-inst" data-i18n-ph="inst" placeholder="Instruction..." oninput="updateInst(this.value)">
+    </div>
+
+    <!-- Items -->
+    <div class="group" id="dynamic-editor"></div>
+  </aside>
+
+  <section class="canvas">
+    <div class="scale-frame" id="scale-frame">
+      <div class="a4-sheet">
+        <div class="sheet-grid grid-4" id="sheet-target"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+/* ================= Dictionary ================= */
+const dict = {
+  en: {
+    perpage: 'per page', print: 'Print A4 Sheet', language: 'Language', format: 'Page Format', per4: '4 / page', per6: '6 / page',
+    act: 'Activity', enable: 'Enable this activity', inst: 'Instruction...',
+    type_match: 'Match', type_odd: 'Odd one', type_cloze: 'Fill in', type_choice: 'Choose',
+    left: 'Left', right: 'Right', item: 'Item', photo: 'Photo', size: 'Size',
+    words: 'Word bank (comma separated)', sent: 'Sentence (use ........ for blanks)',
+    choice: 'Sentence with options in brackets, e.g. ( father / mother )',
+    match_def: 'Match the correct items.', odd_def: 'Cross out the odd one.',
+    cloze_def: 'Fill in the blanks.', choice_def: 'Choose the correct answer.',
+    name: 'Name:', date: 'Date:', addPair: 'Add pair', shuffle: 'Shuffle right side',
+    none: 'No activity enabled', upload: 'Upload picture', remove: 'Remove',
+    warn: 'This slip is too full for the current format. Remove an activity or switch to 4 / page.'
+  },
+  fr: {
+    perpage: 'par page', print: 'Imprimer (A4)', language: 'Langue', format: 'Format de la page', per4: '4 / page', per6: '6 / page',
+    act: 'Activité', enable: 'Activer cette activité', inst: 'Consigne...',
+    type_match: 'Relier', type_odd: 'Intrus', type_cloze: 'Compléter', type_choice: 'Choisir',
+    left: 'Gauche', right: 'Droite', item: 'Mot', photo: 'Photo', size: 'Taille',
+    words: 'Boîte à mots (séparés par des virgules)', sent: 'Phrase (utiliser ........ pour les vides)',
+    choice: 'Phrase avec options entre parenthèses, ex. ( père / mère )',
+    match_def: 'Relie les éléments.', odd_def: "Barre l'intrus.",
+    cloze_def: 'Complète les vides.', choice_def: 'Choisis la bonne réponse.',
+    name: 'Nom :', date: 'Date :', addPair: 'Ajouter une paire', shuffle: 'Mélanger la droite',
+    none: 'Aucune activité activée', upload: 'Ajouter une image', remove: 'Retirer',
+    warn: 'Cette fiche est trop remplie pour ce format. Retirez une activité ou passez à 4 / page.'
+  }
+};
+
+/* ================= Helpers ================= */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clampSz = v => Math.max(20, Math.min(60, Math.round(+v || 35)));
+const TYPES = ['match', 'odd', 'cloze', 'choice'];
+const ico = n => `<svg class="i"><use href="#i-${n}"/></svg>`;
+
+/* ================= State ================= */
+let lang = 'en';
+
+const baseData = () => ({
+  match: [
+    { a: 'Cat',   b: 'Chat',  imgA: '', imgB: '', sz: 35 },
+    { a: 'Dog',   b: 'Chien', imgA: '', imgB: '', sz: 35 },
+    { a: 'Apple', b: 'Pomme', imgA: '', imgB: '', sz: 35 }
+  ],
+  perm: [1, 2, 0],
+  matchSz: 35,
+  oddSz: 35,
+  odd: [
+    { t: 'One',   img: '', sz: 35 }, { t: 'Two',   img: '', sz: 35 },
+    { t: 'Car',   img: '', sz: 35 }, { t: 'Three', img: '', sz: 35 }
+  ],
+  bank: 'father, sister',
+  sent: 'This is my ............ and my ............ .',
+  choice: 'This is my ( father / mother ) and my ( sister / brother ).'
+});
+
+const state = {
+  grid: 4,
+  active: 0,
+  slots: [
+    { enabled: true,  type: 'match', inst: null, data: baseData() },
+    { enabled: false, type: 'odd',   inst: null, data: baseData() },
+    { enabled: false, type: 'cloze', inst: null, data: baseData() }
+  ]
+};
+
+const S = () => state.slots[state.active].data;
+const defaultInst = (slot, i) => `${i + 1}. ${dict[lang][slot.type + '_def']}`;
+const instOf = (slot, i) => slot.inst === null ? defaultInst(slot, i) : slot.inst;
+
+function shuffledPerm(n) {
+  const id = [...Array(n).keys()];
+  if (n < 2) return id;
+  let p;
+  for (let t = 0; t < 30; t++) {
+    p = id.slice();
+    for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [p[i], p[j]] = [p[j], p[i]]; }
+    if (p.every((v, i) => v !== i)) return p;
+  }
+  return id.slice(1).concat(id[0]);
+}
+
+/* ================= UI text / language ================= */
+function setSeg(id, i) { $(id).style.setProperty('--i', i); }
+
+function setLang(l) {
+  lang = l;
+  setSeg('seg-lang', l === 'en' ? 0 : 1);
+  $('lang-en').classList.toggle('on', l === 'en');
+  $('lang-fr').classList.toggle('on', l === 'fr');
+  document.documentElement.lang = l;
+  updateUIText();
+  loadEditor();
+  renderSheet();
+}
+
+function updateUIText() {
+  const d = dict[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = d[el.dataset.i18n]);
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => el.placeholder = d[el.dataset.i18nPh]);
+  document.querySelectorAll('.t-act').forEach(el => el.textContent = d.act);
+}
+
+/* ================= Controls ================= */
+function setGrid(n) {
+  state.grid = n;
+  setSeg('seg-grid', n === 4 ? 0 : 1);
+  document.querySelectorAll('#seg-grid button').forEach((b, i) => b.classList.toggle('on', (n === 4) === (i === 0)));
+  $('sheet-target').className = `sheet-grid grid-${n}`;
+  renderSheet();
+}
+
+function switchSlot(idx) {
+  state.active = idx;
+  setSeg('seg-slot', idx);
+  document.querySelectorAll('#seg-slot button').forEach((b, i) => b.classList.toggle('on', i === idx));
+  loadEditor();
+}
+
+function toggleEnable(v) { state.slots[state.active].enabled = v; updateDots(); renderSheet(); }
+
+function setType(t) {
+  state.slots[state.active].type = t;
+  loadEditor();
+  renderSheet();
+}
+
+function updateInst(v) { state.slots[state.active].inst = v === '' ? null : v; renderSheet(); }
+
+function updateDots() { state.slots.forEach((s, i) => $(`dot-${i}`).classList.toggle('live', s.enabled)); }
+
+/* ================= Images ================= */
+function pickImg(input, type, idx, key) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const im = new Image();
+    im.onload = () => {
+      const max = 400, sc = Math.min(1, max / Math.max(im.width, im.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(im.width * sc); c.height = Math.round(im.height * sc);
+      c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+      const url = c.toDataURL(file.type === 'image/png' ? 'image/png' : 'image/jpeg', .88);
+      S()[type][idx][key] = url;
+      loadEditor(); renderSheet();
+    };
+    im.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+  input.value = '';
+}
+function clearImg(type, idx, key) { S()[type][idx][key] = ''; loadEditor(); renderSheet(); }
+
+function setSz(key, v, el) {
+  S()[key] = clampSz(v);
+  el.parentElement.querySelector('output').textContent = clampSz(v) + 'px';
+  renderSheet();
+}
+
+function upload(type, idx, key, src) {
+  const d = dict[lang];
+  return `<div class="up-wrap">
+    <label class="up ${src ? 'has' : ''}" title="${esc(d.upload)}">
+      ${src ? `<img src="${src}" alt="">` : ico('image')}
+      <input type="file" accept="image/*" hidden onchange="pickImg(this,'${type}',${idx},'${key}')">
+    </label>
+    ${src ? `<button class="x" title="${esc(d.remove)}" onclick="clearImg('${type}',${idx},'${key}')">×</button>` : ''}
+  </div>`;
+}
+
+function sizeBlock(key, sz) {
+  return `<div class="size-row">${ico('image')}
+    <input type="range" min="20" max="60" value="${clampSz(sz)}" oninput="setSz('${key}',this.value,this)">
+    <output>${clampSz(sz)}px</output></div>`;
+}
+
+/* ================= Match editing ================= */
+function addPair() {
+  const m = S().match; if (m.length >= 5) return;
+  m.push({ a: '', b: '', imgA: '', imgB: '', sz: 35 });
+  S().perm = shuffledPerm(m.length);
+  loadEditor(); renderSheet();
+}
+function delPair(i) {
+  const m = S().match; if (m.length <= 2) return;
+  m.splice(i, 1); S().perm = shuffledPerm(m.length);
+  loadEditor(); renderSheet();
+}
+
+/* ================= Editor ================= */
+function loadEditor() {
+  const slot = state.slots[state.active];
+  const d = dict[lang];
+  const D = slot.data;
+
+  $('check-enable').checked = slot.enabled;
+  $('slot-inst').value = instOf(slot, state.active);
+  setSeg('seg-type', TYPES.indexOf(slot.type));
+  document.querySelectorAll('#seg-type button').forEach(b => b.classList.toggle('on', b.dataset.type === slot.type));
+  updateDots();
+
+  const c = $('dynamic-editor');
+
+  if (slot.type === 'match') {
+    c.innerHTML = sizeBlock('matchSz', D.matchSz) + D.match.map((m, i) => `
+      <div class="row-m">
+        <input type="text" value="${esc(m.a)}" placeholder="${esc(d.left)}" oninput="S().match[${i}].a=this.value;renderSheet()">
+        ${upload('match', i, 'imgA', m.imgA)}
+        <input type="text" value="${esc(m.b)}" placeholder="${esc(d.right)}" oninput="S().match[${i}].b=this.value;renderSheet()">
+        ${upload('match', i, 'imgB', m.imgB)}
+        <button class="ghost-btn icon danger" onclick="delPair(${i})" ${D.match.length <= 2 ? 'disabled style="opacity:.35;cursor:not-allowed"' : ''}>${ico('trash')}</button>
+      </div>`).join('') + `
+      <div class="btn-row">
+        <button class="ghost-btn" onclick="addPair()" ${D.match.length >= 5 ? 'disabled style="opacity:.4"' : ''}>${ico('plus')}${esc(d.addPair)}</button>
+      </div>`;
+  } else if (slot.type === 'odd') {
+    c.innerHTML = sizeBlock('oddSz', D.oddSz) + D.odd.map((o, i) => `
+      <div class="row-o">
+        <input type="text" value="${esc(o.t)}" placeholder="${esc(d.item)} ${i + 1}" oninput="S().odd[${i}].t=this.value;renderSheet()">
+        ${upload('odd', i, 'img', o.img)}
+      </div>`).join('');
+  } else if (slot.type === 'cloze') {
+    c.innerHTML = `
+      <div class="group-title">${esc(d.words)}</div>
+      <input type="text" value="${esc(D.bank)}" oninput="S().bank=this.value;renderSheet()" style="margin-bottom:12px">
+      <div class="group-title">${esc(d.sent)}</div>
+      <textarea oninput="S().sent=this.value;renderSheet()">${esc(D.sent)}</textarea>`;
+  } else {
+    c.innerHTML = `
+      <div class="group-title">${esc(d.choice)}</div>
+      <textarea oninput="S().choice=this.value;renderSheet()">${esc(D.choice)}</textarea>`;
+  }
+}
+
+/* ================= Sheet rendering ================= */
+const imgTag = (src, sz) => `<img class="dyn-img" style="--sz:${clampSz(sz)}px" src="${src}" alt="">`;
+
+function renderActivity(slot, n) {
+  const D = slot.data;
+  let body = '';
+
+  if (slot.type === 'match') {
+    const m = D.match;
+    const perm = D.perm.length === m.length ? D.perm : m.map((_, i) => i);
+    const side = (img, txt, sz) => img ? imgTag(img, sz) : `<span class="m-txt">${esc(txt)}</span>`;
+    body = `<div class="match-matrix">
+      <div class="match-col">${m.map(i => `<div class="match-item">${side(i.imgA, i.a, D.matchSz)}<span class="target-dot"></span></div>`).join('')}</div>
+      <div class="match-col">${perm.map(k => { const i = m[k]; return `<div class="match-item right"><span class="target-dot"></span>${side(i.imgB, i.b, D.matchSz)}</div>`; }).join('')}</div>
+    </div>`;
+  } else if (slot.type === 'odd') {
+    body = `<div class="odd-cluster">${D.odd.map(o => `<div class="odd-box">${o.img ? imgTag(o.img, D.oddSz) : ''}${o.t ? `<span>${esc(o.t)}</span>` : ''}</div>`).join('')}</div>`;
+  } else if (slot.type === 'cloze') {
+    const words = D.bank.split(',').map(w => w.trim()).filter(Boolean);
+    body = `<div>
+      ${words.length ? `<div class="word-bank">${words.map(w => `<span>${esc(w)}</span>`).join('')}</div>` : ''}
+      <div class="cloze-text">${esc(D.sent).replace(/(\.{3,}|…+)/g, '<span class="blank-space"></span>')}</div>
+    </div>`;
+  } else {
+    const html = esc(D.choice).replace(/\(([^)]+)\)/g, (_, inner) =>
+      inner.split('/').map(o => `<span class="opt"><i></i>${o.trim()}</span>`).join(''));
+    body = `<div class="choice-text">${html}</div>`;
+  }
+
+  return `<div class="activity-unit"><div class="prompt-text">${esc(instOf(slot, n))}</div>${body}</div>`;
+}
+
+function createSlipHTML() {
+  const d = dict[lang];
+  const parts = state.slots.map((s, i) => s.enabled ? renderActivity(s, i) : '').join('');
+  return `
+    <div class="slip-tile">
+      <span class="scissor"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.1 15.9M14.5 14.5L20 20M8.1 8.1L12 12"/></svg></span>
+      <div class="slip-header">
+        <div class="hf"><span>${esc(d.name)}</span><span class="line"></span></div>
+        <div class="hf"><span>${esc(d.date)}</span><span class="line"></span></div>
+      </div>
+      <div class="slip-body">${parts || `<div class="empty-note">${esc(d.none)}</div>`}</div>
+      <div class="watermark">Worksheet Studio</div>
+    </div>`;
+}
+
+function renderSheet() {
+  const t = $('sheet-target');
+  t.innerHTML = Array.from({ length: state.grid }, createSlipHTML).join('');
+  checkOverflow();
+}
+
+function checkOverflow() {
+  const tile = document.querySelector('.slip-tile');
+  const w = $('warn');
+  const over = tile && tile.scrollHeight > tile.clientHeight + 2;
+  w.textContent = over ? dict[lang].warn : '';
+  w.classList.toggle('show', !!over);
+}
+
+/* ================= Fit canvas to screen ================= */
+function fit() {
+  const avail = document.querySelector('.canvas').clientWidth;
+  const sheetPx = 210 * 96 / 25.4;
+  const s = Math.min(1, (avail - 4) / sheetPx);
+  document.documentElement.style.setProperty('--s', s.toFixed(4));
+}
+window.addEventListener('resize', fit);
+window.addEventListener('beforeprint', () => document.documentElement.style.setProperty('--s', 1));
+window.addEventListener('afterprint', fit);
+
+/* ================= Startup ================= */
+updateUIText();
+loadEditor();
+renderSheet();
+fit();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(checkOverflow);
+</script>
+</body>
+</html>
