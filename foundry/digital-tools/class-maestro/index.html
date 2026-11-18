@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Class Maestro</title>
+<meta name="theme-color" content="#0B7F78">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Maestro">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+  <div class="top" id="top">
+    <header class="hdr" id="hdr"></header>
+    <section class="lesson" id="lesson"></section>
+    <section class="pacer" id="pacer"></section>
+  </div>
+  <main>
+    <div id="viewMain">
+      <section class="deck">
+        <nav class="modes ftabs" id="modes" aria-label="Mode"></nav>
+        <div class="fpanel deck-body">
+          <div class="skills chip-row" id="skills"></div>
+          <div class="hint" id="hint"></div>
+          <div class="grid" id="grid"></div>
+          <div class="board-label" id="boardLabel">Board</div>
+        </div>
+      </section>
+    </div>
+    <div id="viewPanel" hidden></div>
+  </main>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script src="programmes.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

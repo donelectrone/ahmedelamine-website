@@ -1,0 +1,159 @@
+{
+ "id": "1AM-english",
+ "rev": 1,
+ "level": "1AM",
+ "subject": "English",
+ "lang": "en",
+ "sessionMinutes": 45,
+ "stages": [
+  {
+   "name": "Warm-up",
+   "pct": 10
+  },
+  {
+   "name": "Presentation",
+   "pct": 30
+  },
+  {
+   "name": "Practice",
+   "pct": 45
+  },
+  {
+   "name": "Wrap-up",
+   "pct": 15
+  }
+ ],
+ "skills": [
+  {
+   "id": "vocabulary",
+   "label": "Vocabulary"
+  },
+  {
+   "id": "grammar",
+   "label": "Grammar"
+  },
+  {
+   "id": "writing",
+   "label": "Writing"
+  },
+  {
+   "id": "reading",
+   "label": "Reading"
+  },
+  {
+   "id": "listening",
+   "label": "Listening"
+  },
+  {
+   "id": "speaking",
+   "label": "Speaking"
+  },
+  {
+   "id": "pronunciation",
+   "label": "Pronunciation"
+  },
+  {
+   "id": "homework",
+   "label": "Homework"
+  }
+ ],
+ "sequences": [
+  {
+   "id": 1,
+   "sessions": [
+    {
+     "id": 1,
+     "lessons": [
+      {
+       "id": 1,
+       "title": "Hello! Greetings and names",
+       "skills": [
+        "vocabulary",
+        "speaking"
+       ]
+      },
+      {
+       "id": 2,
+       "title": "The alphabet and spelling",
+       "skills": [
+        "vocabulary",
+        "listening"
+       ]
+      },
+      {
+       "id": 3,
+       "title": "Numbers from 1 to 20",
+       "skills": [
+        "vocabulary",
+        "speaking"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "lessons": [
+      {
+       "id": 4,
+       "title": "I am, you are: verb to be",
+       "skills": [
+        "grammar",
+        "writing"
+       ]
+      },
+      {
+       "id": 5,
+       "title": "Introducing a friend",
+       "skills": [
+        "speaking",
+        "writing"
+       ]
+      },
+      {
+       "id": 6,
+       "title": "Classroom objects",
+       "skills": [
+        "vocabulary",
+        "reading"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "sessions": [
+    {
+     "id": 3,
+     "lessons": [
+      {
+       "id": 7,
+       "title": "My family members",
+       "skills": [
+        "vocabulary",
+        "listening"
+       ]
+      },
+      {
+       "id": 8,
+       "title": "Possessive: my, your, his, her",
+       "skills": [
+        "grammar",
+        "writing"
+       ]
+      },
+      {
+       "id": 9,
+       "title": "Family tree reading",
+       "skills": [
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

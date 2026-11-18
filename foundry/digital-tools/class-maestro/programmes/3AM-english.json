@@ -1,0 +1,124 @@
+{
+ "id": "3AM-english",
+ "rev": 1,
+ "level": "3AM",
+ "subject": "English",
+ "lang": "en",
+ "sessionMinutes": 60,
+ "stages": [
+  {
+   "name": "Warm-up",
+   "pct": 10
+  },
+  {
+   "name": "Presentation",
+   "pct": 30
+  },
+  {
+   "name": "Practice",
+   "pct": 45
+  },
+  {
+   "name": "Wrap-up",
+   "pct": 15
+  }
+ ],
+ "skills": [
+  {
+   "id": "vocabulary",
+   "label": "Vocabulary"
+  },
+  {
+   "id": "grammar",
+   "label": "Grammar"
+  },
+  {
+   "id": "writing",
+   "label": "Writing"
+  },
+  {
+   "id": "reading",
+   "label": "Reading"
+  },
+  {
+   "id": "listening",
+   "label": "Listening"
+  },
+  {
+   "id": "speaking",
+   "label": "Speaking"
+  },
+  {
+   "id": "pronunciation",
+   "label": "Pronunciation"
+  },
+  {
+   "id": "homework",
+   "label": "Homework"
+  }
+ ],
+ "sequences": [
+  {
+   "id": 1,
+   "sessions": [
+    {
+     "id": 1,
+     "lessons": [
+      {
+       "id": 1,
+       "title": "Talking about the future: will",
+       "skills": [
+        "grammar",
+        "speaking"
+       ]
+      },
+      {
+       "id": 2,
+       "title": "Jobs of tomorrow",
+       "skills": [
+        "vocabulary",
+        "reading"
+       ]
+      },
+      {
+       "id": 3,
+       "title": "Predictions: writing a paragraph",
+       "skills": [
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "lessons": [
+      {
+       "id": 4,
+       "title": "Comparatives and superlatives",
+       "skills": [
+        "grammar",
+        "writing"
+       ]
+      },
+      {
+       "id": 5,
+       "title": "Comparing cities",
+       "skills": [
+        "speaking",
+        "listening"
+       ]
+      },
+      {
+       "id": 6,
+       "title": "Reading a travel blog",
+       "skills": [
+        "reading",
+        "vocabulary"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
