@@ -1,12 +1,16 @@
 /* Service worker.
    - App files and programmes: network first (3 s), so an update reaches teachers the next time they are online; the cached copy is the offline fallback.
    - Fonts and icons never change under the same name: cache first.
-   Bump CACHE when the list of files changes. */
-const CACHE = 'teacher-toolkit-v5';
+   The programme list and the cache name are generated (node tools/programmes.js --build). When you add or rename an app file, add it to FILES below. */
+/* BUILD:START written by tools/programmes.js --build. Do not edit. */
+const BUILD = '2a72c8a1';
+const PROGRAMME_FILES = ["./programmes/index.json","./programmes/1AM-english.json","./programmes/2AM-english.json","./programmes/3AM-english.json"];
+/* BUILD:END */
+const CACHE = 'class-maestro-v6-' + BUILD;   // a new build name makes phones drop the old copies
 const FILES = [
+  ...PROGRAMME_FILES,
   './', './index.html', './style.css', './fonts.css', './i18n.js', './app.js', './programmes.js', './manifest.webmanifest', './icon.svg',
   './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './icons/apple-touch-icon.png',
-  './programmes/index.json', './programmes/1AM-english.json', './programmes/2AM-english.json', './programmes/3AM-english.json',
   './fonts/bricolage-grotesque-latin-500-normal.woff2', './fonts/bricolage-grotesque-latin-700-normal.woff2',
   './fonts/instrument-sans-latin-400-normal.woff2', './fonts/instrument-sans-latin-500-normal.woff2', './fonts/instrument-sans-latin-600-normal.woff2',
   './fonts/noto-sans-arabic-arabic-400-normal.woff2', './fonts/noto-sans-arabic-arabic-600-normal.woff2', './fonts/noto-sans-arabic-arabic-700-normal.woff2',

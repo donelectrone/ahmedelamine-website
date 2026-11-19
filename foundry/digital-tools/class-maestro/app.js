@@ -148,37 +148,46 @@ function ensureSeats(cls) {
 function blankState() {
   return { v: 3, example: false, progs: {}, classes: [], timetable: [], logs: [], doneKeys: {}, daysOff: [], terms: defaultTerms(), lastSeen: Date.now(), settings: { sound: false, theme: null, lang: detectLang(), lastBackup: Date.now(), setupDone: false } };
 }
+/* Example data is built from the programmes that are actually shipped (programmes.js), up to three classes,
+   in level order. Nothing is hard-coded: change the programme files and the example follows. */
+function exampleProgrammes() {
+  const order = LEVEL_GROUPS.flatMap(g => g[1]), rank = p => { const i = order.indexOf(p.level); return i < 0 ? 99 : i; };
+  return Object.values(PROGRAMMES).filter(p => p && !p.custom && lessonsOf(p.id || p.level).length)
+    .sort((x, y) => rank(x) - rank(y) || String(x.subject).localeCompare(String(y.subject))).slice(0, 3);
+}
 function seed() {
+  const progs = exampleProgrammes();
+  if (!progs.length) return blankState();                    // no programme shipped yet: nothing to build an example from
   const names = ['Amine', 'Yasmine', 'Rayan', 'Lina', 'Anis', 'Ines', 'Walid', 'Sara', 'Mehdi', 'Nour', 'Zakaria', 'Hiba', 'Ilyes', 'Maya', 'Sofiane', 'Rania', 'Khaled', 'Imane', 'Oussama', 'Chaima', 'Bilal', 'Asma'];
-  const a = makeClass('2AM-B', '2AM-english', names, { doneUpTo: 11, gaps: [8, 15] });
-  const b = makeClass('1AM-A', '1AM-english', names.slice(0, 12).reverse(), { doneUpTo: 3 });
-  const now = new Date(), nowMin = now.getHours() * 60 + now.getMinutes();
-  const s0 = clamp(Math.floor(nowMin / 15) * 15 - 15, 0, 1380 - 60);
-  const tt = [
-    { id: uid(), classId: a.id, day: now.getDay(), start: s0, dur: 60 },
-    { id: uid(), classId: b.id, day: now.getDay(), start: clamp(s0 + 75, 0, 1380), dur: 45 }
-  ];
-  SCHOOL_DAYS.filter(d => d !== now.getDay()).forEach(d => {
-    tt.push({ id: uid(), classId: a.id, day: d, start: 8 * 60, dur: 60 }, { id: uid(), classId: b.id, day: d, start: 10 * 60, dur: 45 }, { id: uid(), classId: a.id, day: d, start: 14 * 60, dur: 90 });
+  const taken = new Set(), classes = progs.map((p, i) => {
+    const key = p.id || p.level, total = lessonsOf(key).length;
+    let nm = ''; for (const L of 'ABCDEF') { nm = `${p.level}-${L}`; if (!taken.has(nm)) break; } taken.add(nm);
+    const pupils = i === 0 ? names : [...names.slice(i * 3), ...names.slice(0, i * 3)].slice(0, 20 - i * 2);
+    return makeClass(nm, key, pupils, { doneUpTo: Math.max(1, Math.round(total * [0.35, 0.15, 0.25][i])), gaps: i === 0 ? [8, 15] : [] });
   });
+  const now = new Date(), nowMin = now.getHours() * 60 + now.getMinutes(), tt = [];
+  const dur = c => c.sessionMin, span = classes.reduce((n, c) => n + dur(c), 0) + 15 * (classes.length - 1);
+  let at = clamp(Math.floor(nowMin / 15) * 15 - 15, 0, Math.max(0, 1380 - span));      // today: back to back, the first one already running
+  classes.forEach(c => { tt.push({ id: uid(), classId: c.id, day: now.getDay(), start: at, dur: dur(c) }); at += dur(c) + 15; });
+  SCHOOL_DAYS.filter(d => d !== now.getDay()).forEach(d => classes.forEach((c, i) => tt.push({ id: uid(), classId: c.id, day: d, start: 8 * 60 + i * 120, dur: dur(c) })));
   const logs = [], rnd = n => Math.floor(Math.random() * n);
   const motives = ['Helped a classmate', 'Great participation', 'Excellent homework', 'Very polite'];
   const bad = ['Chatting during the task', 'Forgot the book', 'Late to class'];
-  for (const c of [a, b]) {
-    const ls = lessonsOf(c.level).filter(l => c.done.includes(l.id));
+  for (const c of classes) {
+    const ls = lessonsOf(c.level).filter(l => c.done.includes(l.id)), sk = skillsOf(c).map(x => x.id);
     for (const p of c.pupils) {
-      const ability = 0.25 + Math.random() * 0.7, sk = Object.keys(SKILL_LABEL);
+      const ability = 0.25 + Math.random() * 0.7;
       for (let i = 0, n = rnd(9); i < n; i++) {
         const l = ls[rnd(ls.length)], d = new Date(now - (1 + rnd(60)) * 864e5);
         const r = Math.random() < ability ? 'A' : (Math.random() < .6 ? 'E' : 'N');
-        logs.push({ t: +d, date: ymd(d), type: 'eval', classId: c.id, pupilId: p.id, skill: sk[rnd(6)], result: r, lessonId: l.id });
+        logs.push({ t: +d, date: ymd(d), type: 'eval', classId: c.id, pupilId: p.id, skill: sk[rnd(sk.length)], result: r, lessonId: l.id });
       }
       for (let i = 0, n = rnd(4); i < n; i++) { const d = new Date(now - (1 + rnd(40)) * 864e5); logs.push({ t: +d, date: ymd(d), type: 'star', classId: c.id, pupilId: p.id, motive: motives[rnd(4)], lessonId: ls[rnd(ls.length)].id }); }
       if (Math.random() < .3) { const d = new Date(now - (1 + rnd(40)) * 864e5); logs.push({ t: +d, date: ymd(d), type: 'warn', classId: c.id, pupilId: p.id, motive: bad[rnd(3)], lessonId: ls[rnd(ls.length)].id }); }
       if (Math.random() < .25) { const d = new Date(now - (1 + rnd(40)) * 864e5); logs.push({ t: +d, date: ymd(d), type: 'absent', classId: c.id, pupilId: p.id, lessonId: ls[rnd(ls.length)].id }); }
     }
   }
-  return { v: 3, example: true, progs: { [a.level]: PROGRAMMES[a.level], [b.level]: PROGRAMMES[b.level] }, classes: [a, b], timetable: tt, logs, doneKeys: {}, daysOff: [], terms: defaultTerms(), lastSeen: Date.now(), settings: { sound: false, theme: null, lang: 'en', lastBackup: Date.now(), setupDone: true } };
+  return { v: 3, example: true, progs: Object.fromEntries(classes.map(c => [c.level, PROGRAMMES[c.level]])), classes, timetable: tt, logs, doneKeys: {}, daysOff: [], terms: defaultTerms(), lastSeen: Date.now(), settings: { sound: false, theme: null, lang: 'en', lastBackup: Date.now(), setupDone: true } };
 }
 function load() {
   try {
@@ -930,6 +939,7 @@ function aboutCard() {
 }
 function confirmTap(e, msgKey, fn) { const b = e.currentTarget; if (!b.dataset.sure) { b.dataset.sure = '1'; b.textContent = t(msgKey); return; } fn(); }
 function loadExample() {
+  if (!exampleProgrammes().length) return toast(t('Add a programme file first: the example is built from it.'));
   const keep = { lang: lang(), theme: state.settings.theme, sound: state.settings.sound };
   state = seed(); Object.assign(state.settings, keep); save(); ui.activeId = null; ui.setCls = null; applyTheme(); applyLang(); showView('main'); tick();
 }

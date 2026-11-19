@@ -282,7 +282,8 @@ const I18N = {
   "If it took some stress off you today, send it to one colleague.": "Si cela vous a enlevé un peu de stress aujourd'hui, envoyez-le à un collègue.",
   "Get the next tool (WhatsApp channel)": "Recevoir le prochain outil (chaîne WhatsApp)",
   "Tell me which classroom headache to solve next.": "Dites-moi quel casse-tête de classe résoudre ensuite.",
-  "Designed by Ahmed El Amine.": "Conçu par Ahmed El Amine."
+  "Designed by Ahmed El Amine.": "Conçu par Ahmed El Amine.",
+  "Add a programme file first: the example is built from it.": "Ajoutez d'abord un fichier de programme : l'exemple en est tiré."
  },
  "ar": {
   "! Warning": "! إنذار",
@@ -566,6 +567,7 @@ const I18N = {
   "If it took some stress off you today, send it to one colleague.": "إن خفّف عنك بعض الضغط اليوم، أرسله إلى زميل واحد.",
   "Get the next tool (WhatsApp channel)": "احصل على الأداة القادمة (قناة واتساب)",
   "Tell me which classroom headache to solve next.": "أخبرني أي مشكلة في القسم أحلّها بعد ذلك.",
-  "Designed by Ahmed El Amine.": "من تصميم أحمد الأمين."
+  "Designed by Ahmed El Amine.": "من تصميم أحمد الأمين.",
+  "Add a programme file first: the example is built from it.": "أضف ملف برنامج أولاً: يُبنى المثال منه."
  }
 };
