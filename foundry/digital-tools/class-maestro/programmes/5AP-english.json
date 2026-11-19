@@ -1,0 +1,910 @@
+{
+ "id": "5AP-english",
+ "rev": 1,
+ "level": "5AP",
+ "subject": "English",
+ "lang": "en",
+ "sessionMinutes": 45,
+ "stages": [
+  {
+   "name": "Warm-up",
+   "pct": 10
+  },
+  {
+   "name": "Presentation",
+   "pct": 30
+  },
+  {
+   "name": "Practice",
+   "pct": 45
+  },
+  {
+   "name": "Wrap-up",
+   "pct": 15
+  }
+ ],
+ "skills": [
+  {
+   "id": "listening",
+   "label": "Listening"
+  },
+  {
+   "id": "speaking",
+   "label": "Speaking"
+  },
+  {
+   "id": "reading",
+   "label": "Reading"
+  },
+  {
+   "id": "writing",
+   "label": "Writing"
+  },
+  {
+   "id": "vocabulary",
+   "label": "Vocabulary"
+  },
+  {
+   "id": "grammar",
+   "label": "Grammar"
+  },
+  {
+   "id": "phonics",
+   "label": "Phonics"
+  },
+  {
+   "id": "handwriting",
+   "label": "Handwriting"
+  }
+ ],
+ "sequences": [
+  {
+   "id": 0,
+   "sessions": [
+    {
+     "id": 1,
+     "lessons": [
+      {
+       "id": 1,
+       "title": "Diagnostic assessment (4AP learnings)",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "lessons": [
+      {
+       "id": 2,
+       "title": "Revision & remediation",
+       "skills": [
+        "vocabulary",
+        "grammar",
+        "phonics",
+        "handwriting"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 1,
+   "sessions": [
+    {
+     "id": 1,
+     "lessons": [
+      {
+       "id": 3,
+       "title": "I get ready: Jobs & hobbies",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "lessons": [
+      {
+       "id": 4,
+       "title": "I listen and interact: Jobs & workplaces",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "lessons": [
+      {
+       "id": 5,
+       "title": "I listen and discover: Asking about jobs",
+       "skills": [
+        "listening",
+        "speaking",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "lessons": [
+      {
+       "id": 6,
+       "title": "I read and understand: Jobs text & /ʒ/, /dʒ/",
+       "skills": [
+        "reading",
+        "phonics",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "lessons": [
+      {
+       "id": 7,
+       "title": "I read and discover: Word order & a/an",
+       "skills": [
+        "reading",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 6,
+     "lessons": [
+      {
+       "id": 8,
+       "title": "I learn and enjoy: Jobs language games",
+       "skills": [
+        "vocabulary",
+        "grammar",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 7,
+     "lessons": [
+      {
+       "id": 9,
+       "title": "I learn to write: Writing about jobs",
+       "skills": [
+        "writing",
+        "handwriting",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 8,
+     "lessons": [
+      {
+       "id": 10,
+       "title": "I write: A short message on jobs",
+       "skills": [
+        "writing",
+        "handwriting"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 9,
+     "lessons": [
+      {
+       "id": 11,
+       "title": "I listen and interact: Naming hobbies",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 10,
+     "lessons": [
+      {
+       "id": 12,
+       "title": "I listen and discover: Talking about hobbies",
+       "skills": [
+        "listening",
+        "speaking",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 11,
+     "lessons": [
+      {
+       "id": 13,
+       "title": "I read and understand: Hobbies & sound /ŋ/",
+       "skills": [
+        "reading",
+        "phonics",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 12,
+     "lessons": [
+      {
+       "id": 14,
+       "title": "I read and discover: Likes & days of the week",
+       "skills": [
+        "reading",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 13,
+     "lessons": [
+      {
+       "id": 15,
+       "title": "I learn and enjoy: Hobbies language games",
+       "skills": [
+        "vocabulary",
+        "grammar",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 14,
+     "lessons": [
+      {
+       "id": 16,
+       "title": "I learn to write: Writing about hobbies",
+       "skills": [
+        "writing",
+        "handwriting",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 15,
+     "lessons": [
+      {
+       "id": 17,
+       "title": "I write: A short message on hobbies",
+       "skills": [
+        "writing",
+        "handwriting"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 16,
+     "lessons": [
+      {
+       "id": 18,
+       "title": "I check my progress: Sequence 1",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 17,
+     "lessons": [
+      {
+       "id": 19,
+       "title": "Pause 1: Assessment (Sequence 1)",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 18,
+     "lessons": [
+      {
+       "id": 20,
+       "title": "Pause 1: Remediation (Sequence 1)",
+       "skills": [
+        "vocabulary",
+        "grammar",
+        "phonics",
+        "handwriting"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 19,
+     "lessons": [
+      {
+       "id": 21,
+       "title": "Pause 1: Standardisation (Sequence 1)",
+       "skills": [
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "sessions": [
+    {
+     "id": 1,
+     "lessons": [
+      {
+       "id": 22,
+       "title": "I get ready: Hometown & amenities",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "lessons": [
+      {
+       "id": 23,
+       "title": "I listen and interact: Naming amenities",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "lessons": [
+      {
+       "id": 24,
+       "title": "I listen and discover: Locating amenities",
+       "skills": [
+        "listening",
+        "speaking",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "lessons": [
+      {
+       "id": 25,
+       "title": "I read and understand: Amenities & /j/, /w/",
+       "skills": [
+        "reading",
+        "phonics",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "lessons": [
+      {
+       "id": 26,
+       "title": "I read and discover: Prepositions of place",
+       "skills": [
+        "reading",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 6,
+     "lessons": [
+      {
+       "id": 27,
+       "title": "I learn and enjoy: Amenities language games",
+       "skills": [
+        "vocabulary",
+        "grammar",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 7,
+     "lessons": [
+      {
+       "id": 28,
+       "title": "I learn to write: Describing amenities",
+       "skills": [
+        "writing",
+        "handwriting",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 8,
+     "lessons": [
+      {
+       "id": 29,
+       "title": "I write: A short message on amenities",
+       "skills": [
+        "writing",
+        "handwriting"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 9,
+     "lessons": [
+      {
+       "id": 30,
+       "title": "I listen and interact: Directions & signs",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 10,
+     "lessons": [
+      {
+       "id": 31,
+       "title": "I listen and discover: Asking the way (can)",
+       "skills": [
+        "listening",
+        "speaking",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 11,
+     "lessons": [
+      {
+       "id": 32,
+       "title": "I read and understand: Directions text",
+       "skills": [
+        "reading",
+        "phonics",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 12,
+     "lessons": [
+      {
+       "id": 33,
+       "title": "I read and discover: Imperatives & ordinals",
+       "skills": [
+        "reading",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 13,
+     "lessons": [
+      {
+       "id": 34,
+       "title": "I learn and enjoy: Directions language games",
+       "skills": [
+        "vocabulary",
+        "grammar",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 14,
+     "lessons": [
+      {
+       "id": 35,
+       "title": "I learn to write: Writing directions",
+       "skills": [
+        "writing",
+        "handwriting",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 15,
+     "lessons": [
+      {
+       "id": 36,
+       "title": "I write: A short message giving directions",
+       "skills": [
+        "writing",
+        "handwriting"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 16,
+     "lessons": [
+      {
+       "id": 37,
+       "title": "I check my progress: Sequence 2",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 17,
+     "lessons": [
+      {
+       "id": 38,
+       "title": "Pause 2: Assessment (Sequence 2)",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 18,
+     "lessons": [
+      {
+       "id": 39,
+       "title": "Pause 2: Remediation (Sequence 2)",
+       "skills": [
+        "vocabulary",
+        "grammar",
+        "phonics",
+        "handwriting"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 19,
+     "lessons": [
+      {
+       "id": 40,
+       "title": "Pause 2: Standardisation (Sequence 2)",
+       "skills": [
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "sessions": [
+    {
+     "id": 1,
+     "lessons": [
+      {
+       "id": 41,
+       "title": "I get ready: Holidays & travelling",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "lessons": [
+      {
+       "id": 42,
+       "title": "I listen and interact: Holiday places & seasons",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "lessons": [
+      {
+       "id": 43,
+       "title": "I listen and discover: Present continuous",
+       "skills": [
+        "listening",
+        "speaking",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "lessons": [
+      {
+       "id": 44,
+       "title": "I read and understand: Holidays text & phonics",
+       "skills": [
+        "reading",
+        "phonics",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "lessons": [
+      {
+       "id": 45,
+       "title": "I read and discover: Questions (Present cont.)",
+       "skills": [
+        "reading",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 6,
+     "lessons": [
+      {
+       "id": 46,
+       "title": "I learn and enjoy: Holidays language games",
+       "skills": [
+        "vocabulary",
+        "grammar",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 7,
+     "lessons": [
+      {
+       "id": 47,
+       "title": "I learn to write: Writing about holidays",
+       "skills": [
+        "writing",
+        "handwriting",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 8,
+     "lessons": [
+      {
+       "id": 48,
+       "title": "I write: A short message on holidays",
+       "skills": [
+        "writing",
+        "handwriting"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 9,
+     "lessons": [
+      {
+       "id": 49,
+       "title": "I listen and interact: Means of transport",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 10,
+     "lessons": [
+      {
+       "id": 50,
+       "title": "I listen and discover: Talking about travelling",
+       "skills": [
+        "listening",
+        "speaking",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 11,
+     "lessons": [
+      {
+       "id": 51,
+       "title": "I read and understand: Travelling text & sounds",
+       "skills": [
+        "reading",
+        "phonics",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 12,
+     "lessons": [
+      {
+       "id": 52,
+       "title": "I read and discover: Like / love / prefer + -ing",
+       "skills": [
+        "reading",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 13,
+     "lessons": [
+      {
+       "id": 53,
+       "title": "I learn and enjoy: Travelling language games",
+       "skills": [
+        "vocabulary",
+        "grammar",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 14,
+     "lessons": [
+      {
+       "id": 54,
+       "title": "I learn to write: Writing about travelling",
+       "skills": [
+        "writing",
+        "handwriting",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 15,
+     "lessons": [
+      {
+       "id": 55,
+       "title": "I write: A short message on travelling",
+       "skills": [
+        "writing",
+        "handwriting"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 16,
+     "lessons": [
+      {
+       "id": 56,
+       "title": "I check my progress: Sequence 3",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 17,
+     "lessons": [
+      {
+       "id": 57,
+       "title": "Pause 3: Assessment (Sequence 3)",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 18,
+     "lessons": [
+      {
+       "id": 58,
+       "title": "Pause 3: Remediation (Sequence 3)",
+       "skills": [
+        "vocabulary",
+        "grammar",
+        "phonics",
+        "handwriting"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 19,
+     "lessons": [
+      {
+       "id": 59,
+       "title": "Pause 3: Standardisation (Sequence 3)",
+       "skills": [
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

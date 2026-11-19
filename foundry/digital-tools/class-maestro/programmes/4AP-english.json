@@ -1,0 +1,1042 @@
+{
+ "id": "4AP-english",
+ "rev": 1,
+ "level": "4AP",
+ "subject": "English",
+ "lang": "en",
+ "sessionMinutes": 45,
+ "stages": [
+  {
+   "name": "Warm-up",
+   "pct": 10
+  },
+  {
+   "name": "Presentation",
+   "pct": 30
+  },
+  {
+   "name": "Practice",
+   "pct": 45
+  },
+  {
+   "name": "Wrap-up",
+   "pct": 15
+  }
+ ],
+ "skills": [
+  {
+   "id": "listening",
+   "label": "Listening"
+  },
+  {
+   "id": "speaking",
+   "label": "Speaking"
+  },
+  {
+   "id": "reading",
+   "label": "Reading"
+  },
+  {
+   "id": "writing",
+   "label": "Writing"
+  },
+  {
+   "id": "vocabulary",
+   "label": "Vocabulary"
+  },
+  {
+   "id": "grammar",
+   "label": "Grammar"
+  },
+  {
+   "id": "phonics",
+   "label": "Phonics"
+  },
+  {
+   "id": "handwriting",
+   "label": "Handwriting"
+  }
+ ],
+ "sequences": [
+  {
+   "id": 0,
+   "sessions": [
+    {
+     "id": 1,
+     "lessons": [
+      {
+       "id": 1,
+       "title": "Diagnostic assessment & revision",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "lessons": [
+      {
+       "id": 2,
+       "title": "Greetings & introductions",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      },
+      {
+       "id": 3,
+       "title": "Numbers (11–30)",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 1,
+   "sessions": [
+    {
+     "id": 1,
+     "lessons": [
+      {
+       "id": 4,
+       "title": "I sing and have fun: Family song",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      },
+      {
+       "id": 5,
+       "title": "I listen and repeat: Extended family & jobs",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "lessons": [
+      {
+       "id": 6,
+       "title": "I read and discover: Sounds /ɪ/ vs /iː/",
+       "skills": [
+        "reading",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "lessons": [
+      {
+       "id": 7,
+       "title": "I read and enjoy: Family word games",
+       "skills": [
+        "reading",
+        "vocabulary",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "lessons": [
+      {
+       "id": 8,
+       "title": "I read and write: Cursive writing (Family)",
+       "skills": [
+        "writing",
+        "handwriting",
+        "reading"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "lessons": [
+      {
+       "id": 9,
+       "title": "I play roles: Introducing family members",
+       "skills": [
+        "speaking",
+        "listening",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 6,
+     "lessons": [
+      {
+       "id": 10,
+       "title": "I sing and have fun: Friends & countries song",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      },
+      {
+       "id": 11,
+       "title": "I listen and repeat: Countries & nationalities",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 7,
+     "lessons": [
+      {
+       "id": 12,
+       "title": "I read and discover: Sounds /ʃ/ vs /tʃ/",
+       "skills": [
+        "reading",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 8,
+     "lessons": [
+      {
+       "id": 13,
+       "title": "I read and enjoy: Nationalities word games",
+       "skills": [
+        "reading",
+        "vocabulary",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 9,
+     "lessons": [
+      {
+       "id": 14,
+       "title": "I read and write: Cursive writing & form filling",
+       "skills": [
+        "writing",
+        "handwriting",
+        "reading"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 10,
+     "lessons": [
+      {
+       "id": 15,
+       "title": "I play roles: Talking about friends & e-pals",
+       "skills": [
+        "speaking",
+        "listening",
+        "grammar"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "sessions": [
+    {
+     "id": 1,
+     "lessons": [
+      {
+       "id": 16,
+       "title": "I sing and have fun: School facilities song",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      },
+      {
+       "id": 17,
+       "title": "I listen and repeat: Naming school facilities",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "lessons": [
+      {
+       "id": 18,
+       "title": "I read and discover: Sounds /ʊ/ vs /uː/",
+       "skills": [
+        "reading",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "lessons": [
+      {
+       "id": 19,
+       "title": "I read and enjoy: School facilities games",
+       "skills": [
+        "reading",
+        "vocabulary",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "lessons": [
+      {
+       "id": 20,
+       "title": "I read and write: Cursive writing (Facilities)",
+       "skills": [
+        "writing",
+        "handwriting",
+        "reading"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "lessons": [
+      {
+       "id": 21,
+       "title": "I play roles: Asking about school facilities",
+       "skills": [
+        "speaking",
+        "listening",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 6,
+     "lessons": [
+      {
+       "id": 22,
+       "title": "I sing and have fun: I love my school song",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      },
+      {
+       "id": 23,
+       "title": "I listen and repeat: Locating school facilities",
+       "skills": [
+        "listening",
+        "speaking",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 7,
+     "lessons": [
+      {
+       "id": 24,
+       "title": "I read and discover: Sound /ð/",
+       "skills": [
+        "reading",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 8,
+     "lessons": [
+      {
+       "id": 25,
+       "title": "I read and enjoy: School mapping word games",
+       "skills": [
+        "reading",
+        "vocabulary",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 9,
+     "lessons": [
+      {
+       "id": 26,
+       "title": "I read and write: Cursive writing (School map)",
+       "skills": [
+        "writing",
+        "handwriting",
+        "reading"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 10,
+     "lessons": [
+      {
+       "id": 27,
+       "title": "I play roles: Giving directions at school",
+       "skills": [
+        "speaking",
+        "listening",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 11,
+     "lessons": [
+      {
+       "id": 28,
+       "title": "Pause 1: Oral assessment (Seq 1–2)",
+       "skills": [
+        "listening",
+        "speaking"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 12,
+     "lessons": [
+      {
+       "id": 29,
+       "title": "Pause 1: Reading & writing assessment",
+       "skills": [
+        "reading",
+        "writing",
+        "handwriting"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 13,
+     "lessons": [
+      {
+       "id": 30,
+       "title": "Pause 1: Remediation & standardisation",
+       "skills": [
+        "reading",
+        "writing",
+        "speaking",
+        "phonics"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "sessions": [
+    {
+     "id": 1,
+     "lessons": [
+      {
+       "id": 31,
+       "title": "I sing and have fun: Fun time song",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      },
+      {
+       "id": 32,
+       "title": "I listen and repeat: Indoor & outdoor activities",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "lessons": [
+      {
+       "id": 33,
+       "title": "I read and discover: Sound /ɔː/",
+       "skills": [
+        "reading",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "lessons": [
+      {
+       "id": 34,
+       "title": "I read and enjoy: Fun time word games",
+       "skills": [
+        "reading",
+        "vocabulary",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "lessons": [
+      {
+       "id": 35,
+       "title": "I read and write: Cursive writing (Fun time)",
+       "skills": [
+        "writing",
+        "handwriting",
+        "reading"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "lessons": [
+      {
+       "id": 36,
+       "title": "I play roles: Asking about fun activities",
+       "skills": [
+        "speaking",
+        "listening",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 6,
+     "lessons": [
+      {
+       "id": 37,
+       "title": "I sing and have fun: Hide and seek song",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      },
+      {
+       "id": 38,
+       "title": "I listen and repeat: Naming types of games",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 7,
+     "lessons": [
+      {
+       "id": 39,
+       "title": "I read and discover: Sound /ɑː/",
+       "skills": [
+        "reading",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 8,
+     "lessons": [
+      {
+       "id": 40,
+       "title": "I read and enjoy: Games vocabulary activities",
+       "skills": [
+        "reading",
+        "vocabulary",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 9,
+     "lessons": [
+      {
+       "id": 41,
+       "title": "I read and write: Cursive writing (Games)",
+       "skills": [
+        "writing",
+        "handwriting",
+        "reading"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 10,
+     "lessons": [
+      {
+       "id": 42,
+       "title": "I play roles: Talking about favourite games",
+       "skills": [
+        "speaking",
+        "listening",
+        "grammar"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "sessions": [
+    {
+     "id": 1,
+     "lessons": [
+      {
+       "id": 43,
+       "title": "I sing and have fun: Healthy food song",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      },
+      {
+       "id": 44,
+       "title": "I listen and repeat: Naming healthy food",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "lessons": [
+      {
+       "id": 45,
+       "title": "I read and discover: Sounds /ɚ/ vs /ɜː/",
+       "skills": [
+        "reading",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "lessons": [
+      {
+       "id": 46,
+       "title": "I read and enjoy: Healthy food word games",
+       "skills": [
+        "reading",
+        "vocabulary",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "lessons": [
+      {
+       "id": 47,
+       "title": "I read and write: Cursive writing (Healthy food)",
+       "skills": [
+        "writing",
+        "handwriting",
+        "reading"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "lessons": [
+      {
+       "id": 48,
+       "title": "I play roles: Asking about healthy food",
+       "skills": [
+        "speaking",
+        "listening",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 6,
+     "lessons": [
+      {
+       "id": 49,
+       "title": "I sing and have fun: Head, shoulders, knees & toes",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      },
+      {
+       "id": 50,
+       "title": "I listen and repeat: Body parts & illnesses",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 7,
+     "lessons": [
+      {
+       "id": 51,
+       "title": "I read and discover: Sound /θ/",
+       "skills": [
+        "reading",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 8,
+     "lessons": [
+      {
+       "id": 52,
+       "title": "I read and enjoy: Health & body word games",
+       "skills": [
+        "reading",
+        "vocabulary",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 9,
+     "lessons": [
+      {
+       "id": 53,
+       "title": "I read and write: Cursive writing (Health)",
+       "skills": [
+        "writing",
+        "handwriting",
+        "reading"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 10,
+     "lessons": [
+      {
+       "id": 54,
+       "title": "I play roles: Talking about health problems",
+       "skills": [
+        "speaking",
+        "listening",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 11,
+     "lessons": [
+      {
+       "id": 55,
+       "title": "Pause 2: Learning to integrate (group)",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 12,
+     "lessons": [
+      {
+       "id": 56,
+       "title": "Pause 2: Learning to integrate (individual)",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 13,
+     "lessons": [
+      {
+       "id": 57,
+       "title": "Pause 2: Remediation & standardisation",
+       "skills": [
+        "reading",
+        "writing",
+        "speaking",
+        "phonics"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "sessions": [
+    {
+     "id": 1,
+     "lessons": [
+      {
+       "id": 58,
+       "title": "I sing and have fun: Farm animals song",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      },
+      {
+       "id": 59,
+       "title": "I listen and repeat: Naming farm animals",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "lessons": [
+      {
+       "id": 60,
+       "title": "I read and discover: Phonics review (Farm)",
+       "skills": [
+        "reading",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "lessons": [
+      {
+       "id": 61,
+       "title": "I read and enjoy: Farm animals word games",
+       "skills": [
+        "reading",
+        "vocabulary",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "lessons": [
+      {
+       "id": 62,
+       "title": "I read and write: Cursive writing (Farm)",
+       "skills": [
+        "writing",
+        "handwriting",
+        "reading"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "lessons": [
+      {
+       "id": 63,
+       "title": "I play roles: Talking about farm animals",
+       "skills": [
+        "speaking",
+        "listening",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 6,
+     "lessons": [
+      {
+       "id": 64,
+       "title": "I sing and have fun: Zoo animals song",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      },
+      {
+       "id": 65,
+       "title": "I listen and repeat: Naming zoo animals",
+       "skills": [
+        "listening",
+        "speaking",
+        "vocabulary"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 7,
+     "lessons": [
+      {
+       "id": 66,
+       "title": "I read and discover: Phonics review (Zoo)",
+       "skills": [
+        "reading",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 8,
+     "lessons": [
+      {
+       "id": 67,
+       "title": "I read and enjoy: Zoo animals word games",
+       "skills": [
+        "reading",
+        "vocabulary",
+        "phonics"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 9,
+     "lessons": [
+      {
+       "id": 68,
+       "title": "I read and write: Cursive writing (Zoo)",
+       "skills": [
+        "writing",
+        "handwriting",
+        "reading"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 10,
+     "lessons": [
+      {
+       "id": 69,
+       "title": "I play roles: Asking about zoo animals",
+       "skills": [
+        "speaking",
+        "listening",
+        "grammar"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 11,
+     "lessons": [
+      {
+       "id": 70,
+       "title": "Pause 3: Situation of integration",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 12,
+     "lessons": [
+      {
+       "id": 71,
+       "title": "Pause 3: Final progress assessment",
+       "skills": [
+        "listening",
+        "speaking",
+        "reading",
+        "writing"
+       ]
+      }
+     ]
+    },
+    {
+     "id": 13,
+     "lessons": [
+      {
+       "id": 72,
+       "title": "Pause 3: Remediation & standardisation",
+       "skills": [
+        "reading",
+        "writing",
+        "speaking",
+        "phonics"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
