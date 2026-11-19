@@ -3,8 +3,8 @@
    - Fonts and icons never change under the same name: cache first.
    The programme list and the cache name are generated (node tools/programmes.js --build). When you add or rename an app file, add it to FILES below. */
 /* BUILD:START written by tools/programmes.js --build. Do not edit. */
-const BUILD = '2a72c8a1';
-const PROGRAMME_FILES = ["./programmes/index.json","./programmes/1AM-english.json","./programmes/2AM-english.json","./programmes/3AM-english.json"];
+const BUILD = 'c4f91e8b';
+const PROGRAMME_FILES = ['./programmes/index.json', './programmes/3AP-english.json', './programmes/4AP-english.json', './programmes/5AP-english.json'];
 /* BUILD:END */
 const CACHE = 'class-maestro-v6-' + BUILD;   // a new build name makes phones drop the old copies
 const FILES = [
