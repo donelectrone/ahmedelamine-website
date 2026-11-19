@@ -129,5 +129,16 @@ if (build && !errors.length) {
     + 'const PROGRAMMES = ' + JSON.stringify(programmes) + ';\n';
   fs.writeFileSync(path.join(root, 'programmes.js'), out);
   console.log('programmes.js regenerated.');
+  // The service worker pre-caches exactly the programmes that exist, and its cache name changes with their content,
+  // so a programme removed or edited here also disappears or refreshes on phones that already installed the app.
+  const swPath = path.join(root, 'sw.js');
+  if (fs.existsSync(swPath)) {
+    const hash = require('crypto').createHash('sha1').update(out + JSON.stringify(index)).digest('hex').slice(0, 8);
+    const files = ['./programmes/index.json', ...index.map(e => './programmes/' + e.file)];
+    const block = `/* BUILD:START written by tools/programmes.js --build. Do not edit. */\nconst BUILD = '${hash}';\nconst PROGRAMME_FILES = ${JSON.stringify(files)};\n/* BUILD:END */`;
+    const sw = fs.readFileSync(swPath, 'utf8');
+    if (/\/\* BUILD:START[\s\S]*?BUILD:END \*\//.test(sw)) { fs.writeFileSync(swPath, sw.replace(/\/\* BUILD:START[\s\S]*?BUILD:END \*\//, block)); console.log('sw.js updated (' + files.length + ' programme files, build ' + hash + ').'); }
+    else console.log('warning  sw.js has no BUILD block: copy the new sw.js first.');
+  }
 }
 process.exit(errors.length ? 1 : 0);
